@@ -1,0 +1,574 @@
+﻿@{
+    ViewBag.Title = "Thêm mới Golf Package - Stay and Play";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="/Scripts/ckeditor/ckeditor.js"></script>
+<div id="wrapper">
+        <!-- Navigation -->
+        @Html.Partial("~/Views/_vMenu.cshtml")
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">@ViewBag.Title</h1>                        
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button type="button" class="btn btn-primary" onclick="AddNew();" id="btnSA">Save All</button>
+                                    -<a href="/packagestay/index">Quay lại danh sách</a>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form role="form">
+                                            <!-- /.panel-heading -->
+                                            <div class="panel-body">
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#general" data-toggle="tab">Thông tin chung</a>
+                                                    </li>                                                    
+                                                    <li><a href="#gi" data-toggle="tab">Album ảnh(3 ảnh bên trong)</a>
+                                                    </li>
+                                                </ul>
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="general">
+                                                        <form role="form">
+                                                            <div class="form-group">
+                                                                <label>Tên gói dịch vụ *</label>
+                                                                <input class="form-control"  id="name" name="name" value="@ViewBag.name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Giới thiệu *</label>
+                                                                <textarea name="des" id="des" rows="9">
+                                                                        @Html.Raw(@ViewBag.des)
+                                                                </textarea>
+                                                                <script>
+                                                                    CKEDITOR.replace('des');
+                                                                </script>                                                             
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Quốc gia *</label>
+                                                                <select id="country_id" name="country_id" class="form-control"></select>
+                                                                <script>
+                                                                    getListCountry(@ViewBag.country_id);
+                                                                    $("#country_id").change(function () {
+                                                                        getListProvin($("#country_id").val(),-1);
+                                                                    });
+                                                                </script>
+                                                            </div> 
+                                                            <div class="form-group">
+                                                                <label>Vùng miền *</label>
+                                                                @Html.Partial("~/Views/_vRegion.cshtml")
+                                                                <script>document.getElementById("region_id").value=@ViewBag.region_id;</script>
+                                                            </div> 
+                                                            <div class="form-group">
+                                                                <label>Tỉnh thành</label>
+                                                                <select id="province_id" name="province_id" class="form-control">
+                                                                    <option value="-1"></option>
+                                                                </select>
+                                                                <script>
+                                                                    getListProvin(@ViewBag.country_id,@ViewBag.province_id);
+                                                                </script>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Ảnh đại diện *</label>
+                                                                <input name="imageFile" type="file" id="imageFile" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcess();"/>                                
+                                                                <div id="progressbar" class="progressbar">
+                                                                    <div id="progresslabel" class="progressbarlabel"></div>
+                                                                </div> 
+                                                                <input name="image" type="hidden" id="image" value="@ViewBag.image" class="form-control" />                  
+                                                                <div id="imageShow" style="width:200px;height:126px;display:none;"></div>
+                                                                <script>
+                                                                    if ("@ViewBag.image"!==""){
+                                                                        
+                                                                        $("#imageShow").html("<img src=\"@ViewBag.image\" width=200 height=126>");
+                                                                        $("#imageShow").show();
+                                                                        //alert("image");
+                                                                    }   
+                                                                </script>
+                                                            </div>   
+                                                            <div class="form-group">
+                                                                <label>Địa chỉ *: (Google Map)</label>
+                                                                <input name="address" type="text" id="address" value="@ViewBag.address" class="form-control"/> 
+                                                                <input name="lon" type="hidden" id="lon" value="@ViewBag.lon" class="form-control"/>
+                                                                <input name="lat" type="hidden" id="lat" value="@ViewBag.lat" class="form-control"/>
+                                                            </div>                                                        
+                                                        </form>
+                                                    </div>                                                    
+                                                    <div class="tab-pane fade" id="td">
+                                                        <label>Thông số kỹ thuật *</label>
+                                                                <textarea name="tech_des" id="tech_des" rows="9">
+                                                                        @if (ViewBag.tech_des==""){
+                                                                            @Html.Raw(@Html.Partial("~/Views/_vTechDes.cshtml"))
+                                                                        }else{
+                                                                            @Html.Raw(ViewBag.tech_des);
+                                                                        }
+                                                                </textarea>
+                                                                <script>
+                                                                    CKEDITOR.replace('tech_des');
+                                                                </script>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="sb">
+                                                        <div class="form-group">
+                                                                <label>Ảnh score board *</label>
+                                                                <input name="imageFileSb" type="file" id="imageFileSb" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcessSb();"/>                                
+                                                                <div id="progressbarSb" class="progressbar">
+                                                                    <div id="progresslabelSb" class="progressbarlabel"></div>
+                                                                </div> 
+                                                                <input name="score_board_image" type="hidden" id="score_board_image" value="@ViewBag.score_board_image" class="form-control" />                  
+                                                                <div id="imageShowSb" style="width:555px;height:200px;display:none;"></div>
+                                                                 <script>
+                                                                     if ("@ViewBag.score_board_image"!=""){
+                                                                         $("#imageShowSb").html("<img src=\"@ViewBag.score_board_image\" width=555 height=200>");
+                                                                         $("#imageShowSb").show();
+                                                                     }   
+                                                                </script>
+                                                         </div> 
+                                                    </div>
+                                                    <div class="tab-pane fade" id="gi">
+                                                        <h4>Album ảnh</h4>
+                                                        <div >
+                                                            <input name="imageFileGi" type="file" id="imageFileGi" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcessGi();"/>                                
+                                                            <div id="progressbarGi" class="progressbar">
+                                                                    <div id="progresslabelGi" class="progressbarlabel"></div>
+                                                                </div> 
+                                                            <div >
+                                                                <table id="gidv" class="table table-striped table-bordered table-hover" >
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Ảnh</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="pr">
+                                                        <h4>Giá cả</h4>
+                                                        <div id="dvprice">
+                                                            <span style="float:left;"><a onclick="addRowPrice();" style="cursor:pointer;">+ Thêm khoảng thời gian</a></span>
+                                                            <table id="tblprice" class="table table-striped table-bordered table-hover">
+                                                                <tr class="odd gradeX" id=rowsPrice1 style="display:block;">
+                                                                    <td><input type="date" id="from_date_id_1" name="from_date_id_1" value="@ViewBag.fromDate" placeholder="từ ngày" style="height:25px;"></td>
+                                                                    <td><input type="date" id="to_date_id_1" name="to_date_id_1" value="@ViewBag.toDate" placeholder="đến ngày" style="height:25px;"></td>
+                                                                    <td><input type="text" id="normal_day_price_1" name="normal_day_price_1" placeholder="giá trong tuần" style="height:25px;"></td>
+                                                                    <td><input type="text" id="weekend_day_price_1" name="weekend_day_price_1" placeholder="giá cuối tuần" style="height:25px;"></td>
+                                                                    <td><input type="time" id="from_time_1" name="from_time_1" value="07:00:00" placeholder="từ thời gian" style="height:25px;"></td>
+                                                                    <td><input type="time" id="to_time_1" name="to_time_1" value="11:00:00" placeholder="đến thời gian" style="height:25px;"></td>                                                                             
+                                                                    <td><a onclick="delRowPrice(1);">Delete</a></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="stpl">
+                                                        <h4>Stay and Play</h4>
+                                                        <p>Đang xây dựng</p>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="gp">
+                                                        <h4>Golf Package</h4>
+                                                        <p>Đang xây dựng</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.panel-body -->                          
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+        
+    </div>
+    <!-- /#wrapper -->
+<script>
+    var id = 0;
+    var rowsPrice=1;
+    var from_date_price="@ViewBag.fromDate";
+    var to_date_price="@ViewBag.toDate";
+    if ("@ViewBag.id" != "0") {
+        id = @ViewBag.id;
+        rowsPrice=@ViewBag.rowsPrice;
+    }
+    function addRowPrice(){
+        rowsPrice++;
+        var row='<tr class="odd gradeX" id=rowsPrice'+rowsPrice+' style="display:block;">';
+        if (rowsPrice>1){
+            var index=rowsPrice-1;
+            from_date_price=document.getElementById("from_date_id_"+index).value;
+            to_date_price=document.getElementById("to_date_id_"+index).value;
+        }
+        row+='<td><input type="date" id="from_date_id_'+rowsPrice+'" name="from_date_id_'+rowsPrice+'" value="'+from_date_price+'" placeholder="từ ngày" style="height:25px;"></td>';
+        row+='<td><input type="date" id="to_date_id_'+rowsPrice+'" name="to_date_id_'+rowsPrice+'" value="'+to_date_price+'" placeholder="đến ngày" style="height:25px;"></td>';
+        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" placeholder="giá trong tuần" style="height:25px;"></td>';
+        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" placeholder="giá cuối tuần" style="height:25px;"></td>';
+        row+='<td><input type="time" id="from_time_'+rowsPrice+'" name="from_time_'+rowsPrice+'" value="07:00:00" placeholder="từ thời gian" style="height:25px;"></td>';
+        row+='<td><input type="time" id="to_time_'+rowsPrice+'" name="to_time_'+rowsPrice+'" value="11:00:00" placeholder="đến thời gian" style="height:25px;"></td>';
+        row+='<td><a onclick="delRowPrice('+rowsPrice+');" style="cursor:pointer;">Delete</a></td>';
+        row+="</tr>"
+        $("#tblprice").append(row);
+        //alert(row);
+    }
+    function delRowPrice(index){
+        document.getElementById("rowsPrice"+index).style.display='none';
+    }
+    function AddNew() {
+        var formdata = new FormData(); //FormData object
+        var name = document.getElementById("name").value;
+        var des = CKEDITOR.instances.des.getData();
+        var country_id = document.getElementById("country_id").value;
+        var province_id = document.getElementById("province_id").value;
+        var region_id = document.getElementById("region_id").value;
+        var image = document.getElementById("image").value;
+        var address = document.getElementById("address").value;
+        var lon = document.getElementById("lon").value;
+        var lat = document.getElementById("lat").value;
+        var tech_des = CKEDITOR.instances.tech_des.getData();
+        var score_board_image = document.getElementById("score_board_image").value;
+        //alert(province_id);
+        
+        if (name==""){
+            alert("Nhập tên sân golf");
+            return;
+        }
+        if (des=="") {
+            alert("Nhập giới thiệu sân golf");
+            return;
+        }
+        if (image=="") {
+            alert("Nhập ảnh đại diện sân golf");
+            return;
+        }
+        if (address=="" || lat=="") {
+            alert("Nhập địa chỉ sân golf để hiển thị trên google map");
+            return;
+        }
+        if (tech_des=="") {
+            alert("Nhập thông số kỹ thuật sân golf ở mục bên cạnh");
+            return;
+        }
+        if (score_board_image=="") {
+            alert("Upload score board image ở mục bên cạnh");
+            return;
+        }
+        if (province_id==null || province_id=="" || province_id=="-1") {
+            alert("Bạn chưa chọn tỉnh thành");
+            return;
+        }
+        document.getElementById("btnSA").disabled=true;
+        formdata.append("name", name);
+        formdata.append("des", des);
+        formdata.append("country_id", country_id);
+        formdata.append("province_id", province_id);
+        formdata.append("region_id", region_id);
+        formdata.append("image", image);
+        formdata.append("address", address);
+        formdata.append("lon", lon);
+        formdata.append("lat", lat);
+        formdata.append("tech_des", tech_des);
+        formdata.append("score_board_image", score_board_image);
+        formdata.append("id", id);//id=0 add new, id!=0 is update
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Golf/Update_Golf');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0") { 
+                    updateGI(xhr.responseText);
+                    updatePrice(xhr.responseText);
+                    //window.location.href = "/golf/index";
+                } else {
+                    document.getElementById("btnSA").disabled=false;
+                    alert("Có lỗi trong quá trình cập nhật dữ liệu");
+                }
+            }
+            
+        }
+    }
+    //Image upload
+    function uploadProcess() {
+        //var title = unicodeToNoMark($("#title").val());
+        //if (title.trim() == "") {
+        //    alert("Nhập tên bài viết trước");
+        //    document.getElementById("title").focus();
+        //    document.getElementById('imageFile').value = "";
+        //    return;
+        //}
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('imageFile');
+        for (var i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            break;
+        }
+        //formdata.append("filename", title);
+        //showLoadingImage();
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                $("#progressbar").progressbar("value", progress);
+            }
+        }, false);
+
+        xhr.open('POST', '/golf/UploadImageProcess');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $('#imageShow').show();
+                $('#imageShow').html("<img src=\"" + xhr.responseText + "\" width=200 height=126>");
+                $('#image').val(xhr.responseText);
+                //hideLoadingImage();
+            }
+        }
+        return false;
+    }
+    //Image upload
+    function uploadProcessSb() {
+        
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('imageFileSb');
+        for (i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            break;
+        }
+        //formdata.append("filename", title);
+        //showLoadingImage();
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                $("#progressbarSb").progressbar("value", progress);
+            }
+        }, false);
+
+        xhr.open('POST', '/golf/UploadImageProcess');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $('#imageShowSb').show();
+                $('#imageShowSb').html("<img src=\"" + xhr.responseText + "\" width=555 height=200>");
+                $('#score_board_image').val(xhr.responseText);
+                //hideLoadingImage();
+            }
+        }
+        return false;
+    }
+    var GI = [];
+    var LGI=0;
+    //Image upload
+    function uploadProcessGi() {
+        
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('imageFileGi');
+        for (var i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        }
+        //formdata.append("filename", title);
+        //showLoadingImage();
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                $("#progressbarGi").progressbar("value", progress);
+            }
+        }, false);
+
+        xhr.open('POST', '/golf/UploadImageProcessGi');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                //$('#imageShowSb').show();
+                //$('#imageShowSb').html("<img src=\"" + xhr.responseText + "\" width=555 height=200>");
+                //$('#score_board_image').val(xhr.responseText);
+                //hideLoadingImage();
+                var news = '{"news":' + xhr.responseText + '}';
+                var json_parsed = $.parseJSON(news);            
+                //$("#provin").html("");
+                for (var i = 0; i < json_parsed.news.length; i++) {
+                    if (json_parsed.news[i]) {
+                        var name = json_parsed.news[i];
+                        //alert(name);
+                        GI.push(name);                        
+                        $("#gidv").append("<tr class=\"odd gradeX\" id=trimage_"+LGI+"><td><img src=\""+name+"\" width=100 height=100></td><td><a onclick=\"delImage("+LGI+");\" style=\"cursor:pointer;\">Xóa</a></td></tr>");
+                        LGI++;
+                    }
+                }
+                //$("#provin").val(value);
+            }
+        }
+        return false;
+    }
+    //Image upload
+    function getGI(id) {
+        var formdata = new FormData(); //FormData object
+        formdata.append("id", id);        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/golf/getGI');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {  
+                if (xhr.responseText=="0") return;
+                var news = '{"news":' + xhr.responseText + '}';
+                var json_parsed = $.parseJSON(news);            
+                //$("#provin").html("");
+                for (var i = 0; i < json_parsed.news.length; i++) {
+                    if (json_parsed.news[i]) {
+                        var name = json_parsed.news[i];
+                        //alert(name);
+                        GI.push(name);                        
+                        $("#gidv").append("<tr class=\"odd gradeX\" id=trimage_"+LGI+"><td><img src=\""+name+"\" width=100 height=100></td><td><a onclick=\"delImage("+LGI+");\" style=\"cursor:pointer;\">Xóa</a></td></tr>");
+                        LGI++;
+                    }
+                }
+                //$("#provin").val(value);
+            }
+        }
+        return false;
+    }
+    getGI(@ViewBag.id);
+    //Image upload
+    function getGP(id) {
+        var formdata = new FormData(); //FormData object
+        formdata.append("id", id);        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/golf/getGP');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {  
+                if (xhr.responseText=="0") return;
+                var news = '{"news":' + xhr.responseText + '}';
+                var json_parsed = $.parseJSON(news); 
+                var row="";
+                $("#tblprice").html("");
+                for (var i = 0; i < json_parsed.news.length; i++) {
+                    if (json_parsed.news[i]) {
+                        var v = json_parsed.news[i];         
+                        var rowsPrice=i+1;
+                        row+='<tr class="odd gradeX" id=rowsPrice'+rowsPrice+' style="display:block;">';                        
+                        row+='<td><input type="date" id="from_date_id_'+rowsPrice+'" name="from_date_id_'+rowsPrice+'" value="'+convertFromDateIdToDateString(v.from_date_id+"")+'" placeholder="từ ngày" style="height:25px;"></td>';
+                        row+='<td><input type="date" id="to_date_id_'+rowsPrice+'" name="to_date_id_'+rowsPrice+'" value="'+convertFromDateIdToDateString(v.to_date_id+"")+'" placeholder="đến ngày" style="height:25px;"></td>';
+                        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" value="'+v.normal_day_price+'" placeholder="giá trong tuần" style="height:25px;"></td>';
+                        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" value="'+v.weekend_day_price+'" placeholder="giá cuối tuần" style="height:25px;"></td>';
+                        row+='<td><input type="time" id="from_time_'+rowsPrice+'" name="from_time_'+rowsPrice+'" value="'+v.from_time+'" placeholder="từ thời gian" style="height:25px;"></td>';
+                        row+='<td><input type="time" id="to_time_'+rowsPrice+'" name="to_time_'+rowsPrice+'" value="'+v.to_time+'" placeholder="đến thời gian" style="height:25px;"></td>';
+                        row+='<td><a onclick="delRowPrice('+rowsPrice+');" style="cursor:pointer;">Delete</a></td>';
+                        row+="</tr>"
+                    }
+                }
+                $("#tblprice").html(row);
+                //$("#provin").val(value);
+            }
+        }
+        return false;
+    }
+    getGP(@ViewBag.id);
+    //Image upload
+    function updateGI(id) {
+        showLoadingImage();
+        var formdata = new FormData(); //FormData object    
+        var xhr = new XMLHttpRequest();
+        for (var i = 0; i < LGI; i++) {
+            //Appending each file to FormData object
+            formdata.append("name_"+i, GI[i]);
+        }        
+
+        formdata.append("count",LGI);
+        formdata.append("id",id);
+        xhr.open('POST', '/golf/updateGI');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText=="0"){
+                    alert("Cập nhật album ảnh có lỗi xảy ra(đường truyền, phần mềm)! Bạn cập nhật lại sau!");
+                }
+                hideLoadingImage();
+                window.location.href = "/golf/index";
+            }
+        }
+        return false;
+    }
+    //Price Update
+    function updatePrice(id) {
+        //showLoadingImage();
+        
+        var formdata = new FormData(); //FormData object    
+        var xhr = new XMLHttpRequest();
+        //alert(rowsPrice);
+        for (var j = 1; j <= rowsPrice; j++) {
+            //alert(j);
+            if (!document.getElementById("from_date_id_"+j)) alert("not ok");
+            //Appending each file to FormData object
+            //alert(document.getElementById("from_date_id_"+j).value+document.getElementById("to_date_id_"+j).value);
+            //alert(document.getElementById("normal_day_price_"+j).value+document.getElementById("weekend_day_price_"+j).value);
+            //alert(document.getElementById("from_time_"+j).value+document.getElementById("to_time_"+j).value);
+            if (!document.getElementById("from_date_id_"+j)) continue;
+            if (document.getElementById("rowsPrice"+j).style.display=='none') continue;
+            formdata.append("from_date_id_"+j, document.getElementById("from_date_id_"+j).value);
+            formdata.append("to_date_id_"+j, document.getElementById("to_date_id_"+j).value);
+            formdata.append("normal_day_price_"+j, document.getElementById("normal_day_price_"+j).value);
+            formdata.append("weekend_day_price_"+j, document.getElementById("weekend_day_price_"+j).value);
+            formdata.append("from_time_"+j, document.getElementById("from_time_"+j).value);
+            formdata.append("to_time_"+j, document.getElementById("to_time_"+j).value);
+        }        
+        //alert("11");
+        //return;
+        formdata.append("count",rowsPrice);
+        formdata.append("id",id);
+        //alert("22");
+        xhr.open('POST', '/golf/updatePrice');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText=="0"){
+                    alert("Cập nhật giá sân golf có lỗi xảy ra(đường truyền, phần mềm)! Bạn cập nhật lại sau!");
+                }
+                hideLoadingImage();
+                window.location.href = "/golf/index";
+            }
+        }
+        return false;
+    }
+    function delImage(index){
+        GI[index]="";
+        $("#trimage_"+index).hide();
+    }
+    $(function () {
+        var long;
+        var lat;
+        var options = {
+            map: ".map_canvas"
+        };
+        $("#address").geocomplete(options)
+          .bind("geocode:result", function (event, result) {
+              $("#lon").val(result.geometry.location.lng());
+              $("#lat").val(result.geometry.location.lat());
+              //alert("long" + result.geometry.location.lng() + ", lat=" + result.geometry.location.lat());
+          })
+          .bind("geocode:error", function (event, status) {
+              $.log("ERROR: " + status);
+          })
+          .bind("geocode:multiple", function (event, results) {
+              $.log("Multiple: " + results.length + " results found");
+          });
+    });
+
+</script>

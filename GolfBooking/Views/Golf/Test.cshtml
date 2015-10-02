@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+ @Html.Partial("~/Views/_vMenu.cshtml")
+<div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form role="form">
+                                            <!-- /.panel-heading -->
+                                            <div class="panel-body">
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#general" data-toggle="tab">Thông tin chung</a>
+                                                    </li>
+                                                    <li><a href="#gi" data-toggle="tab">Gallery Image</a>
+                                                    </li>
+                                                    <li><a href="#pr" data-toggle="tab">Price</a>
+                                                    </li>
+                                                    <li><a href="#stpl" data-toggle="tab">Stay and Play</a></li>
+                                                    <li><a href="#gp" data-toggle="tab">Golf Package</a></li>
+                                                </ul>
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="general">
+                                                        <form role="form">
+                                                            <div class="form-group">
+                                                                <label>Tên sân golf *</label>
+                                                                <input class="form-control"  id="name" name="name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Giới thiệu *</label>
+                                                                <textarea class="form-control"  id="des" name="des"></textarea>                                                                
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Quốc gia</label>
+                                                                <select id="country_id" name="country_id"></select>
+                                                            </div> 
+                                                            
+                                                            <div class="form-group">
+                                                                <label>Tỉnh thành</label>
+                                                                <select id="province_id" name="province_id"></select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Ảnh đại diện *</label>
+                                                                
+                                                            </div>                                                           
+                                                        </form>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="gi">
+                                                        <h4>Album ảnh</h4>
+                                                        <p>Đang xây dựngaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="pr">
+                                                        <h4>Giá cả</h4>
+                                                        <p>Đang xây dựngaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="stpl">
+                                                        <h4>Stay and Play</h4>
+                                                        <p>Đang xây dựngaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="gp">
+                                                        <h4>Golf Package</h4>
+                                                        <p>Đang xây dựnaaaaaaaaaaaaaaaaaaaaaaaaaaaag</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.panel-body -->                          
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+</div>
+</div>

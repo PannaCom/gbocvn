@@ -1,0 +1,25 @@
+﻿@model GolfBooking.Models.country
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!-- Navigation -->
+        @Html.Partial("~/Views/_vMenu.cshtml")
+
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Bạn có chắc chắn xóa quốc gia @Model.name</h1>
+                    @using (Html.BeginForm()) {
+                        @Html.AntiForgeryToken()
+                        <p>
+                            <input type="submit" value="Delete" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+                    }
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+</div>
+

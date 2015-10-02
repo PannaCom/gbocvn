@@ -1,0 +1,37 @@
+﻿@model GolfBooking.Models.country
+
+@{
+    ViewBag.Title = "Sửa tên quốc gia";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Navigation -->
+        @Html.Partial("~/Views/_vMenu.cshtml")
+
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">@ViewBag.Title</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    @using (Html.BeginForm()) {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        
+                            <div class="form-group">
+                                <label>Tên</label>
+                                <input class="form-control" id="name" name="name" value="@Model.name">
+                                <input type="hidden" id="deleted" name="deleted" value="0">
+                            </div>
+                            <p>
+                                <input type="submit" value="Update" />
+                            </p>
+                        
+                    }
+                </div>
+            </div>
+    </div>
