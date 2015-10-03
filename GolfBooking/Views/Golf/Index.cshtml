@@ -38,7 +38,7 @@
                                         @foreach (var item in Model){
                                             <tr class="odd gradeX">
                                                 <td>@item.name</td>
-                                                <td><img src="@item.image" height="100" width="100"></td>
+                                                <td><img src="@GolfBooking.Config.domain/@item.image" height="100" width="100"></td>
                                                 <td><a href="/Golf/Create?id=@item.id">Sửa</a>-<a href="/Province/Delete/@item.id">Xóa</a></td>
                                             </tr>
                                         }
