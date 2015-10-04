@@ -37,8 +37,11 @@ namespace GolfBooking.Controllers
         //
         // GET: /PackageStay/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
+            if (id == null) id = 0;
+            ViewBag.golf_id = 0;
+            ViewBag.id = id;
             return View();
         }
 

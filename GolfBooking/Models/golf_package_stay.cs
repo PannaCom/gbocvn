@@ -19,6 +19,7 @@ namespace GolfBooking.Models
         public string name { get; set; }
         public string des { get; set; }
         public string full_detail { get; set; }
+        public string image { get; set; }
         public Nullable<decimal> min_price { get; set; }
         public Nullable<byte> deleted { get; set; }
         public Nullable<byte> type { get; set; }

@@ -170,8 +170,8 @@
                                                                 <tr class="odd gradeX" id=rowsPrice1 style="display:block;">
                                                                     <td><input type="date" id="from_date_id_1" name="from_date_id_1" value="@ViewBag.fromDate" placeholder="từ ngày" style="height:25px;"></td>
                                                                     <td><input type="date" id="to_date_id_1" name="to_date_id_1" value="@ViewBag.toDate" placeholder="đến ngày" style="height:25px;"></td>
-                                                                    <td><input type="text" id="normal_day_price_1" name="normal_day_price_1" placeholder="giá trong tuần" style="height:25px;"></td>
-                                                                    <td><input type="text" id="weekend_day_price_1" name="weekend_day_price_1" placeholder="giá cuối tuần" style="height:25px;"></td>
+                                                                    <td><input type="text" id="normal_day_price_1" name="normal_day_price_1" placeholder="giá trong tuần" style="height:25px;width:120px;"></td>
+                                                                    <td><input type="text" id="weekend_day_price_1" name="weekend_day_price_1" placeholder="giá cuối tuần" style="height:25px;width:120px;"></td>
                                                                     <td><input type="time" id="from_time_1" name="from_time_1" value="07:00:00" placeholder="từ thời gian" style="height:25px;"></td>
                                                                     <td><input type="time" id="to_time_1" name="to_time_1" value="11:00:00" placeholder="đến thời gian" style="height:25px;"></td>
                                                                     <td><input type="checkbox" id="cart_1" name="cart_1" style="height:25px;">Cart</td>                                                                                                                                                          
@@ -215,7 +215,7 @@
     if ("@ViewBag.id" != "0") {
         id = @ViewBag.id;
         rowsPrice=@ViewBag.rowsPrice;
-    }
+    } else rowsPrice=0;
     function addRowPrice(){
         rowsPrice++;
         var row='<tr class="odd gradeX" id=rowsPrice'+rowsPrice+' style="display:block;">';
@@ -226,8 +226,8 @@
         }
         row+='<td><input type="date" id="from_date_id_'+rowsPrice+'" name="from_date_id_'+rowsPrice+'" value="'+from_date_price+'" placeholder="từ ngày" style="height:25px;"></td>';
         row+='<td><input type="date" id="to_date_id_'+rowsPrice+'" name="to_date_id_'+rowsPrice+'" value="'+to_date_price+'" placeholder="đến ngày" style="height:25px;"></td>';
-        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" placeholder="giá trong tuần" style="height:25px;"></td>';
-        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" placeholder="giá cuối tuần" style="height:25px;"></td>';
+        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" placeholder="giá trong tuần" style="height:25px;width:120px;"></td>';
+        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" placeholder="giá cuối tuần" style="height:25px;width:120px;"></td>';
         row+='<td><input type="time" id="from_time_'+rowsPrice+'" name="from_time_'+rowsPrice+'" value="07:00:00" placeholder="từ thời gian" style="height:25px;"></td>';
         row+='<td><input type="time" id="to_time_'+rowsPrice+'" name="to_time_'+rowsPrice+'" value="11:00:00" placeholder="đến thời gian" style="height:25px;"></td>';
         row+='<td><input type="checkbox" id="cart_'+rowsPrice+'" name="cart_'+rowsPrice+'" >Cart</td>';
@@ -240,6 +240,10 @@
         document.getElementById("rowsPrice"+index).style.display='none';
     }
     function AddNew() {
+        //for (var j = 1; j <= rowsPrice; j++) {
+        //    alert(document.getElementById("cart_"+j).checked);
+        //}   
+        //return;
         var formdata = new FormData(); //FormData object
         var name = document.getElementById("name").value;
         var des = CKEDITOR.instances.des.getData();
@@ -480,8 +484,8 @@
                         row+='<tr class="odd gradeX" id=rowsPrice'+rowsPrice+' style="display:block;">';                        
                         row+='<td><input type="date" id="from_date_id_'+rowsPrice+'" name="from_date_id_'+rowsPrice+'" value="'+convertFromDateIdToDateString(v.from_date_id+"")+'" placeholder="từ ngày" style="height:25px;"></td>';
                         row+='<td><input type="date" id="to_date_id_'+rowsPrice+'" name="to_date_id_'+rowsPrice+'" value="'+convertFromDateIdToDateString(v.to_date_id+"")+'" placeholder="đến ngày" style="height:25px;"></td>';
-                        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" value="'+v.normal_day_price+'" placeholder="giá trong tuần" style="height:25px;"></td>';
-                        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" value="'+v.weekend_day_price+'" placeholder="giá cuối tuần" style="height:25px;"></td>';
+                        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" value="'+v.normal_day_price+'" placeholder="giá trong tuần" style="height:25px;width:120px;"></td>';
+                        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" value="'+v.weekend_day_price+'" placeholder="giá cuối tuần" style="height:25px;width:120px;"></td>';
                         row+='<td><input type="time" id="from_time_'+rowsPrice+'" name="from_time_'+rowsPrice+'" value="'+v.from_time+'" placeholder="từ thời gian" style="height:25px;"></td>';
                         row+='<td><input type="time" id="to_time_'+rowsPrice+'" name="to_time_'+rowsPrice+'" value="'+v.to_time+'" placeholder="đến thời gian" style="height:25px;"></td>';
                         row+='<td><input type="checkbox" id="cart_'+rowsPrice+'" name="cart_'+rowsPrice+'" '+check+'>Cart</td>';
@@ -543,7 +547,7 @@
             formdata.append("weekend_day_price_"+j, document.getElementById("weekend_day_price_"+j).value);
             formdata.append("from_time_"+j, document.getElementById("from_time_"+j).value);
             formdata.append("to_time_"+j, document.getElementById("to_time_"+j).value);
-            formdata.append("cart_"+j, document.getElementById("cart_"+j).value);
+            formdata.append("cart_"+j, document.getElementById("cart_"+j).checked);
         }        
         //alert("11");
         //return;

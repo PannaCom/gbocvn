@@ -33,7 +33,6 @@ namespace GolfBooking.Models
         public DbSet<golf_order_customize_package> golf_order_customize_package { get; set; }
         public DbSet<golf_order_package_stay> golf_order_package_stay { get; set; }
         public DbSet<golf_order_trophy> golf_order_trophy { get; set; }
-        public DbSet<golf_package_stay> golf_package_stay { get; set; }
         public DbSet<golf_package_stay_image> golf_package_stay_image { get; set; }
         public DbSet<golf_review> golf_review { get; set; }
         public DbSet<golf_trophy> golf_trophy { get; set; }
@@ -45,5 +44,6 @@ namespace GolfBooking.Models
         public DbSet<golf> golves { get; set; }
         public DbSet<golf_image> golf_image { get; set; }
         public DbSet<golf_price> golf_price { get; set; }
+        public DbSet<golf_package_stay> golf_package_stay { get; set; }
     }
 }

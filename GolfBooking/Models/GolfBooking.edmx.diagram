@@ -13,10 +13,9 @@
         <EntityTypeShape EntityType="golfbookingModel.golf_order_customize_package" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_order_package_stay" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_order_trophy" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="golfbookingModel.golf_package_stay" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_package_stay_image" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_review" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="golfbookingModel.golf_trophy" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="golfbookingModel.golf_trophy" Width="1.5" PointX="12.5" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_trophy_category" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_trophy_image" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.news" Width="1.5" PointX="8.75" PointY="10.75" IsExpanded="true" />
@@ -25,6 +24,7 @@
         <EntityTypeShape EntityType="golfbookingModel.golf" Width="1.5" PointX="4.5065682793532353" PointY="21.008102501280653" />
         <EntityTypeShape EntityType="golfbookingModel.golf_image" Width="1.5" PointX="9.89833804867153" PointY="12.90059039597427" />
         <EntityTypeShape EntityType="golfbookingModel.golf_price" Width="1.5" PointX="2.3536864623211726" PointY="6.25624193542462" />
+        <EntityTypeShape EntityType="golfbookingModel.golf_package_stay" Width="1.5" PointX="8.4691912701675633" PointY="29.694437011002766" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

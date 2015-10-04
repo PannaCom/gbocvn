@@ -92,6 +92,7 @@ namespace GolfBooking.Controllers
                 ViewBag.lat = "";
                 ViewBag.tech_des = "";
                 ViewBag.score_board_image = "";
+                ViewBag.rowsPrice = 0;
             }
             else
             {
@@ -110,8 +111,16 @@ namespace GolfBooking.Controllers
                     ViewBag.score_board_image = p.score_board_image;
                     
                 }
-                var rowsPrice = db.golf_price.Count(o => o.golf_id == id);
-                ViewBag.rowsPrice = rowsPrice;
+                try
+                {
+                    int rowsPrice = (int)db.golf_price.Count(o => o.golf_id == id);
+                    if (rowsPrice != null)
+                        ViewBag.rowsPrice = rowsPrice;
+                    else ViewBag.rowsPrice = 0;
+                }
+                catch (Exception ex) {
+                    ViewBag.rowsPrice = 0;
+                }
             }
             DateTime fromDate = DateTime.Now;
             DateTime toDate = DateTime.Now.AddDays(30);
@@ -292,7 +301,7 @@ namespace GolfBooking.Controllers
                             TimeSpan from_time = TimeSpan.Parse(Request.Form["from_time_" + i].ToString());
                             TimeSpan to_time = TimeSpan.Parse(Request.Form["to_time_" + i].ToString());
                             bool cart = false;
-                            if (Request.Form["cart_" + i].ToString() == "on") cart = true;
+                            if (Request.Form["cart_" + i].ToString() == "true") cart = true;
                             if (from_date_id != null && from_date_id != 0)
                             {
                                 golf_price gi = new golf_price();
@@ -317,6 +326,22 @@ namespace GolfBooking.Controllers
             }
             catch (Exception ex)
             {
+                return "0";
+            }
+        }
+        public string autosearch(string keyword) {
+            var p = (from q in db.golves where q.deleted == 0 && q.name.Contains(keyword) select q.name).Take(10);
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+        public string getgolfid(string keyword)
+        {
+            try
+            {
+                var p = (from q in db.golves where q.deleted == 0 && q.name.Contains(keyword) select q.id).FirstOrDefault();
+                if (p == null) return "0";
+                return p.ToString();
+            }
+            catch (Exception ex) {
                 return "0";
             }
         }

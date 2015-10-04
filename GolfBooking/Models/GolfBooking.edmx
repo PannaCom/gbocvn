@@ -206,6 +206,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="551" />
           <Property Name="des" Type="nvarchar" MaxLength="2500" />
           <Property Name="full_detail" Type="ntext" />
+          <Property Name="image" Type="nvarchar" MaxLength="150" />
           <Property Name="min_price" Type="decimal" Precision="12" Scale="4" />
           <Property Name="deleted" Type="tinyint" />
           <Property Name="type" Type="tinyint" />
@@ -305,7 +306,6 @@
           <EntitySet Name="golf_order_customize_package" EntityType="golfbookingModel.golf_order_customize_package" />
           <EntitySet Name="golf_order_package_stay" EntityType="golfbookingModel.golf_order_package_stay" />
           <EntitySet Name="golf_order_trophy" EntityType="golfbookingModel.golf_order_trophy" />
-          <EntitySet Name="golf_package_stay" EntityType="golfbookingModel.golf_package_stay" />
           <EntitySet Name="golf_package_stay_image" EntityType="golfbookingModel.golf_package_stay_image" />
           <EntitySet Name="golf_review" EntityType="golfbookingModel.golf_review" />
           <EntitySet Name="golf_trophy" EntityType="golfbookingModel.golf_trophy" />
@@ -317,6 +317,7 @@
           <EntitySet Name="golves" EntityType="golfbookingModel.golf" />
           <EntitySet Name="golf_image" EntityType="golfbookingModel.golf_image" />
           <EntitySet Name="golf_price" EntityType="golfbookingModel.golf_price" />
+          <EntitySet Name="golf_package_stay" EntityType="golfbookingModel.golf_package_stay" />
         </EntityContainer>
         <EntityType Name="golf_atribute_value">
           <Key>
@@ -404,19 +405,6 @@
           <Property Name="phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="full_details" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="date_time" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="golf_package_stay">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="golf_id" Type="Int32" />
-          <Property Name="name" Type="String" MaxLength="551" Unicode="true" FixedLength="false" />
-          <Property Name="des" Type="String" MaxLength="2500" Unicode="true" FixedLength="false" />
-          <Property Name="full_detail" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="min_price" Type="Decimal" Precision="12" Scale="4" />
-          <Property Name="deleted" Type="Byte" />
-          <Property Name="type" Type="Byte" />
         </EntityType>
         <EntityType Name="golf_package_stay_image">
           <Key>
@@ -532,6 +520,20 @@
           <Property Type="Time" Name="to_time" Precision="7" />
           <Property Type="Boolean" Name="cart" />
         </EntityType>
+        <EntityType Name="golf_package_stay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="golf_id" />
+          <Property Type="String" Name="name" MaxLength="551" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="des" MaxLength="2500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="full_detail" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="image" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="min_price" Precision="12" Scale="4" />
+          <Property Type="Byte" Name="deleted" />
+          <Property Type="Byte" Name="type" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -630,20 +632,6 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="full_details" ColumnName="full_details" />
                 <ScalarProperty Name="date_time" ColumnName="date_time" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="golf_package_stay">
-            <EntityTypeMapping TypeName="golfbookingModel.golf_package_stay">
-              <MappingFragment StoreEntitySet="golf_package_stay">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="des" ColumnName="des" />
-                <ScalarProperty Name="full_detail" ColumnName="full_detail" />
-                <ScalarProperty Name="min_price" ColumnName="min_price" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="type" ColumnName="type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -767,6 +755,21 @@
                 <ScalarProperty Name="from_date_id" ColumnName="from_date_id" />
                 <ScalarProperty Name="weekend_day_price" ColumnName="weekend_day_price" />
                 <ScalarProperty Name="normal_day_price" ColumnName="normal_day_price" />
+                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="golf_package_stay">
+            <EntityTypeMapping TypeName="golfbookingModel.golf_package_stay">
+              <MappingFragment StoreEntitySet="golf_package_stay">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="min_price" ColumnName="min_price" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="full_detail" ColumnName="full_detail" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="golf_id" ColumnName="golf_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
