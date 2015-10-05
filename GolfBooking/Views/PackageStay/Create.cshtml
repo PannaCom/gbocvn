@@ -139,8 +139,8 @@
     var id = 0;
     
     if ("@ViewBag.id" != "0") {
-        //id = @ViewBag.id;
-      
+        id = @ViewBag.id;      
+        document.getElementById("type").value="@ViewBag.type";
     }
     
     function AddNew() {
@@ -173,7 +173,10 @@
             alert("Nhập ảnh đại diện");
             return;
         }
-        
+        if (LGI==0) {
+            alert("Nhập album ảnh(3 ảnh) bên trong");
+            return;
+        }        
         document.getElementById("btnSA").disabled=true;
         formdata.append("name", name);
         formdata.append("des", des);
@@ -218,7 +221,7 @@
             break;
         }
         //formdata.append("filename", title);
-        //showLoadingImage();
+        showLoadingImage();
         var xhr = new XMLHttpRequest();
         xhr.upload.addEventListener("progress", function (evt) {
             if (evt.lengthComputable) {
@@ -234,7 +237,7 @@
                 $('#imageShow').show();
                 $('#imageShow').html("<img src=\"" + xhr.responseText + "\" style=\"width:100%;height:300px;\">");
                 $('#image').val(xhr.responseText);
-                //hideLoadingImage();
+                hideLoadingImage();
             }
         }
         return false;
@@ -252,7 +255,7 @@
             formdata.append(fileInput.files[i].name, fileInput.files[i]);
         }
         //formdata.append("filename", title);
-        //showLoadingImage();
+        showLoadingImage();
         var xhr = new XMLHttpRequest();
         xhr.upload.addEventListener("progress", function (evt) {
             if (evt.lengthComputable) {
@@ -278,7 +281,7 @@
                         LGI++;
                     }
                 }
-               
+                hideLoadingImage();
             }
         }
         return false;

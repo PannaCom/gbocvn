@@ -43,9 +43,7 @@
                                                     <li><a href="#gi" data-toggle="tab">Album ảnh</a>
                                                     </li>                                                    
                                                     <li><a href="#pr" data-toggle="tab">Giá cả</a>
-                                                    </li>
-                                                    <li><a href="#stpl" data-toggle="tab">Stay and Play</a></li>
-                                                    <li><a href="#gp" data-toggle="tab">Golf Package</a></li>
+                                                    </li>                                                    
                                                 </ul>
                                                 <!-- Tab panes -->
                                                 <div class="tab-content">
@@ -180,14 +178,7 @@
                                                             </table>
                                                         </div>
                                                     </div>
-                                                    <div class="tab-pane fade" id="stpl">
-                                                        <h4>Stay and Play</h4>
-                                                        <p>Đang xây dựng</p>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="gp">
-                                                        <h4>Golf Package</h4>
-                                                        <p>Đang xây dựng</p>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                             <!-- /.panel-body -->                          
@@ -334,7 +325,7 @@
             break;
         }
         //formdata.append("filename", title);
-        //showLoadingImage();
+        showLoadingImage();
         var xhr = new XMLHttpRequest();
         xhr.upload.addEventListener("progress", function (evt) {
             if (evt.lengthComputable) {
@@ -350,7 +341,7 @@
                 $('#imageShow').show();
                 $('#imageShow').html("<img src=\"" + xhr.responseText + "\" width=200 height=126>");
                 $('#image').val(xhr.responseText);
-                //hideLoadingImage();
+                hideLoadingImage();
             }
         }
         return false;
@@ -366,7 +357,7 @@
             break;
         }
         //formdata.append("filename", title);
-        //showLoadingImage();
+        showLoadingImage();
         var xhr = new XMLHttpRequest();
         xhr.upload.addEventListener("progress", function (evt) {
             if (evt.lengthComputable) {
@@ -382,7 +373,7 @@
                 $('#imageShowSb').show();
                 $('#imageShowSb').html("<img src=\"" + xhr.responseText + "\" width=555 height=200>");
                 $('#score_board_image').val(xhr.responseText);
-                //hideLoadingImage();
+                hideLoadingImage();
             }
         }
         return false;
@@ -399,7 +390,7 @@
             formdata.append(fileInput.files[i].name, fileInput.files[i]);
         }
         //formdata.append("filename", title);
-        //showLoadingImage();
+        showLoadingImage();
         var xhr = new XMLHttpRequest();
         xhr.upload.addEventListener("progress", function (evt) {
             if (evt.lengthComputable) {
@@ -429,6 +420,7 @@
                     }
                 }
                 //$("#provin").val(value);
+                hideLoadingImage();
             }
         }
         return false;

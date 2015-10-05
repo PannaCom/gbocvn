@@ -20,7 +20,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="/Golf/Create" class="fll" style="float:right;">Thêm mới</a>                            
-                            <input name="golfname" type="text" id="golfname" value="@ViewBag.name" class="form-control fll"  onkeyup="searchGolf();"/>                                  
+                            <input name="golfname" type="text" id="golfname" value="@ViewBag.name" class="form-control fll"  onkeyup="autosearch();"/>                                  
                             <button type="button" class="btn btn-default" onclick="search();">Tìm kiếm</button>
                         </div>
                         <!-- /.panel-heading -->
@@ -39,7 +39,7 @@
                                             <tr class="odd gradeX">
                                                 <td>@item.name</td>
                                                 <td><img src="@GolfBooking.Config.domain/@item.image" height="100" width="100"></td>
-                                                <td><a href="/Golf/Create?id=@item.id">Sửa</a>-<a href="/Province/Delete/@item.id">Xóa</a></td>
+                                                <td><a href="/Golf/Create?id=@item.id">Sửa</a>-<a href="/Golf/Delete/@item.id">Xóa</a></td>
                                             </tr>
                                         }
                                     </tbody>
@@ -68,5 +68,17 @@
 <script>
     function search() {
         window.location.href = "/Golf/Index?name=" + document.getElementById("golfname").value;
+    }
+    function autosearch() {
+        var keyword = document.getElementById("golfname").value;
+        urlSearch = '/golf/autosearch?keyword=';
+        $('#golfname').autocomplete({
+            source: urlSearch + keyword,
+            select: function (event, ui) {
+                $(event.target).val(ui.item.value);
+                return false;
+            },
+            minLength: 1
+        });
     }
 </script>

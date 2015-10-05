@@ -20,7 +20,14 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="/PackageStay/Create" class="fll" style="float:right;">Thêm mới</a>                            
-                            <input name="name" type="text" id="name" value="@ViewBag.name" class="form-control fll"  onkeyup="searchGolf();"/>                                  
+                            <input name="name" type="text" id="name" value="@ViewBag.name" class="form-control fll"  onkeyup="autosearch();"/> 
+                            <select class="form-control fll"  id="type" name="type">
+                                  <option value="1">Golf Package</option>
+                                  <option value="2">Stay and Play</option>
+                             </select>       
+                            <script>
+                                document.getElementById("type").value = "@ViewBag.type";
+                            </script>                             
                             <button type="button" class="btn btn-default" onclick="search();">Tìm kiếm</button>
                         </div>
                         <!-- /.panel-heading -->
@@ -29,7 +36,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>Tên sân</th>
+                                            <th>Tên gói dịch vụ</th>
                                             <th>Ảnh</th>
                                             <th>Action</th>
                                         </tr>
@@ -39,7 +46,7 @@
                                             <tr class="odd gradeX">
                                                 <td>@item.name</td>
                                                 <td><img src="@GolfBooking.Config.domain/@item.image" height="100" width="100"></td>
-                                                <td><a href="/Golf/Create?id=@item.id">Sửa</a>-<a href="/Province/Delete/@item.id">Xóa</a></td>
+                                                <td><a href="/PackageStay/Create?id=@item.id">Sửa</a>-<a href="/PackageStay/Delete/@item.id">Xóa</a></td>
                                             </tr>
                                         }
                                     </tbody>
@@ -57,7 +64,7 @@
                             <li class="disabled"><a href="#">«</a></li>
                             @for (int i = 1; i <= Model.PageCount; i++)
                             { 
-                                 <text><li><a href="/Golf/Index?name=@ViewBag.name&page=@i">@i</a></li></text>
+                                 <text><li><a href="/PackageStay/Index?name=@ViewBag.name&page=@i">@i</a></li></text>
                             }
                     </ul>
                 </div>
@@ -67,6 +74,18 @@
         <!-- /#page-wrapper -->
 <script>
     function search() {
-        window.location.href = "/Golf/Index?name=" + document.getElementById("golfname").value;
+        window.location.href = "/PackageStay/Index?name=" + document.getElementById("name").value + "&type=" + document.getElementById("type").value;
+    }
+    function autosearch() {
+        var keyword = document.getElementById("name").value;
+        urlSearch = '/PackageStay/autosearch?keyword=';
+        $('#name').autocomplete({
+            source: urlSearch + keyword,
+            select: function (event, ui) {
+                $(event.target).val(ui.item.value);                
+                return false;
+            },
+            minLength: 1
+        });
     }
 </script>

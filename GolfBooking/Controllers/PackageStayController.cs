@@ -6,7 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GolfBooking.Models;
-
+using Newtonsoft.Json;
+using System.Collections;
+using PagedList;
 namespace GolfBooking.Controllers
 {
     public class PackageStayController : Controller
@@ -16,9 +18,18 @@ namespace GolfBooking.Controllers
         //
         // GET: /PackageStay/
 
-        public ActionResult Index()
+        public ActionResult Index(string name,int? type, int? page)
         {
-            return View(db.golf_package_stay.ToList());
+            //return View(db.provinces.Where(o=>o.deleted==0).OrderBy(o=>o.country_id).ThenBy(o=>o.name).ToList());
+            if (name == null) name = "";
+            name = name.Replace("%20", " ");
+            if (type == null) type = 1;
+            ViewBag.name = name;
+            ViewBag.type = type;
+            var p = (from q in db.golf_package_stay where q.name.Contains(name) && q.deleted == 0 && q.type==type select q).OrderBy(o=>o.golf_id).ThenBy(o => o.name).Take(100);
+            int pageSize = 25;
+            int pageNumber = (page ?? 1);
+            return View(p.ToPagedList(pageNumber, pageSize));
         }
 
         //
@@ -42,9 +53,105 @@ namespace GolfBooking.Controllers
             if (id == null) id = 0;
             ViewBag.golf_id = 0;
             ViewBag.id = id;
+            if (id != 0)
+            {
+                golf_package_stay p = db.golf_package_stay.Find(id);
+                ViewBag.golf_id = p.golf_id;
+                ViewBag.name = p.name;
+                ViewBag.des = p.des;
+                ViewBag.full_detail = p.full_detail;
+                ViewBag.image = p.image;
+                ViewBag.min_price = p.min_price;//.ToString().Replace(".", "").Replace(",", "")
+                ViewBag.type = p.type;
+                golf g = db.golves.Find(p.golf_id);
+                ViewBag.autogolfname = g.name;
+            }
+            else {
+                ViewBag.name = "";
+                ViewBag.des = "";
+                ViewBag.full_detail = "";
+                ViewBag.image = "";
+                ViewBag.min_price = 0;
+                ViewBag.type = 1;
+            }
+
             return View();
         }
+        [HttpPost]
+        [ValidateInput(false)]
+        public string Update(string name, string des, string full_detail, int golf_id, decimal min_price, string image,byte type,int id)
+        {
+            try
+            {
+                //add new
+                if (id == 0)
+                {
+                    golf_package_stay gps = new golf_package_stay();
+                    gps.name = name;
+                    gps.des = des;
+                    gps.full_detail = full_detail;
+                    gps.golf_id = golf_id;
+                    gps.min_price = min_price;
+                    gps.image = image;
+                    gps.type = type;
+                    gps.deleted = 0;
+                    db.golf_package_stay.Add(gps);
+                    db.SaveChanges();
 
+                }
+                else
+                {
+                    golf_package_stay gps = db.golf_package_stay.Find(id);
+                    gps.name = name;
+                    gps.des = des;
+                    gps.full_detail = full_detail;
+                    gps.golf_id = golf_id;
+                    gps.min_price = min_price;
+                    gps.image = image;
+                    gps.type = type;
+                    gps.deleted = 0;
+                    db.Entry(gps).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                }
+                return "1";
+            }
+            catch (Exception ex) {
+                return "0";
+            }
+        }
+        public string getGI(int id)
+        {
+            var p = (from q in db.golf_package_stay_image where q.golf_package_id == id select q.image);
+            return JsonConvert.SerializeObject(p.ToList());
+        }
+        public string updateGI(int count, int id)
+        {
+            try
+            {
+                db.Database.ExecuteSqlCommand("delete from golf_package_stay_image where golf_package_id=" + id);
+                if (id != 0)
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        string name = Request.Form["name_" + i].ToString();
+                        if (name != "" && name != null)
+                        {
+                            golf_package_stay_image gi = new golf_package_stay_image();
+                            gi.golf_package_id = id;
+                            gi.image = name;
+                            db.golf_package_stay_image.Add(gi);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+                return "1";
+            }
+            catch (Exception ex)
+            {
+                return "0";
+            }
+        }
         //
         // POST: /PackageStay/Create
 
@@ -121,6 +228,53 @@ namespace GolfBooking.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public string UploadImageProcess(HttpPostedFileBase file)
+        {
+            string physicalPath = HttpContext.Server.MapPath("../" + Config.PackageGolfImagePath + "\\");
+            string nameFile = String.Format("{0}.jpg", Guid.NewGuid().ToString());
+            int countFile = Request.Files.Count;
+            string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
+            for (int i = 0; i < countFile; i++)
+            {
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                Request.Files[i].SaveAs(fullPath);
+                break;
+            }
+            //string ok = resizeImage(Config.imgWidthNews, Config.imgHeightNews, fullPath, Config.NewsImagePath + "/" + nameFile);
+            return Config.PackageGolfImagePath + "/" + nameFile;
+        }
+        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public string UploadImageProcessGi(HttpPostedFileBase file)
+        {
+            string physicalPath = HttpContext.Server.MapPath("../" + Config.PackageGolfImagePath + "\\");
+            string nameFile = String.Format("{0}.jpg", Guid.NewGuid().ToString());
+            int countFile = Request.Files.Count;
+            string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
+            ArrayList list = new ArrayList();
+            for (int i = 0; i < countFile; i++)
+            {
+                nameFile = String.Format("{0}.jpg", Guid.NewGuid().ToString());
+                fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                Request.Files[i].SaveAs(fullPath);
+                list.Add(Config.PackageGolfImagePath + "/" + nameFile);
+            }
+            return JsonConvert.SerializeObject(list);
+        }
+        public string autosearch(string keyword)
+        {
+            var p = (from q in db.golf_package_stay where q.deleted == 0 && q.name.Contains(keyword) select q.name).Take(10);
+            return JsonConvert.SerializeObject(p.ToList());
         }
     }
 }
