@@ -207,7 +207,7 @@
           <Property Name="des" Type="nvarchar" MaxLength="2500" />
           <Property Name="full_detail" Type="ntext" />
           <Property Name="image" Type="nvarchar" MaxLength="150" />
-          <Property Name="min_price" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="min_price" Type="decimal" Precision="12" />
           <Property Name="deleted" Type="tinyint" />
           <Property Name="type" Type="tinyint" />
         </EntityType>
@@ -225,8 +225,8 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="golf_id" Type="int" />
-          <Property Name="normal_day_price" Type="decimal" Precision="12" Scale="4" />
-          <Property Name="weekend_day_price" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="normal_day_price" Type="decimal" Precision="12" />
+          <Property Name="weekend_day_price" Type="decimal" Precision="12" />
           <Property Name="from_date_id" Type="int" />
           <Property Name="to_date_id" Type="int" />
           <Property Name="from_time" Type="time" />
@@ -316,8 +316,8 @@
           <EntitySet Name="provinces" EntityType="golfbookingModel.province" />
           <EntitySet Name="golves" EntityType="golfbookingModel.golf" />
           <EntitySet Name="golf_image" EntityType="golfbookingModel.golf_image" />
-          <EntitySet Name="golf_price" EntityType="golfbookingModel.golf_price" />
           <EntitySet Name="golf_package_stay" EntityType="golfbookingModel.golf_package_stay" />
+          <EntitySet Name="golf_price" EntityType="golfbookingModel.golf_price" />
         </EntityContainer>
         <EntityType Name="golf_atribute_value">
           <Key>
@@ -506,20 +506,6 @@
           <Property Type="Int32" Name="golf_id" />
           <Property Type="String" Name="image" MaxLength="151" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="golf_price">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="golf_id" />
-          <Property Type="Decimal" Name="normal_day_price" Precision="12" Scale="4" />
-          <Property Type="Decimal" Name="weekend_day_price" Precision="12" Scale="4" />
-          <Property Type="Int32" Name="from_date_id" />
-          <Property Type="Int32" Name="to_date_id" />
-          <Property Type="Time" Name="from_time" Precision="7" />
-          <Property Type="Time" Name="to_time" Precision="7" />
-          <Property Type="Boolean" Name="cart" />
-        </EntityType>
         <EntityType Name="golf_package_stay">
           <Key>
             <PropertyRef Name="id" />
@@ -530,9 +516,23 @@
           <Property Type="String" Name="des" MaxLength="2500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="full_detail" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="image" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="min_price" Precision="12" Scale="4" />
+          <Property Type="Decimal" Name="min_price" Precision="12" Scale="0" />
           <Property Type="Byte" Name="deleted" />
           <Property Type="Byte" Name="type" />
+        </EntityType>
+        <EntityType Name="golf_price">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="golf_id" />
+          <Property Type="Decimal" Name="normal_day_price" Precision="12" Scale="0" />
+          <Property Type="Decimal" Name="weekend_day_price" Precision="12" Scale="0" />
+          <Property Type="Int32" Name="from_date_id" />
+          <Property Type="Int32" Name="to_date_id" />
+          <Property Type="Time" Name="from_time" Precision="7" />
+          <Property Type="Time" Name="to_time" Precision="7" />
+          <Property Type="Boolean" Name="cart" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -745,21 +745,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="golf_price">
-            <EntityTypeMapping TypeName="golfbookingModel.golf_price">
-              <MappingFragment StoreEntitySet="golf_price">
-                <ScalarProperty Name="cart" ColumnName="cart" />
-                <ScalarProperty Name="to_time" ColumnName="to_time" />
-                <ScalarProperty Name="from_time" ColumnName="from_time" />
-                <ScalarProperty Name="to_date_id" ColumnName="to_date_id" />
-                <ScalarProperty Name="from_date_id" ColumnName="from_date_id" />
-                <ScalarProperty Name="weekend_day_price" ColumnName="weekend_day_price" />
-                <ScalarProperty Name="normal_day_price" ColumnName="normal_day_price" />
-                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="golf_package_stay">
             <EntityTypeMapping TypeName="golfbookingModel.golf_package_stay">
               <MappingFragment StoreEntitySet="golf_package_stay">
@@ -770,6 +755,21 @@
                 <ScalarProperty Name="full_detail" ColumnName="full_detail" />
                 <ScalarProperty Name="des" ColumnName="des" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="golf_id" ColumnName="golf_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="golf_price">
+            <EntityTypeMapping TypeName="golfbookingModel.golf_price">
+              <MappingFragment StoreEntitySet="golf_price">
+                <ScalarProperty Name="cart" ColumnName="cart" />
+                <ScalarProperty Name="to_time" ColumnName="to_time" />
+                <ScalarProperty Name="from_time" ColumnName="from_time" />
+                <ScalarProperty Name="to_date_id" ColumnName="to_date_id" />
+                <ScalarProperty Name="from_date_id" ColumnName="from_date_id" />
+                <ScalarProperty Name="weekend_day_price" ColumnName="weekend_day_price" />
+                <ScalarProperty Name="normal_day_price" ColumnName="normal_day_price" />
                 <ScalarProperty Name="golf_id" ColumnName="golf_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

@@ -43,7 +43,7 @@ namespace GolfBooking.Models
         public DbSet<province> provinces { get; set; }
         public DbSet<golf> golves { get; set; }
         public DbSet<golf_image> golf_image { get; set; }
-        public DbSet<golf_price> golf_price { get; set; }
         public DbSet<golf_package_stay> golf_package_stay { get; set; }
+        public DbSet<golf_price> golf_price { get; set; }
     }
 }
