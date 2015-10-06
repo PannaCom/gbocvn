@@ -15,7 +15,7 @@ namespace GolfBooking.Models
     public partial class golf_package_stay
     {
         public int id { get; set; }
-        public Nullable<int> golf_id { get; set; }
+        public string golf_id { get; set; }
         public string name { get; set; }
         public string des { get; set; }
         public string full_detail { get; set; }
