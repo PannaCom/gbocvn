@@ -1,5 +1,5 @@
 ﻿
-@model PagedList.IPagedList<GolfBooking.Models.golf>
+@model PagedList.IPagedList<GolfBooking.Models.GolfItemViewModel>
 @using PagedList.Mvc; 
 @{
     ViewBag.Title = "Danh sách sân golf course";
@@ -24,7 +24,12 @@
 																    <h3>@item.name</h3>
 																	    <div class="price-banner">
 																		    <span>from</span>
-																		    <span class="price">£59</span>																			
+                                                                            <span class="price">£@if(item.priceInfo != null){ @item.priceInfo.minPrice }</span>																			
+                                                                            @if (item.priceInfo != null && item.priceInfo.cart){
+                                                                                <text>
+                                                                                <img style="width:25px" src="http://38.media.tumblr.com/f8bb59e593d8951791b5c45a2b322c2b/tumblr_inline_nds0kdrbei1rlyyia.png" alt="Alternate Text" />
+                                                                                </text>
+                                                                            }
 																	    </div>
 															    </div>
 														    </a>

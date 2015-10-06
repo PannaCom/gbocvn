@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using GolfBooking.Models;
 using System.Data;
 using System.Collections;
+
 namespace GolfBooking.Controllers
 {
     public class GolfController : Controller
@@ -32,14 +33,59 @@ namespace GolfBooking.Controllers
             if (region == null) region = -1;
             ViewBag.name = name;
             ViewBag.region = region;
-            var p = db.golves.Where(o=>o.name.Contains(name)).Where(o=>o.deleted==0);//(from q in db.golves where q.name.Contains(name) && q.deleted == 0 select q).OrderBy(o => o.name).Take(100);
+
+            var isWeeken = DateTime.Now.DayOfWeek == DayOfWeek.Sunday || DateTime.Now.DayOfWeek == DayOfWeek.Saturday ? true : false;
+
+            var p = (from g in db.golves
+                     select new GolfItemViewModel
+                     {
+                         id = g.id,
+                         name = g.name,
+                         des = g.des,
+                         tech_des = g.tech_des,
+                         score_board_image = g.score_board_image,
+                         image = g.image,
+                         country_id = g.country_id,
+                         province_id = g.province_id,
+                         region_id = g.region_id,
+                         address = g.address,
+                         lon = g.lon,
+                         lat = g.lat,
+                         geo = g.geo,
+                         deleted = g.deleted,
+                         priceInfo = !isWeeken ? //how??
+                                    db.golf_price.Where(o => o.golf_id == g.id)
+                                        .Select(x =>
+                                            new extentdVal
+                                            {
+                                                cart = x.cart.HasValue ? x.cart.Value : false,
+                                                minPrice = x.normal_day_price.HasValue ? x.normal_day_price.Value : 0
+                                            }).OrderBy(z => z.minPrice).FirstOrDefault() :
+                                    db.golf_price.Where(o => o.golf_id == g.id)
+                                        .Select(x =>
+                                            new extentdVal
+                                            {
+                                                cart = x.cart.HasValue ? x.cart.Value : false,
+                                                minPrice = x.weekend_day_price.HasValue ? x.weekend_day_price.Value : 0
+                                            }).OrderBy(z => z.minPrice).FirstOrDefault()
+
+                     });
+
+            p = p.Where(o=>o.name.Contains(name)).Where(o=>o.deleted==0);
+            //(from q in db.golves where q.name.Contains(name) && q.deleted == 0 select q).OrderBy(o => o.name).Take(100);
             if (region != -1) p = p.Where(o => o.region_id == region);
+
             p = p.OrderBy(o => o.name).Take(100);
+
             int pageSize = 8;
             int pageNumber = (page ?? 1);
             ViewBag.page = pageNumber;
             ViewBag.header_course_list = Config.getRegionById((int)region) + " Golf Course";
             
+            //tao viet 1 cai query o day
+            
+
+
             return View(p.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult View(int id) {
