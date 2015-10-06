@@ -26,7 +26,7 @@ namespace GolfBooking.Controllers
             if (type == null) type = 1;
             ViewBag.name = name;
             ViewBag.type = type;
-            var p = (from q in db.golf_package_stay where q.name.Contains(name) && q.deleted == 0 && q.type==type select q).OrderBy(o=>o.golf_id).ThenBy(o => o.name).Take(100);
+            var p = (from q in db.golf_package_stay where q.name.Contains(name) && q.deleted == 0 && q.type==type select q).OrderByDescending(o=>o.id).ThenBy(o => o.name).Take(100);
             int pageSize = 25;
             int pageNumber = (page ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));
@@ -63,8 +63,27 @@ namespace GolfBooking.Controllers
                 ViewBag.image = p.image;
                 ViewBag.min_price = p.min_price;//.ToString().Replace(".", "").Replace(",", "")
                 ViewBag.type = p.type;
-                golf g = db.golves.Find(p.golf_id);
-                ViewBag.autogolfname = g.name;
+                ViewBag.autogolfname = "";
+                //golf g = db.golves.Find(p.golf_id); 
+                if (p.golf_id!=null && p.golf_id!=""){
+                    string[] list_golf_id = p.golf_id.Split(',');
+                    string golf_list_table = "";
+                    int countGolfList = 0;
+                    for (int k = 0; k < list_golf_id.Length; k++)
+                    {
+
+                        int index=0;
+                        if (list_golf_id[k].Trim()!="") index=int.Parse(list_golf_id[k]);
+                        var gl = (from q in db.golves where q.deleted == 0 && q.id==index select q).ToList();                        
+                        for (int i = 0; i < gl.Count; i++)
+                        {
+                            countGolfList++;
+                            golf_list_table += "<tr class=\"odd gradeX\" id=trg_" + countGolfList + "><td>" + gl[i].name + "</td><td><a onclick=\"delGolf(" + countGolfList + "," + gl[i].id + ");\" style=\"cursor:pointer;\">Xóa</a></td></tr>";
+                        }
+                    }
+                    ViewBag.golf_list_table = golf_list_table;
+                    ViewBag.countGolfList = countGolfList;
+                }
             }
             else {
                 ViewBag.name = "";
@@ -72,14 +91,17 @@ namespace GolfBooking.Controllers
                 ViewBag.full_detail = "";
                 ViewBag.image = "";
                 ViewBag.min_price = 0;
+                ViewBag.countGolfList = 0;
                 ViewBag.type = 1;
+                ViewBag.autogolfname = "";
+                ViewBag.golf_id = "";
             }
 
             return View();
         }
         [HttpPost]
         [ValidateInput(false)]
-        public string Update(string name, string des, string full_detail, int golf_id, decimal min_price, string image,byte type,int id)
+        public string Update(string name, string des, string full_detail, string golf_id, decimal min_price, string image,byte type,int id)
         {
             try
             {
@@ -97,7 +119,7 @@ namespace GolfBooking.Controllers
                     gps.deleted = 0;
                     db.golf_package_stay.Add(gps);
                     db.SaveChanges();
-
+                    return gps.id.ToString();
                 }
                 else
                 {
@@ -112,9 +134,9 @@ namespace GolfBooking.Controllers
                     gps.deleted = 0;
                     db.Entry(gps).State = EntityState.Modified;
                     db.SaveChanges();
-
+                    return id.ToString();
                 }
-                return "1";
+                
             }
             catch (Exception ex) {
                 return "0";

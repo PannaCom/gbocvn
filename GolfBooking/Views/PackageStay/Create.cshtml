@@ -42,9 +42,20 @@
                                                     <div class="tab-pane fade in active" id="general">
                                                         <form role="form">
                                                             <div class="form-group">
-                                                                <label>Sân golf *(<i>gõ tìm tên sân golf có gói dịch vụ này</i>)</label>
+                                                                <label>Sân golf *(<i>gõ tìm tên sân golf để add vào gói dịch vụ này</i>)</label>
                                                                 <input class="form-control"  id="autogolfname" name="autogolfname" value="@ViewBag.autogolfname" onkeyup="autosearch();">
                                                                 <input type="hidden" id="golf_id" name="golf_id" value="@ViewBag.golf_id">
+                                                                <div>
+                                                                    <table id="golflist" class="table table-striped table-bordered table-hover" >
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Tên sân</th>
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                            @Html.Raw(@ViewBag.golf_list_table)
+                                                                        </thead>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Tên gói dịch vụ *</label>
@@ -177,6 +188,10 @@
             alert("Nhập album ảnh(3 ảnh) bên trong");
             return;
         }        
+        if (isNaN(min_price)){
+            alert("Nhập giá cho đúng định dạng số, bỏ dấu . và ,");
+            return;
+        }
         document.getElementById("btnSA").disabled=true;
         formdata.append("name", name);
         formdata.append("des", des);
@@ -353,10 +368,15 @@
             select: function (event, ui) {
                 $(event.target).val(ui.item.value);
                 setgolfid(""+ui.item.value+"");
+                $('#autogolfname').val("");
                 return false;
             },
             minLength: 1
         });
+    }
+    var countGolfList=0;
+    if ("@ViewBag.countGolfList"!="0"){
+        countGolfList=@ViewBag.countGolfList;
     }
     function setgolfid(keyword) {
         var formdata = new FormData(); //FormData object    
@@ -371,10 +391,18 @@
                 if (xhr.responseText == "0") {
                     alert("Bạn phải chọn tên sân golf có gói dịch vụ này!");
                 } else {
-                    document.getElementById("golf_id").value = xhr.responseText;
+                    document.getElementById("golf_id").value += ","+xhr.responseText+",";
                     //alert(xhr.responseText);
+                    countGolfList++;
+                    $("#golflist").append("<tr class=\"odd gradeX\" id=trg_"+countGolfList+"><td>"+keyword+"</td><td><a onclick=\"delGolf("+countGolfList+","+xhr.responseText+");\" style=\"cursor:pointer;\">Xóa</a></td></tr>");
                 }
             }
         }
+    }
+    function delGolf(index,val){        
+        $("#trg_"+index).hide();
+        var str=document.getElementById("golf_id").value;
+        str=str.replace(","+val+",","");
+        document.getElementById("golf_id").value=str;
     }
 </script>
