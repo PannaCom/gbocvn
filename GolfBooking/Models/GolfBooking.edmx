@@ -253,8 +253,9 @@
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nvarchar" MaxLength="150" />
           <Property Name="des" Type="ntext" />
-          <Property Name="price" Type="decimal" Precision="12" Scale="4" />
+          <Property Name="price" Type="decimal" Precision="12" />
           <Property Name="image" Type="nvarchar" MaxLength="150" />
+          <Property Name="banner" Type="nvarchar" MaxLength="150" />
           <Property Name="golf_trophy_cat_id" Type="int" />
         </EntityType>
         <EntityType Name="golf_trophy_category">
@@ -263,7 +264,6 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nvarchar" MaxLength="150" />
-          <Property Name="image" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="golf_trophy_image">
           <Key>
@@ -308,8 +308,6 @@
           <EntitySet Name="golf_order_trophy" EntityType="golfbookingModel.golf_order_trophy" />
           <EntitySet Name="golf_package_stay_image" EntityType="golfbookingModel.golf_package_stay_image" />
           <EntitySet Name="golf_review" EntityType="golfbookingModel.golf_review" />
-          <EntitySet Name="golf_trophy" EntityType="golfbookingModel.golf_trophy" />
-          <EntitySet Name="golf_trophy_category" EntityType="golfbookingModel.golf_trophy_category" />
           <EntitySet Name="golf_trophy_image" EntityType="golfbookingModel.golf_trophy_image" />
           <EntitySet Name="news" EntityType="golfbookingModel.news" />
           <EntitySet Name="countries" EntityType="golfbookingModel.country" />
@@ -318,6 +316,8 @@
           <EntitySet Name="golf_image" EntityType="golfbookingModel.golf_image" />
           <EntitySet Name="golf_price" EntityType="golfbookingModel.golf_price" />
           <EntitySet Name="golf_package_stay" EntityType="golfbookingModel.golf_package_stay" />
+          <EntitySet Name="golf_trophy" EntityType="golfbookingModel.golf_trophy" />
+          <EntitySet Name="golf_trophy_category" EntityType="golfbookingModel.golf_trophy_category" />
         </EntityContainer>
         <EntityType Name="golf_atribute_value">
           <Key>
@@ -424,25 +424,6 @@
           <Property Name="point" Type="Byte" />
           <Property Name="address" Type="String" MaxLength="151" Unicode="true" FixedLength="false" />
         </EntityType>
-        <EntityType Name="golf_trophy">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="des" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="price" Type="Decimal" Precision="12" Scale="4" />
-          <Property Name="image" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="golf_trophy_cat_id" Type="Int32" />
-        </EntityType>
-        <EntityType Name="golf_trophy_category">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="image" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-        </EntityType>
         <EntityType Name="golf_trophy_image">
           <Key>
             <PropertyRef Name="id" />
@@ -533,6 +514,25 @@
           <Property Type="Decimal" Name="min_price" Precision="12" Scale="0" />
           <Property Type="Byte" Name="deleted" />
           <Property Type="Byte" Name="type" />
+        </EntityType>
+        <EntityType Name="golf_trophy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="des" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="price" Precision="12" Scale="0" />
+          <Property Type="String" Name="image" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="banner" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="golf_trophy_cat_id" />
+        </EntityType>
+        <EntityType Name="golf_trophy_category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -655,27 +655,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="golf_trophy">
-            <EntityTypeMapping TypeName="golfbookingModel.golf_trophy">
-              <MappingFragment StoreEntitySet="golf_trophy">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="des" ColumnName="des" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="golf_trophy_cat_id" ColumnName="golf_trophy_cat_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="golf_trophy_category">
-            <EntityTypeMapping TypeName="golfbookingModel.golf_trophy_category">
-              <MappingFragment StoreEntitySet="golf_trophy_category">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="image" ColumnName="image" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="golf_trophy_image">
             <EntityTypeMapping TypeName="golfbookingModel.golf_trophy_image">
               <MappingFragment StoreEntitySet="golf_trophy_image">
@@ -771,6 +750,27 @@
                 <ScalarProperty Name="des" ColumnName="des" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="golf_id" ColumnName="golf_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="golf_trophy">
+            <EntityTypeMapping TypeName="golfbookingModel.golf_trophy">
+              <MappingFragment StoreEntitySet="golf_trophy">
+                <ScalarProperty Name="golf_trophy_cat_id" ColumnName="golf_trophy_cat_id" />
+                <ScalarProperty Name="banner" ColumnName="banner" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="golf_trophy_category">
+            <EntityTypeMapping TypeName="golfbookingModel.golf_trophy_category">
+              <MappingFragment StoreEntitySet="golf_trophy_category">
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

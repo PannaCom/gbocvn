@@ -19,6 +19,7 @@ namespace GolfBooking.Models
         public string des { get; set; }
         public Nullable<decimal> price { get; set; }
         public string image { get; set; }
+        public string banner { get; set; }
         public Nullable<int> golf_trophy_cat_id { get; set; }
     }
 }
