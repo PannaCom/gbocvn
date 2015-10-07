@@ -1,0 +1,20 @@
+﻿@model PagedList.IPagedList<GolfBooking.Models.golf_package_stay>
+@using PagedList.Mvc; 
+@{
+    ViewBag.Title = "list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<article id="content">
+				<section class="container content-padding-lg" style="padding-top:2px;">
+					<h6>Home » Golf Package</h6>
+					<div class="row animated">
+							<!-- Left Menu -->
+                            @Html.Partial("~/Views/_vLeftMenu.cshtml")
+							<!-- Lấy ra dữ liệu và hiển thị từ bảng golf_package_stay, giống giao diện của trang http://demo.binhyen.net/golfpackagelist.html -->
+                            <!-- xem file golfpackagelist.html tại thư mục /svn/giaodien/ -->
+                            <!-- khi click vào ảnh, title hoặc chữ book thì ra trang có giao diện là golfpackagelist3.html http://demo.binhyen.net/golfpackagelist3.html
+                            <!-- trong đó dữ liệu title, des, full_detail thì lấy từ bảng golf_package_stay, còn 3 ảnh bên trong lấy từ bảng golf_package_stay_image qua golf_package_id
+					</div>		
+					
+				</section>
+</article><!-- #content --> 
