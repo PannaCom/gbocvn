@@ -24,11 +24,14 @@
 																    <h3>@item.name</h3>
 																	    <div class="price-banner">
 																		    <span>from</span>
-                                                                            <span class="price">£@if(item.priceInfo != null){ @item.priceInfo.minPrice }</span>																			
+                                                                            <span class="price">@if(item.priceInfo != null){ @item.priceInfo.minPrice }</span>	
+                                                                            <br />																		
                                                                             @if (item.priceInfo != null && item.priceInfo.cart){
                                                                                 <text>
-                                                                                <img style="width:25px" src="http://38.media.tumblr.com/f8bb59e593d8951791b5c45a2b322c2b/tumblr_inline_nds0kdrbei1rlyyia.png" alt="Alternate Text" />
+                                                                                18h/&nbsp;<img style="width:25px" src="/Images/cart.png" alt="Alternate Text" />
                                                                                 </text>
+                                                                            }else{
+                                                                                <text>18g+c</text>
                                                                             }
 																	    </div>
 															    </div>
