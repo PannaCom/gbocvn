@@ -26,12 +26,23 @@ namespace GolfBooking.Controllers
             if (type == null) type = 1;
             ViewBag.name = name;
             ViewBag.type = type;
-            var p = (from q in db.golf_package_stay where q.name.Contains(name) && q.deleted == 0 && q.type==type select q).OrderByDescending(o=>o.id).ThenBy(o => o.name).Take(100);
+            var p = (from q in db.golf_package_stay where q.name.Contains(name) && q.deleted == 0 && q.type==type select q).OrderByDescending(o=>o.id).Take(100);
             int pageSize = 25;
             int pageNumber = (page ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));
         }
-
+        public ActionResult list(string name, int? type, int? page)
+        {
+            if (name == null) name = "";
+            name = name.Replace("%20", " ");
+            if (type == null) type = 1;
+            ViewBag.name = name;
+            ViewBag.type = type;
+            var p = (from q in db.golf_package_stay where q.name.Contains(name) && q.deleted == 0 && q.type == type select q).OrderByDescending(o => o.id).Take(100);
+            int pageSize = 25;
+            int pageNumber = (page ?? 1);
+            return View(p.ToPagedList(pageNumber, pageSize));
+        }
         //
         // GET: /PackageStay/Details/5
 
