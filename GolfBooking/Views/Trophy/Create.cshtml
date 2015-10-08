@@ -1,0 +1,263 @@
+﻿@model GolfBooking.Models.golf_trophy
+
+@{
+    ViewBag.Title = "Thêm mới Trophy";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="/Scripts/ckeditor/ckeditor.js"></script>
+<div id="wrapper">
+        <!-- Navigation -->
+        @Html.Partial("~/Views/_vMenu.cshtml")
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">@ViewBag.Title</h1>                        
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button type="button" class="btn btn-primary" onclick="AddNew();" id="btnSA">Save All</button>
+                                    -<a href="/trophy/index">Quay lại danh sách</a>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form role="form">
+                                            <!-- /.panel-heading -->
+                                            <div class="panel-body">
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#general" data-toggle="tab">Thông tin chung</a>
+                                                    </li>                                                    
+                                                    <li><a href="#gi" data-toggle="tab">Ảnh banner</a>
+                                                    </li>
+                                                </ul>
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="general">
+                                                        <form role="form">                                                            
+                                                            <div class="form-group">
+                                                                <label>Tên trophy *</label>
+                                                                <input class="form-control"  id="name" name="name" value="@ViewBag.name">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Ảnh đại diện *</label>
+                                                                <input name="imageFile" type="file" id="imageFile" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcess();"/>                                
+                                                                <div id="progressbar" class="progressbar">
+                                                                    <div id="progresslabel" class="progressbarlabel"></div>
+                                                                </div> 
+                                                                <input name="image" type="hidden" id="image" value="@ViewBag.image" class="form-control" />                  
+                                                                <div id="imageShow" style="width:200px;height:200px;display:none;"></div>
+                                                                <script>
+                                                                    if ("@ViewBag.image" !== "") {
+                                                                        $("#imageShow").html("<img src=\"@ViewBag.image\" style=\"width:200px;height:200px;\">");
+                                                                        $("#imageShow").show();
+                                                                    }
+                                                                </script>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Banner ảnh lớn *</label>
+                                                                <input name="imageFileBn" type="file" id="imageFileBn" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcessBn();"/>                                
+                                                                <div id="progressbarBn" class="progressbar">
+                                                                    <div id="progresslabelBn" class="progressbarlabel"></div>
+                                                                </div> 
+                                                                <input name="banner" type="hidden" id="banner" value="@ViewBag.banner" class="form-control" />                  
+                                                                <div id="imageShowBn" style="width:100%;height:300px;display:none;"></div>
+                                                                <script>
+                                                                    if ("@ViewBag.banner" !== "") {
+                                                                        $("#imageShowBn").html("<img src=\"@ViewBag.banner\" style=\"width:100%;height:300px;\">");
+                                                                        $("#imageShowBn").show();
+                                                                    }
+                                                                </script>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Thuộc danh mục *</label>
+                                                                <select class="form-control"  id="golf_trophy_cat_id" name="golf_trophy_cat_id">
+                                                                   
+                                                                </select>    
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Giá bán *</label>
+                                                                <input class="form-control"  id="price" name="price" value="@ViewBag.price">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Giới thiệu ngắn *</label>
+                                                                <textarea name="des" id="des" rows="9">
+                                                                        @Html.Raw(@ViewBag.des)
+                                                                </textarea>
+                                                                <script>
+                                                                    CKEDITOR.replace('des');
+                                                                </script>                                                             
+                                                            </div>                                           
+                                                        </form>
+                                                    </div> 
+                                                                                                  
+                                                </div>
+                                            </div>
+                                            <!-- /.panel-body -->                          
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+        
+    </div>
+    <!-- /#wrapper -->
+<script>
+    var id = 0;
+    
+    if ("@ViewBag.id" != "0") {
+        id = @ViewBag.id;      
+        document.getElementById("golf_trophy_cat_id").value="@ViewBag.golf_trophy_cat_id";
+    }
+    
+    function AddNew() {
+        var formdata = new FormData(); //FormData object
+        var name = document.getElementById("name").value;
+        var des = CKEDITOR.instances.des.getData();
+        var banner = document.getElementById("banner").value; 
+        var image = document.getElementById("image").value;
+        var price = document.getElementById("price").value;
+        var golf_trophy_cat_id = document.getElementById("golf_trophy_cat_id").value;
+        
+        if (name==""){
+            alert("Nhập tên trophy");
+            return;
+        }
+        if (des=="") {
+            alert("Nhập giới thiệu ngắn về dịch vụ");
+            return;
+        }
+               
+        if (image=="") {
+            alert("Nhập ảnh đại diện");
+            return;
+        }
+               
+        if (banner=="") {
+            alert("Nhập banner");
+            return;
+        }                
+        if (isNaN(price)){
+            alert("Nhập giá cho đúng định dạng số, bỏ các ký tự không phải số");
+            return;
+        }
+        document.getElementById("btnSA").disabled=true;
+        formdata.append("name", name);
+        formdata.append("des", des);
+        formdata.append("price", price);
+        formdata.append("image", image);
+        formdata.append("banner", banner);
+        formdata.append("golf_trophy_cat_id", golf_trophy_cat_id);        
+        formdata.append("id", id);//id=0 add new, id!=0 is update
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Trophy/Update');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0") { 
+                    //updateGI(xhr.responseText);
+                    //updatePrice(xhr.responseText);
+                    window.location.href = "/trophy/index";
+                } else {
+                    document.getElementById("btnSA").disabled=false;
+                    alert("Có lỗi trong quá trình cập nhật dữ liệu");
+                }
+            }
+            
+        }
+    }
+    //Image upload
+    function uploadProcess() {
+        //var title = unicodeToNoMark($("#title").val());
+        //if (title.trim() == "") {
+        //    alert("Nhập tên bài viết trước");
+        //    document.getElementById("title").focus();
+        //    document.getElementById('imageFile').value = "";
+        //    return;
+        //}
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('imageFile');
+        for (var i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            break;
+        }
+        //formdata.append("filename", title);
+        showLoadingImage();
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                $("#progressbar").progressbar("value", progress);
+            }
+        }, false);
+
+        xhr.open('POST', '/trophy/UploadImageProcess');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $('#imageShow').show();
+                $('#imageShow').html("<img src=\"" + xhr.responseText + "\" style=\"width:200px;height:200px;\">");
+                $('#image').val(xhr.responseText);
+                hideLoadingImage();
+            }
+        }
+        return false;
+    }
+    
+    //Image upload
+    function uploadProcessBn() {
+        //var title = unicodeToNoMark($("#title").val());
+        //if (title.trim() == "") {
+        //    alert("Nhập tên bài viết trước");
+        //    document.getElementById("title").focus();
+        //    document.getElementById('imageFile').value = "";
+        //    return;
+        //}
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('imageFileBn');
+        for (var i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            break;
+        }
+        //formdata.append("filename", title);
+        showLoadingImage();
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                $("#progressbarBn").progressbar("value", progress);
+            }
+        }, false);
+
+        xhr.open('POST', '/trophy/UploadImageProcess');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $('#imageShowBn').show();
+                $('#imageShowBn').html("<img src=\"" + xhr.responseText + "\" style=\"width:100%;height:300px;\">");
+                $('#banner').val(xhr.responseText);
+                hideLoadingImage();
+            }
+        }
+        return false;
+    }
+</script>

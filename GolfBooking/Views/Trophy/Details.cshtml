@@ -1,0 +1,58 @@
+﻿@model GolfBooking.Models.golf_trophy
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>golf_trophy</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.des)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.des)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.image)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.image)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.banner)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.banner)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.golf_trophy_cat_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.golf_trophy_cat_id)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
