@@ -21,7 +21,7 @@ namespace GolfBooking.Controllers
         {
             if (name == null) name = "";
             name = name.Replace("%20", " ");
-            if (cat_id == null) cat_id = 1;
+            if (cat_id == null) cat_id = 2;
             ViewBag.name = name;
             ViewBag.cat_id = cat_id;
             var p = (from q in db.golf_trophy where q.name.Contains(name) && q.golf_trophy_cat_id == cat_id select q).OrderByDescending(o => o.id).Take(100);

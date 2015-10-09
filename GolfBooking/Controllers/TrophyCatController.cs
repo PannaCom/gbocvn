@@ -141,7 +141,7 @@ namespace GolfBooking.Controllers
         }
         public string getList(int id) { 
            
-            var p = db.golf_trophy_category.OrderBy(o=>o.name).ToList();
+            var p = db.golf_trophy_category.OrderBy(o=>o.id).ToList();
             string val = "";
             for (int i = 0; i < p.Count; i++) {
                 if (id == p[i].id)
