@@ -25,6 +25,20 @@
                                 <label>Tên</label>
                                 <input class="form-control" id="name" name="name" value="@Model.name">
                             </div>
+                            <div class="form-group">
+                                     <label>Ảnh đại diện *</label>
+                                     <input name="imageFile" type="file" id="imageFile" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcess();"/>                                
+                                     <div id="progressbar" class="progressbar">
+                                         <div id="progresslabel" class="progressbarlabel"></div>
+                                     </div> 
+                                     <input name="image" type="hidden" id="image" value="@Model.image" class="form-control" />                  
+                                     <div id="imageShow" style="width:200px;height:200px;"></div>
+                                     <script>
+                                      if ("@Model.image" !== "") {
+                                        $("#imageShow").html("<img src=\"@Model.image\" style=\"width:200px;height:200px;\">");
+                                      }
+                                      </script>
+                            </div>
                             <p>
                                 <input type="submit" value="Save" />
                             </p>
@@ -33,3 +47,43 @@
                 </div>
             </div>
     </div>
+<script>
+    //Image upload
+    function uploadProcess() {
+        //var title = unicodeToNoMark($("#title").val());
+        //if (title.trim() == "") {
+        //    alert("Nhập tên bài viết trước");
+        //    document.getElementById("title").focus();
+        //    document.getElementById('imageFile').value = "";
+        //    return;
+        //}
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('imageFile');
+        for (var i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            break;
+        }
+        //formdata.append("filename", title);
+        showLoadingImage();
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                $("#progressbar").progressbar("value", progress);
+            }
+        }, false);
+
+        xhr.open('POST', '/trophy/UploadImageProcess');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $('#imageShow').show();
+                $('#imageShow').html("<img src=\"" + xhr.responseText + "\" style=\"width:200px;height:200px;\">");
+                $('#image').val(xhr.responseText);
+                hideLoadingImage();
+            }
+        }
+        return false;
+    }
+</script>

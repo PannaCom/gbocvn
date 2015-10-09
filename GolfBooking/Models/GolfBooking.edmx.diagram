@@ -19,12 +19,12 @@
         <EntityTypeShape EntityType="golfbookingModel.news" Width="1.5" PointX="8.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.country" Width="1.5" PointX="6.206887669026333" PointY="12.501694804291098" />
         <EntityTypeShape EntityType="golfbookingModel.province" Width="1.5" PointX="4.0217897053909439" PointY="23.398311715292891" />
-        <EntityTypeShape EntityType="golfbookingModel.golf" Width="1.5" PointX="4.5065682793532353" PointY="21.008102501280653" />
+        <EntityTypeShape EntityType="golfbookingModel.golf" Width="1.5" PointX="6.75" PointY="21" />
         <EntityTypeShape EntityType="golfbookingModel.golf_image" Width="1.5" PointX="9.89833804867153" PointY="12.90059039597427" />
         <EntityTypeShape EntityType="golfbookingModel.golf_price" Width="1.5" PointX="1.9235358973608985" PointY="14.300063348514989" />
         <EntityTypeShape EntityType="golfbookingModel.golf_package_stay" Width="1.5" PointX="1.1840480385273917" PointY="2.4358168255704533" />
         <EntityTypeShape EntityType="golfbookingModel.golf_trophy" Width="1.5" PointX="7.677558088524993" PointY="27.630083514205218" />
-        <EntityTypeShape EntityType="golfbookingModel.golf_trophy_category" Width="1.5" PointX="2.433493457005123" PointY="22.329975764420805" />
+        <EntityTypeShape EntityType="golfbookingModel.golf_trophy_category" Width="1.5" PointX="3.1051110676979232" PointY="23.528637405265421" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

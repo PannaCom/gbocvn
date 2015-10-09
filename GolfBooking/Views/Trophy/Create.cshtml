@@ -36,8 +36,7 @@
                                                 <ul class="nav nav-tabs">
                                                     <li class="active"><a href="#general" data-toggle="tab">Thông tin chung</a>
                                                     </li>                                                    
-                                                    <li><a href="#gi" data-toggle="tab">Ảnh banner</a>
-                                                    </li>
+                                                   
                                                 </ul>
                                                 <!-- Tab panes -->
                                                 <div class="tab-content">
@@ -123,7 +122,7 @@
     
     if ("@ViewBag.id" != "0") {
         id = @ViewBag.id;      
-        document.getElementById("golf_trophy_cat_id").value="@ViewBag.golf_trophy_cat_id";
+        //document.getElementById("golf_trophy_cat_id").value="@ViewBag.golf_trophy_cat_id";
     }
     
     function AddNew() {
@@ -260,4 +259,17 @@
         }
         return false;
     }
+    function getListTrophyCat(id){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/TrophyCat/getList?id='+id);
+        xhr.send();
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                //alert(xhr.responseText);
+                $("#golf_trophy_cat_id").html(xhr.responseText);
+            }
+        }
+    }
+    getListTrophyCat(@ViewBag.golf_trophy_cat_id);
 </script>

@@ -119,5 +119,41 @@ namespace GolfBooking.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public string UploadImageProcess(HttpPostedFileBase file)
+        {
+            string physicalPath = HttpContext.Server.MapPath("../" + Config.TrophyGolfImagePath + "\\");
+            string nameFile = String.Format("{0}.jpg", Guid.NewGuid().ToString());
+            int countFile = Request.Files.Count;
+            string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
+            for (int i = 0; i < countFile; i++)
+            {
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                Request.Files[i].SaveAs(fullPath);
+                break;
+            }
+            //string ok = resizeImage(Config.imgWidthNews, Config.imgHeightNews, fullPath, Config.NewsImagePath + "/" + nameFile);
+            return Config.TrophyGolfImagePath + "/" + nameFile;
+        }
+        public string getList(int id) { 
+           
+            var p = db.golf_trophy_category.OrderBy(o=>o.name).ToList();
+            string val = "";
+            for (int i = 0; i < p.Count; i++) {
+                if (id == p[i].id)
+                {
+                    val += "<option value=\"" + p[i].id + "\" selected>" + p[i].name + "</option>";
+                }
+                else {
+                    val += "<option value=\"" + p[i].id + "\">" + p[i].name + "</option>";
+                }
+            }
+            return val;
+       
+        }
     }
 }

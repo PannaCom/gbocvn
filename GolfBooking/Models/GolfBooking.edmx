@@ -264,6 +264,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nvarchar" MaxLength="150" />
+          <Property Name="image" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="golf_trophy_image">
           <Key>
@@ -533,6 +534,7 @@
           </Key>
           <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="name" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="image" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -770,6 +772,7 @@
           <EntitySetMapping Name="golf_trophy_category">
             <EntityTypeMapping TypeName="golfbookingModel.golf_trophy_category">
               <MappingFragment StoreEntitySet="golf_trophy_category">
+                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
