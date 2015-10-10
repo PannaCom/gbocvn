@@ -1,0 +1,211 @@
+﻿@model GolfBooking.Models.news
+
+@{
+    ViewBag.Title = "Thêm mới bản tin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="/Scripts/ckeditor/ckeditor.js"></script>
+<div id="wrapper">
+        <!-- Navigation -->
+        @Html.Partial("~/Views/_vMenu.cshtml")
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">@ViewBag.Title</h1>                        
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button type="button" class="btn btn-primary" onclick="AddNew();" id="btnSA">Save All</button>
+                                    -<a href="/news/index">Quay lại danh sách</a>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form role="form">
+                                            <!-- /.panel-heading -->
+                                            <div class="panel-body">
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#general" data-toggle="tab">Thông tin chung</a>
+                                                    </li>                                                    
+                                                   
+                                                </ul>
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="general">
+                                                        <form role="form">                                                            
+                                                            <div class="form-group">
+                                                                <label>Tên trophy *</label>
+                                                                <input class="form-control"  id="title" name="title" value="@ViewBag.title">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Ảnh đại diện *</label>
+                                                                <input name="imageFile" type="file" id="imageFile" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcess();"/>                                
+                                                                <div id="progressbar" class="progressbar">
+                                                                    <div id="progresslabel" class="progressbarlabel"></div>
+                                                                </div> 
+                                                                <input name="image" type="hidden" id="image" value="@ViewBag.image" class="form-control" />                  
+                                                                <div id="imageShow" style="width:200px;height:200px;display:none;"></div>
+                                                                <script>
+                                                                    if ("@ViewBag.image" !== "") {
+                                                                        $("#imageShow").html("<img src=\"@ViewBag.image\" style=\"width:200px;height:200px;\">");
+                                                                        $("#imageShow").show();
+                                                                    }
+                                                                </script>
+                                                            </div>
+                                                            
+                                                            <div class="form-group">
+                                                                <label>Loại tin (news or events) *</label>
+                                                                <select class="form-control"  id="type" name="type">
+                                                                    <option value="1">News</option>
+                                                                    <option value="2">Events</option>
+                                                                </select>    
+                                                            </div>                                                            
+                                                            <div class="form-group">
+                                                                <label>Giới thiệu ngắn *</label>
+                                                                <textarea name="des" id="des" rows="9">
+                                                                        @Html.Raw(@ViewBag.des)
+                                                                </textarea>
+                                                                <script>
+                                                                    CKEDITOR.replace('des');
+                                                                </script>                                                             
+                                                            </div>    
+                                                            <div class="form-group">
+                                                                <label>Nội dung tin *</label>
+                                                                <textarea name="full_details" id="full_details" rows="16">
+                                                                        @Html.Raw(@ViewBag.full_details)
+                                                                </textarea>
+                                                                <script>
+                                                                    CKEDITOR.replace('full_details');
+                                                                </script>                                                             
+                                                            </div>                                          
+                                                        </form>
+                                                    </div> 
+                                                                                                  
+                                                </div>
+                                            </div>
+                                            <!-- /.panel-body -->                          
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+        
+    </div>
+    <!-- /#wrapper -->
+<script>
+    var id = 0;
+    
+    if ("@ViewBag.id" != "0") {
+        id = @ViewBag.id;      
+        document.getElementById("type").value="@ViewBag.type";
+    }
+    
+    function AddNew() {
+        var formdata = new FormData(); //FormData object
+        var title = document.getElementById("title").value;
+        var des = CKEDITOR.instances.des.getData();
+        var full_details = CKEDITOR.instances.full_details.getData();        
+        var image = document.getElementById("image").value;       
+        var type = document.getElementById("type").value;
+        
+        if (title==""){
+            alert("Nhập title");
+            return;
+        }
+        if (des=="") {
+            alert("Nhập giới thiệu ngắn");
+            return;
+        }
+        if (full_details=="") {
+            alert("Nhập nội dung");
+            return;
+        }     
+        if (image=="") {
+            alert("Nhập ảnh đại diện");
+            return;
+        }
+               
+        document.getElementById("btnSA").disabled=true;
+        formdata.append("name", name);
+        formdata.append("des", des);
+        formdata.append("full_details", full_details);
+        formdata.append("image", image);        
+        formdata.append("type", type);        
+        formdata.append("id", id);//id=0 add new, id!=0 is update
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/News/Update');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0") { 
+                    //updateGI(xhr.responseText);
+                    //updatePrice(xhr.responseText);
+                    window.location.href = "/news/index";
+                } else {
+                    document.getElementById("btnSA").disabled=false;
+                    alert("Có lỗi trong quá trình cập nhật dữ liệu");
+                }
+            }
+            
+        }
+    }
+    //Image upload
+    function uploadProcess() {
+        //var title = unicodeToNoMark($("#title").val());
+        //if (title.trim() == "") {
+        //    alert("Nhập tên bài viết trước");
+        //    document.getElementById("title").focus();
+        //    document.getElementById('imageFile').value = "";
+        //    return;
+        //}
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('imageFile');
+        for (var i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            break;
+        }
+        //formdata.append("filename", title);
+        showLoadingImage();
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                $("#progressbar").progressbar("value", progress);
+            }
+        }, false);
+
+        xhr.open('POST', '/news/UploadImageProcess');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $('#imageShow').show();
+                $('#imageShow').html("<img src=\"" + xhr.responseText + "\" style=\"width:200px;height:200px;\">");
+                $('#image').val(xhr.responseText);
+                hideLoadingImage();
+            }
+        }
+        return false;
+    }
+    
+    
+</script>
+
