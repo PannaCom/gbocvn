@@ -43,9 +43,32 @@ namespace GolfBooking.Controllers
             int pageNumber = (page ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));
         }
+        
+
+        //  Tuyenvv - View a packet
+        public ActionResult View(int id = 0)
+        {
+
+            var q = (from pack in db.golf_package_stay where pack.id == id
+                     select new ModelPacketStayItem
+                     {
+                         id = pack.id,
+                         golf_id = pack.golf_id,
+                         name = pack.name,
+                         des = pack.des,
+                         full_detail = pack.full_detail,
+                         image = pack.image,
+                         min_price = pack.min_price,
+                         deleted = pack.deleted,
+                         type = pack.type,
+                         listImages = db.golf_package_stay_image.Where( o => o.golf_package_id == pack.id ).Select(x => x.image).Take(3)
+                     }).FirstOrDefault();
+
+            return View(q);
+        }
+
         //
         // GET: /PackageStay/Details/5
-
         public ActionResult Details(int id = 0)
         {
             golf_package_stay golf_package_stay = db.golf_package_stay.Find(id);

@@ -3,18 +3,159 @@
 @{
     ViewBag.Title = "list";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool isFirst = true;
+    int sliderId = 1;
 }
+
 <article id="content">
 				<section class="container content-padding-lg" style="padding-top:2px;">
 					<h6>Home » Golf Package</h6>
 					<div class="row animated">
 							<!-- Left Menu -->
                             @Html.Partial("~/Views/_vLeftMenu.cshtml")
-							<!-- Lấy ra dữ liệu và hiển thị từ bảng golf_package_stay, giống giao diện của trang http://demo.binhyen.net/golfpackagelist.html -->
-                            <!-- xem file golfpackagelist.html tại thư mục /svn/giaodien/ -->
-                            <!-- khi click vào ảnh, title hoặc chữ book thì ra trang có giao diện là golfpackagelist3.html http://demo.binhyen.net/golfpackagelist3.html
-                            <!-- trong đó dữ liệu title, des, full_detail thì lấy từ bảng golf_package_stay, còn 3 ảnh bên trong lấy từ bảng golf_package_stay_image qua golf_package_id
+							@foreach (var item in Model)
+                           {
+                               string display = "display:none";;
+                               if (isFirst)
+                               {
+                                   isFirst = false;
+                                   display = "";
+                               }
+                                <text>
+                        <div class="col-sm-9 golf-slider-custom" style="background-color:#edebe1;cursor:pointer;padding-left:0px;padding-right:0px;@display" id="slide@{@sliderId}" onclick="location.href = '@Url.RouteUrl("viewpacket", new { id = item.id })'">
+                            <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;">
+                                <div class="col-sm-12" id=slide1bg style="border:1px solid #bf0000;padding-left:1px;background-image:url('http://golf.binhyen.net@{@item.image}');background-position:center;background-size:100% 100%;height:300px;">
+                                    <div style="display:block;color:#bf0000;position:absolute;float:left;top:60%;left:40%;background-color:#ffffff;width:57%;height:100px;padding-top:30px;padding-left:10px;padding-right:10px;">
+                                        <div style="display:block;color:#ffffff;text-align:center;font-weight:bold;position:absolute;float:left;top:-15px;left:40%;background-color:#bf0000;width:57%;height:35px;">
+                                            @item.name
+                                        </div>
+                                        <div style="border:4px solid #b06e5b;display:block;color:#000000;text-align:center;font-weight:bold;position:absolute;float:left;top:-35px;left:-70px;border-radius:48%;padding-top:20px;background-color:#ffffff;width:90px;height:80px;">
+                                            
+                                            <a href="@Url.RouteUrl("viewpacket", new { id = item.id })">Book Now</a>
+                                        </div>
+                                        @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(item.des))
+                                    </div>n
+                                </div>
+                            </div>
+                        </div>
+                                </text>
+                               sliderId++;
+                           }
+                        
+                        <div style="padding-top:15px;padding-bottom:15px;background-color:#ffffff;color:#bf0000;font-weight:bold;"><i>More Discounted Packages</i></div>
+                        <div class="col-sm-9" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
+                            <div style="width:100%;position:relative;display:block;float:left;padding-left:5px;">
+                                <div class="col-sm-4" style="padding-left:1px;">
+                                    <img src="images/gv4.jpg" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
+                                </div>
+                                <div class="col-sm-6">
+                                    <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">7 Days 6 Nights Shocking Banyan Tree Villa  + 5 rounds of Golf</h6>
+                                    <p>
+                                        Offers from 15th September 2014 to 14th September 2015
+                                        7 Nights in Twin Room based on 2 sharing on B & B Basis
+                                        Water and Fruit on arrival
+                                        5 x 18 holes as follows - either
+                                        3 round Golf Montado + 2 round at Ribagolfe
+                                        5 rounds at Golf Montado
+                                        3 round at Montado + 2 round Golf at Troia
+                                    </p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:125px;width:125px;position:position: absolute;">
+                                        <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:40px;padding-left:46px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from 231$</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;padding-right:0px;">
+                                <div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
+                                    &nbsp;
+                                </div>
+                                <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
+                                    <a href="#" style="color:#ffffff;">Details</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-9" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-top:15px;">
+                            <div style="width:100%;position:relative;display:block;float:left;padding-left:5px;">
+                                <div class="col-sm-4" style="padding-left:1px;">
+                                    <img src="images/gv1.jpg" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
+                                </div>
+                                <div class="col-sm-6">
+                                    <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">3 Days 2 Nights Shocking Angsana Langco Hotel   with unlimited Golf for 2 days</h6>
+                                    <p>
+                                        3 round Golf Montado + 2 round at Ribagolfe
+                                        5 rounds at Golf Montado
+                                        3 round at Montado + 2 round Golf at Troia
+                                    </p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:125px;width:125px;position:position: absolute;">
+                                        <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:40px;padding-left:46px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from 241$</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;padding-right:0px;">
+                                <div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
+                                    &nbsp;
+                                </div>
+                                <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
+                                    <a href="#" style="color:#ffffff;">Details</a>
+                                </div>
+                            </div>
+
+                        </div>
 					</div>		
 					
 				</section>
 </article><!-- #content --> 
+
+<script>
+    var sl = 0;
+    function changeBG() {
+        sl++;
+        //$('#slide1').slideDown(1000,changeBGDO());
+        //console.log(sl);
+        if (sl % 3 == 0) {
+            //alert("1");
+            //$('#header').fadeIn(3000,changeBGDO());
+            $('#slide3').hide();
+            $('#slide2').hide();
+            $('#slide1').show();
+            $('#slide1').animate({ opacity: 0.1 }, 1000, changeBGDO).animate({ opacity: 1 }, 1000);
+            //$('#slide1').slideDown(1000);
+        } else
+            if (sl % 3 == 1) {
+                $('#slide1').hide();
+                $('#slide3').hide();
+                $('#slide2').show();
+                $('#slide2').animate({ opacity: 0.1 }, 1000, changeBGDO).animate({ opacity: 1 }, 1000);
+                //$('#slide2').slideDown(3000);
+                //$('#header').fadeIn(3000,changeBGDO());
+            } else
+                if (sl % 3 == 2) {
+                    $('#slide1').hide();
+                    $('#slide2').hide();
+                    $('#slide3').show();
+                    $('#slide3').animate({ opacity: 0.1 }, 1000, changeBGDO).animate({ opacity: 1 }, 1000);
+                }
+    }
+    function changeBGDO() {
+        //sl++;		
+        //console.log(sl);
+        if (sl % 3 == 0) {
+            $('#slide1bg').css("background-image", "url('images/gv1.jpg')");
+            //$('#slide1').slideUp(3000);						 
+        } else
+            if (sl % 3 == 1) {
+                $('#slide2bg').css("background-image", "url('images/gv2.jpg')");
+                //$('#slide2').slideUp(3000);	
+            }
+            else
+                if (sl % 3 == 2) {
+                    $('#slide3bg').css("background-image", "url('images/gv3.jpg')");
+                    //$('#slide3').slideUp(3000);	
+                }
+    }
+    setInterval(changeBG, 4000);
+</script>
