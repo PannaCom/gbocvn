@@ -12,6 +12,13 @@ namespace GolfBooking
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
+            //define 1 cai route o day
+            routes.MapRoute(
+                "viewpacket",
+                "viewpacket/{id}",
+                new { controller = "PackageStay", action = "View", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Default",
