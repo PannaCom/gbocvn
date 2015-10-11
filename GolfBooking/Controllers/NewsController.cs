@@ -6,7 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GolfBooking.Models;
-
+using Newtonsoft.Json;
+using PagedList;
 namespace GolfBooking.Controllers
 {
     public class NewsController : Controller
@@ -16,9 +17,17 @@ namespace GolfBooking.Controllers
         //
         // GET: /News/
 
-        public ActionResult Index()
+        public ActionResult Index(string name, int? page)
         {
-            return View(db.news.ToList());
+            //return View(db.provinces.Where(o=>o.deleted==0).OrderBy(o=>o.country_id).ThenBy(o=>o.name).ToList());
+            if (name == null) name = "";
+            name = name.Replace("%20", " ");
+            name = name.Trim();
+            ViewBag.name = name;            
+            var p = (from q in db.news where q.title.Contains(name) select q).OrderByDescending(o => o.id).Take(100);
+            int pageSize = 25;
+            int pageNumber = (page ?? 1);
+            return View(p.ToPagedList(pageNumber, pageSize));
         }
 
         //
@@ -37,8 +46,26 @@ namespace GolfBooking.Controllers
         //
         // GET: /News/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
+            if (id == null) id = 0;
+            ViewBag.id = id;
+            if (id == 0)
+            {
+                ViewBag.name = "";
+                ViewBag.image = "";
+                ViewBag.full_details = "";
+                ViewBag.type = 1;
+                ViewBag.des = "";
+            }
+            else {
+                news n = db.news.Find(id);
+                ViewBag.name = n.title;
+                ViewBag.image = n.image;
+                ViewBag.full_details = n.full_details;
+                ViewBag.type = n.type;
+                ViewBag.des = n.des;
+            }
             return View();
         }
 
@@ -118,6 +145,65 @@ namespace GolfBooking.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public string Update(string title, string des, string full_details, string image, byte type, int id)
+        {
+            try
+            {
+                if (id == 0)
+                {
+                    news n = new news();
+                    n.title = title;
+                    n.des = des;
+                    n.full_details = full_details;
+                    n.image = image;
+                    n.type = type;
+                    db.news.Add(n);
+                    db.SaveChanges();
+                    return n.id.ToString();
+                }
+                else {
+                    news n = db.news.Find(id);
+                    n.title = title;
+                    n.des = des;
+                    n.full_details = full_details;
+                    n.image = image;
+                    n.type = type;
+                    db.Entry(n).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return id.ToString();
+                }
+            }
+            catch (Exception ex) {
+                return "0";
+            }
+        }
+        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public string UploadImageProcess(HttpPostedFileBase file)
+        {
+            string physicalPath = HttpContext.Server.MapPath("../" + Config.NewsGolfImagePath + "\\");
+            string nameFile = String.Format("{0}.jpg", Guid.NewGuid().ToString());
+            int countFile = Request.Files.Count;
+            string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
+            for (int i = 0; i < countFile; i++)
+            {
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                Request.Files[i].SaveAs(fullPath);
+                break;
+            }
+            //string ok = resizeImage(Config.imgWidthNews, Config.imgHeightNews, fullPath, Config.NewsImagePath + "/" + nameFile);
+            return Config.NewsGolfImagePath + "/" + nameFile;
+        }
+        public string autosearch(string keyword)
+        {
+            var p = (from q in db.news where q.title.Contains(keyword) select q.title).Take(10);
+            return JsonConvert.SerializeObject(p.ToList());
         }
     }
 }

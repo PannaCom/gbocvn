@@ -23,6 +23,7 @@ namespace GolfBooking.Controllers
             //return View(db.provinces.Where(o=>o.deleted==0).OrderBy(o=>o.country_id).ThenBy(o=>o.name).ToList());
             if (name == null) name = "";
             name = name.Replace("%20", " ");
+            name = name.Trim();
             if (type == null) type = 1;
             ViewBag.name = name;
             ViewBag.type = type;
@@ -50,7 +51,7 @@ namespace GolfBooking.Controllers
         {
 
             var q = (from pack in db.golf_package_stay where pack.id == id
-                     select new ModelPacketStayItem
+                     select new //ModelPacketStayItem
                      {
                          id = pack.id,
                          golf_id = pack.golf_id,

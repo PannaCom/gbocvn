@@ -12,6 +12,7 @@ namespace GolfBooking
         public static string GolfImagePath = "/Images/Golf/";
         public static string PackageGolfImagePath = "/Images/PackageGolf/";
         public static string TrophyGolfImagePath = "/Images/Trophy/";
+        public static string NewsGolfImagePath = "/Images/News/";
         public static string domain = "http://golf.binhyen.net/";
         //convert longitude latitude to geography
         public static DbGeography CreatePoint(double? latitude, double? longitude)
