@@ -51,7 +51,7 @@ namespace GolfBooking.Controllers
         {
 
             var q = (from pack in db.golf_package_stay where pack.id == id
-                     select new //ModelPacketStayItem
+                     select new ModelPacketStayItem
                      {
                          id = pack.id,
                          golf_id = pack.golf_id,
