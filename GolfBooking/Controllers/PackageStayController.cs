@@ -40,7 +40,7 @@ namespace GolfBooking.Controllers
             ViewBag.name = name;
             ViewBag.type = type;
             var p = (from q in db.golf_package_stay where q.name.Contains(name) && q.deleted == 0 && q.type == type select q).OrderByDescending(o => o.id).Take(100);
-            int pageSize = 25;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));
         }
@@ -50,7 +50,8 @@ namespace GolfBooking.Controllers
         public ActionResult View(int id = 0)
         {
 
-            var q = (from pack in db.golf_package_stay where pack.id == id
+            var q = (from pack in db.golf_package_stay
+                     where pack.id == id
                      select new ModelPacketStayItem
                      {
                          id = pack.id,
@@ -62,8 +63,43 @@ namespace GolfBooking.Controllers
                          min_price = pack.min_price,
                          deleted = pack.deleted,
                          type = pack.type,
-                         listImages = db.golf_package_stay_image.Where( o => o.golf_package_id == pack.id ).Select(x => x.image).Take(3)
+                         listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
                      }).FirstOrDefault();
+
+            var q2 = (from pack in db.golf_package_stay
+                     where pack.id > q.id
+                     select new ModelPacketStayItem
+                     {
+                         id = pack.id,
+                         golf_id = pack.golf_id,
+                         name = pack.name,
+                         des = pack.des,
+                         full_detail = pack.full_detail,
+                         image = pack.image,
+                         min_price = pack.min_price,
+                         deleted = pack.deleted,
+                         type = pack.type,
+                         listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
+                     }).FirstOrDefault();
+
+            var q3 = (from pack in db.golf_package_stay
+                     where pack.id > q2.id
+                     select new ModelPacketStayItem
+                     {
+                         id = pack.id,
+                         golf_id = pack.golf_id,
+                         name = pack.name,
+                         des = pack.des,
+                         full_detail = pack.full_detail,
+                         image = pack.image,
+                         min_price = pack.min_price,
+                         deleted = pack.deleted,
+                         type = pack.type,
+                         listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
+                     }).FirstOrDefault();
+
+            ViewBag.nextItem1 = q2;
+            ViewBag.nextItem2 = q3;
 
             return View(q);
         }

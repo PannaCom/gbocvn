@@ -30,18 +30,12 @@
             <div class="col-sm-9" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
                 <div style="width:100%;position:relative;display:block;float:left;padding-left:5px;">
                     <div class="col-sm-4" style="padding-left:1px;">
-                        <img src="images/gv4.jpg" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
+                        <img src="http://golf.binhyen.net@{@ViewBag.nextItem1.image}" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
                     </div>
                     <div class="col-sm-6">
-                        <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">7 Days 6 Nights Shocking Banyan Tree Villa  + 5 rounds of Golf</h6>
+                        <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@ViewBag.nextItem1.name</h6>
                         <p>
-                            Offers from 15th September 2014 to 14th September 2015
-                            7 Nights in Twin Room based on 2 sharing on B & B Basis
-                            Water and Fruit on arrival
-                            5 x 18 holes as follows - either
-                            3 round Golf Montado + 2 round at Ribagolfe
-                            5 rounds at Golf Montado
-                            3 round at Montado + 2 round Golf at Troia
+                            @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(ViewBag.nextItem1.des))
                         </p>
                     </div>
                     <div class="col-sm-2">
@@ -55,7 +49,7 @@
                         &nbsp;
                     </div>
                     <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
-                        <a href="#" style="color:#ffffff;">Details</a>
+                        <a href="@Url.RouteUrl("viewpacket", new { id = ViewBag.nextItem1.id })" style="color:#ffffff;">Details</a>
                     </div>
                 </div>
 
@@ -63,15 +57,11 @@
             <div class="col-sm-9" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-top:15px;">
                 <div style="width:100%;position:relative;display:block;float:left;padding-left:5px;">
                     <div class="col-sm-4" style="padding-left:1px;">
-                        <img src="images/gv1.jpg" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
+                        <img src="http://golf.binhyen.net@{@ViewBag.nextItem2.image}" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
                     </div>
                     <div class="col-sm-6">
-                        <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">3 Days 2 Nights Shocking Angsana Langco Hotel   with unlimited Golf for 2 days</h6>
-                        <p>
-                            3 round Golf Montado + 2 round at Ribagolfe
-                            5 rounds at Golf Montado
-                            3 round at Montado + 2 round Golf at Troia
-                        </p>
+                        <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@ViewBag.nextItem2.name</h6>
+                        @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(ViewBag.nextItem2.des))
                     </div>
                     <div class="col-sm-2">
                         <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:125px;width:125px;position:position: absolute;">
@@ -84,7 +74,7 @@
                         &nbsp;
                     </div>
                     <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
-                        <a href="#" style="color:#ffffff;">Details</a>
+                        <a href="@Url.RouteUrl("viewpacket", new { id = ViewBag.nextItem2.id })" style="color:#ffffff;">Details</a>
                     </div>
                 </div>
 
