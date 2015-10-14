@@ -1,0 +1,221 @@
+﻿@model GolfBooking.Models.slide
+
+@{
+    ViewBag.Title = "Thêm mới Slide";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script src="/Scripts/ckeditor/ckeditor.js"></script>
+<div id="wrapper">
+        <!-- Navigation -->
+        @Html.Partial("~/Views/_vMenu.cshtml")
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">@ViewBag.Title</h1>                        
+                    </div>
+                    <!-- /.col-lg-12 -->
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button type="button" class="btn btn-primary" onclick="AddNew();" id="btnSA">Save All</button>
+                                    -<a href="/slide/index">Quay lại danh sách</a>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form role="form">
+                                            <!-- /.panel-heading -->
+                                            <div class="panel-body">
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#general" data-toggle="tab">Thông tin chung</a>
+                                                    </li>
+                                                </ul>
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="general">
+                                                        <form role="form">
+                                                            <div class="form-group">
+                                                                <label>Tiêu đề lớn *(<i>Hiển thị trên ô Search Tee Time</i>)</label>
+                                                                <input class="form-control"  id="caption" name="caption" value="@ViewBag.caption">                                                                
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Slogan (hiển thị trong ô text tròn, bên trên) *</label>
+                                                                <input class="form-control"  id="slogan" name="slogan" value="@ViewBag.slogan">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>text chữ nhỏ (hiển thị trong ô text tròn, bên dưới và link đến trang khác) *</label>
+                                                                <input class="form-control"  id="linktext" name="linktext" value="@ViewBag.linktext">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>link đến(đường dẫn khi click vào text chữ nhỏ) *</label>
+                                                                <input class="form-control"  id="link" name="link" value="@ViewBag.link">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Ảnh đại diện lớn *</label>
+                                                                <input name="imageFile" type="file" id="imageFile" value="" multiple="multiple" class="form-control" runat="server" onchange="uploadProcess();"/>                                
+                                                                <div id="progressbar" class="progressbar">
+                                                                    <div id="progresslabel" class="progressbarlabel"></div>
+                                                                </div> 
+                                                                <input name="image" type="hidden" id="image" value="@ViewBag.image" class="form-control" />                  
+                                                                <div id="imageShow" style="width:100%;height:300px;display:none;"></div>
+                                                                <script>
+                                                                    if ("@ViewBag.image" !== "") {
+                                                                        $("#imageShow").html("<img src=\"@ViewBag.image\" style=\"width:100%;height:300px;\">");
+                                                                        $("#imageShow").show();
+                                                                    }
+                                                                </script>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Vị trí xuất hiện *</label>
+                                                                <select class="form-control"  id="type" name="type">
+                                                                    <option selected="selected" disabled="disabled" value="">Chọn thứ tự xuất hiện</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="6">6</option>
+                                                                    <option value="7">7</option>
+                                                                    <option value="8">8</option>
+                                                                    <option value="9">9</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                </select>    
+                                                            </div>                                            
+                                                        </form>
+                                                    </div> 
+                                                                                                   
+                                                </div>
+                                            </div>
+                                            <!-- /.panel-body -->                          
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+        
+    </div>
+    <!-- /#wrapper -->
+<script>
+    var id = 0;
+    
+    if ("@ViewBag.id" != "0") {
+        id = @ViewBag.id;      
+        document.getElementById("type").value="@ViewBag.type";
+    }
+    
+    function AddNew() {
+        var formdata = new FormData(); //FormData object
+        var caption = document.getElementById("caption").value;
+        var slogan = document.getElementById("slogan").value;             
+        var linktext = document.getElementById("linktext").value;
+        var image = document.getElementById("image").value;
+        var link = document.getElementById("link").value;
+        var type = document.getElementById("type").value;
+
+        if (caption == "") {
+            alert("Nhập tiêu đề lớn");
+            return;
+        }
+        if (slogan==""){
+            alert("Nhập slogan");
+            return;
+        }
+        if (linktext=="") {
+            alert("Nhập text chữ nhỏ ");
+            return;
+        }
+        if (link=="") {
+            alert("Nhập link text chữ nhỏ");
+            return;
+        }        
+        if (image=="") {
+            alert("Nhập ảnh đại diện");
+            return;
+        }
+              
+        if (type==""){
+            alert("Nhập vị trí xuất hiện");
+            return;
+        }
+        document.getElementById("btnSA").disabled=true;
+        formdata.append("caption", caption);
+        formdata.append("slogan", slogan);
+        formdata.append("linktext", linktext);
+        formdata.append("link", link);
+        formdata.append("image", image);
+        formdata.append("type", type);        
+        formdata.append("id", id);//id=0 add new, id!=0 is update
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Slide/Update');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0") { 
+                    updateGI(xhr.responseText);
+                    //updatePrice(xhr.responseText);
+                    //window.location.href = "/golf/index";
+                } else {
+                    document.getElementById("btnSA").disabled=false;
+                    alert("Có lỗi trong quá trình cập nhật dữ liệu");
+                }
+            }
+            
+        }
+    }
+    //Image upload
+    function uploadProcess() {
+        //var title = unicodeToNoMark($("#title").val());
+        //if (title.trim() == "") {
+        //    alert("Nhập tên bài viết trước");
+        //    document.getElementById("title").focus();
+        //    document.getElementById('imageFile').value = "";
+        //    return;
+        //}
+        var formdata = new FormData(); //FormData object
+        var fileInput = document.getElementById('imageFile');
+        for (var i = 0; i < fileInput.files.length; i++) {
+            //Appending each file to FormData object
+            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            break;
+        }
+        //formdata.append("filename", title);
+        showLoadingImage();
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                $("#progressbar").progressbar("value", progress);
+            }
+        }, false);
+
+        xhr.open('POST', '/Slide/UploadImageProcess');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                $('#imageShow').show();
+                $('#imageShow').html("<img src=\"" + xhr.responseText + "\" style=\"width:100%;height:300px;\">");
+                $('#image').val(xhr.responseText);
+                hideLoadingImage();
+            }
+        }
+        return false;
+    }
+    
+    
+</script>

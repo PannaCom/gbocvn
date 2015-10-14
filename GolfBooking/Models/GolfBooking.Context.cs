@@ -45,5 +45,6 @@ namespace GolfBooking.Models
         public DbSet<golf_package_stay> golf_package_stay { get; set; }
         public DbSet<golf_trophy> golf_trophy { get; set; }
         public DbSet<golf_trophy_category> golf_trophy_category { get; set; }
+        public DbSet<slide> slides { get; set; }
     }
 }
