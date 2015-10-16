@@ -27,7 +27,7 @@
                                     <text>
                                     <div class="col-sm-9 golf-slider-custom" style="background-color:#edebe1;cursor:pointer;padding-left:0px;padding-right:0px;@display" id="slide@{@sliderId}" onclick="location.href = '@Url.RouteUrl("viewpacket", new { id = item.id })'">
                                         <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;">
-                                            <div class="col-sm-12" id=slide1bg style="border:1px solid #bf0000;padding-left:1px;background-image:url('http://golf.binhyen.net@{@item.image}');background-position:center;background-size:100% 100%;height:300px;">
+                                            <div class="col-sm-12" id=slide1bg style="border:1px solid #bf0000;padding-left:1px;background-image:url('@{@GolfBooking.Config.domain@item.image}');background-position:center;background-size:100% 100%;height:300px;">
                                                 <div style="display:block;color:#bf0000;position:absolute;float:left;top:60%;left:40%;background-color:#ffffff;width:57%;height:100px;padding-top:30px;padding-left:10px;padding-right:10px;">
                                                     <div style="display:block;color:#ffffff;text-align:center;font-weight:bold;position:absolute;float:left;top:-15px;left:40%;background-color:#bf0000;width:57%;height:35px;">
                                                         @item.name
@@ -55,14 +55,19 @@
                                         <div class="col-sm-9" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
                                             <div style="width:100%;position:relative;display:block;float:left;padding-left:5px;">
                                                 <div class="col-sm-4" style="padding-left:1px;">
-                                                    <img src="http://golf.binhyen.net@{@item.image}" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
+                                                    <a href="@Url.RouteUrl("viewpacket", new { id = item.id })">
+                                                        <img src="@{@GolfBooking.Config.domain@item.image}" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
+                                                    </a>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@item.name</h6>
+                                                    <a href="@Url.RouteUrl("viewpacket", new { id = item.id })">
+                                                        <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@item.name</h6>
+                                                  </a>
+
                                                     <p>
-                                                        @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(item.des)) 
+                                                        @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(item.des))
                                                     </p>
-                                                </div>
+</div>
                                                 <div class="col-sm-2">
                                                     <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:125px;width:125px;position:position: absolute;">
                                                         <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:40px;padding-left:46px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from @{@item.min_price}$</span>

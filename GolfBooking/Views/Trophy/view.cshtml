@@ -1,0 +1,54 @@
+﻿@model GolfBooking.Models.golf_trophy
+@{
+    ViewBag.Title = "view";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<article id="content">
+    <section class="container content-padding-lg" style="padding-top:2px;">
+        <h6>Home » Golf Trophy » @ViewBag.catname</h6>
+        <div class="row animated">
+            <div class="col-sm-3">
+                <div style="width:100%;display:block;position:relative;background-color:bf0000;border:1px solid #cecece;">
+                    <h6 class="text-center" style="color:#fff;margin-bottom:5px;background-color:#bf0000;padding-top:10px;padding-bottom:10px;">Categories</h6>
+                    <div class="row" style="padding-left:0px;width:100%;">
+                        <ul>
+                            @{
+                                foreach (var cat in ViewBag.categories)
+                                {
+                                    string active = "";
+                                    if (ViewBag.catid == cat.id)
+                                    {
+                                        active = "background-color:#edebe1;";
+                                    }
+
+                                    <text>
+                                        <li style="border-bottom:1px solid #cecece;@active"><a href="@Url.RouteUrl("trophylist", new { catid=cat.id })">> @cat.name</a></li>
+                                    </text>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
+                <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;">
+                    <div class="col-sm-12" id=slide1bg style="height:auto;">
+                        <div style="width:42%;position:relative;float:left;border:1px solid #cfd5e3;text-align:center;background-color:#fff;height:300px;">
+                            <h5 style="color:#595959;font-weight:bold;">@Model.name</h5>
+                            <img src="@{@GolfBooking.Config.domain@Model.image}">
+                            <p style="color:#000000;text-align:center;background-color:#edebe1;height:auto;bottom:0px;position:absolute;width:100%;">@ViewBag.catname</b></p>
+                        </div>
+                        <div style="width:57%;position:relative;float:left;border:1px solid #cfd5e3;text-align:center;background-color:#fff;height:300px;">
+                            @Html.Raw(Model.des)
+                            <input type="button" class="btn btn-primary btn-block" style="float:right;right:0;bottom:0;background-color:#bf0000;color:#ffffff;width:112px;font-size:11px;position:absolute;" name="Make Reservations" value="Order Now">
+                            <input type="button" class="btn btn-primary btn-block" style="float:left;left:0;bottom:0;background-color:#bf0000;color:#ffffff;width:112px;font-size:11px;position:absolute;" name="Make Reservations" value="@Model.price VNĐ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+</article><!-- #content -->  
