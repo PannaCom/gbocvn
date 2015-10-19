@@ -1,4 +1,6 @@
-﻿@{
+﻿@model PagedList.IPagedList<GolfBooking.Models.golf_trophy>
+@using PagedList.Mvc;
+@{
     ViewBag.Title = "category";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int slideCnt = 1;
@@ -40,7 +42,7 @@
                                 foreach (var cat in ViewBag.categories)
                                 {
                                     <text>
-                                        <li style="border-bottom:1px solid #cecece"><a href="@Url.RouteUrl("trophylist", new { catid = cat.id })">> @cat.name</a></li>
+                                        <li style="border-bottom:1px solid #cecece"><a href="@Url.RouteUrl("trophycategory", new { catid = cat.id })">> @cat.name</a></li>
                                     </text>
                                 }
                             }
@@ -54,14 +56,12 @@
                 <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;">
                     <div class="col-sm-12" id=slide1bg style="height:300px;">
                         @{
-                            foreach (var cat in ViewBag.categories)
+                            @foreach (var item in Model)
                             {
-                                <text>
-                                    <div style="width:32%;position:relative;float:left;border:1px solid #bf0000;text-align:center;background-color:#fff;">
-                                        <a href="@Url.RouteUrl("trophylist", new { catid=cat.id })"><img src="@{@GolfBooking.Config.domain@cat.image}"></a>
-                                        <p style="color:#000000;text-align:center;background-color:#edebe1;"><a href="@Url.RouteUrl("trophylist", new { catid=cat.id })">@cat.name</a></p>
-                                    </div>
-                                </text>
+                            <div style="margin-left:12px;width:28%;position:relative;float:left;border:1px solid #bf0000;text-align:center;background-color:#fff;">
+                                <a href="@Url.RouteUrl("trophylist", new { id = item.id })"><img src="@{@GolfBooking.Config.domain@item.image}"></a>                                
+                                <p style="color:#000000;text-align:center;background-color:#edebe1;"><a href="@Url.RouteUrl("trophyview", new { id=item.id })">> @item.price</a></p>
+                            </div>
                             }
                         }
                         

@@ -24,7 +24,7 @@ namespace GolfBooking
             // them route cho trophy category
             routes.MapRoute(
                 "trophycategory",
-                "golftrophycat",
+                "golftrophycat/{catid}/{page}",
                 new { controller = "Trophy", action = "category"}
             );
 

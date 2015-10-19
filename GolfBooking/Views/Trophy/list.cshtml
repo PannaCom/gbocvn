@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<GolfBooking.Models.golf_trophy>
+﻿@model PagedList.IPagedList<GolfBooking.Models.golf_trophy_category>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "list";
@@ -47,7 +47,7 @@
                                     }
                                     
                                     <text>
-                                        <li style="border-bottom:1px solid #cecece;@active"><a href="@Url.RouteUrl("trophylist", new { catid=cat.id })">> @cat.name</a></li>
+                                        <li style="border-bottom:1px solid #cecece;@active"><a href="@Url.RouteUrl("trophycategory", new { catid=cat.id })">> @cat.name</a></li>
                                     </text>
                                 }
                             }
@@ -61,9 +61,9 @@
                     <div class="col-sm-12" id=slide1bg style="height:auto;">
                         @foreach (var item in Model)
                         {
-                            <div style="width:22%;position:relative;float:left;border:1px solid #bf0000;text-align:center;background-color:#fff;">
-                                <a href="@Url.RouteUrl("trophyview", new { id = item.id })"><img src="@{@GolfBooking.Config.domain@item.image}"></a>
-                                <p style="color:#000000;text-align:center;background-color:#edebe1;">@item.name<br><b>@item.price vnđ</b></p>
+                            <div style="margin-left:12px;width:28%;position:relative;float:left;border:1px solid #bf0000;text-align:center;background-color:#fff;">
+                                <a href="@Url.RouteUrl("trophylist", new { id = item.id })"><img src="@{@GolfBooking.Config.domain@item.image}"></a>                                
+                                <p style="color:#000000;text-align:center;background-color:#edebe1;"><a href="@Url.RouteUrl("trophycategory", new { catid=item.id})">> @item.name</a></p>
                             </div>
                         }
                         
@@ -79,3 +79,52 @@
 
     </section>
 </article><!-- #content -->
+<script>
+    var sl = 0;
+    function changeBG() {
+        sl++;
+        //$('#slide1').slideDown(1000,changeBGDO());
+        //console.log(sl);
+        if (sl % 3 == 0) {
+            //alert("1");
+            //$('#header').fadeIn(3000,changeBGDO());
+            $('#slide3').hide();
+            $('#slide2').hide();
+            $('#slide1').show();
+            $('#slide1').animate({ opacity: 0.1 }, 1000, changeBGDO).animate({ opacity: 1 }, 1000);
+            //$('#slide1').slideDown(1000);
+        } else
+            if (sl % 3 == 1) {
+                $('#slide1').hide();
+                $('#slide3').hide();
+                $('#slide2').show();
+                $('#slide2').animate({ opacity: 0.1 }, 1000, changeBGDO).animate({ opacity: 1 }, 1000);
+                //$('#slide2').slideDown(3000);
+                //$('#header').fadeIn(3000,changeBGDO());
+            } else
+                if (sl % 3 == 2) {
+                    $('#slide1').hide();
+                    $('#slide2').hide();
+                    $('#slide3').show();
+                    $('#slide3').animate({ opacity: 0.1 }, 1000, changeBGDO).animate({ opacity: 1 }, 1000);
+                }
+    }
+    function changeBGDO() {
+        //sl++;
+        //console.log(sl);
+        if (sl % 3 == 0) {
+            $('#slide1bg').css("background-image", "url('images/gpsl1.gif')");
+            //$('#slide1').slideUp(3000);
+        } else
+            if (sl % 3 == 1) {
+                $('#slide2bg').css("background-image", "url('images/gpsl2.gif')");
+                //$('#slide2').slideUp(3000);
+            }
+            else
+                if (sl % 3 == 2) {
+                    $('#slide3bg').css("background-image", "url('images/gpsl3.gif')");
+                    //$('#slide3').slideUp(3000);
+                }
+    }
+    setInterval(changeBG, 4000);
+</script>
