@@ -4,6 +4,8 @@
     ViewBag.Title = "category";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int slideCnt = 1;
+    int count = 0;
+    string paddingtop = "";
 }
 <article id="content">
     <section class="container content-padding-lg" style="padding-top:2px;">
@@ -41,8 +43,14 @@
                             @{
                                 foreach (var cat in ViewBag.categories)
                                 {
+                                    string active = "";
+                                    if (ViewBag.catid == cat.id)
+                                    {
+                                        active = "background-color:#edebe1;";
+                                    }
+                                    
                                     <text>
-                                        <li style="border-bottom:1px solid #cecece"><a href="@Url.RouteUrl("trophycategory", new { catid = cat.id })">> @cat.name</a></li>
+                                        <li style="border-bottom:1px solid #cecece;@active"><a href="/Trophy/category?catid=@cat.id">> @cat.name</a></li>
                                     </text>
                                 }
                             }
@@ -54,21 +62,27 @@
             </div>
             <div class="col-sm-9" style="padding-left:0px;padding-right:0px;">
                 <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;">
-                    <div class="col-sm-12" id=slide1bg style="height:300px;">
-                        @{
+                    <div class="col-sm-12" id=slide1bg style="height:auto;">
+                       
                             @foreach (var item in Model)
                             {
-                            <div style="margin-left:12px;width:28%;position:relative;float:left;border:1px solid #bf0000;text-align:center;background-color:#fff;">
-                                <a href="@Url.RouteUrl("trophylist", new { id = item.id })"><img src="@{@GolfBooking.Config.domain@item.image}"></a>                                
-                                <p style="color:#000000;text-align:center;background-color:#edebe1;"><a href="@Url.RouteUrl("trophyview", new { id=item.id })">> @item.price</a></p>
+                                count++;
+                                if (count > 3) { paddingtop = "margin-top:12px"; } else { paddingtop = ""; }
+                            <div style="margin-left:12px;@paddingtop;width:28%;position:relative;float:left;border:1px solid #bf0000;text-align:center;background-color:#fff;">
+                                <a href="@Url.RouteUrl("trophyview", new { id = item.id })"><img src="@{@GolfBooking.Config.domain@item.image}"></a>                                
+                                <p style="color:#000000;text-align:center;background-color:#edebe1;"><a href="@Url.RouteUrl("trophyview", new { id=item.id })">@item.name<br><b>@String.Format("{0:#,##0}", item.price) vnđ</b></a></p>
                             </div>
                             }
-                        }
+                        
                         
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+                @Html.PagedListPager(Model, page => Url.Action("category", new { page, catid = ViewBag.catid}))
+            </div>
         </div>
 
     </section>

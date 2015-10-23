@@ -38,13 +38,13 @@ namespace GolfBooking.Controllers
         {
             if (catid == null) catid = 2;
             var p = (from q in db.golf_trophy where q.golf_trophy_cat_id==catid select q).OrderBy(o => o.id);
-            IEnumerable<golf_trophy> banner = db.golf_trophy.OrderByDescending(o => o.id).Take(3);
+            IEnumerable<golf_trophy> banner = db.golf_trophy.Where(o=>o.banner!="").OrderByDescending(o => o.id).Take(3);
             ViewBag.banners = banner;
             var cat = db.golf_trophy_category.OrderBy(o => o.id);
             ViewBag.categories = cat;
             ViewBag.catid = catid;
             ViewBag.catname = cat.Where(o => o.id == catid).FirstOrDefault().name;
-            int pageSize = 8;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));
         }
@@ -53,14 +53,14 @@ namespace GolfBooking.Controllers
         public ActionResult list(int? catid, int? page)
         {
             if (catid == null) catid = 2;
-            var p = (from q in db.golf_trophy_category select q).OrderBy(o => o.id);            
-            IEnumerable<golf_trophy> banner = db.golf_trophy.OrderByDescending(o => o.id).Take(3);
+            var p = (from q in db.golf_trophy_category select q).OrderBy(o => o.id);
+            IEnumerable<golf_trophy> banner = db.golf_trophy.Where(o => o.banner != "").OrderByDescending(o => o.id).Take(3);
             ViewBag.banners = banner;
             var cat = db.golf_trophy_category.OrderBy(o => o.id);
             ViewBag.categories = cat;
             ViewBag.catid = catid;            
             ViewBag.catname = cat.Where(o => o.id == catid).FirstOrDefault().name;
-            int pageSize = 8;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));
         }

@@ -47,7 +47,7 @@
                                     }
                                     
                                     <text>
-                                        <li style="border-bottom:1px solid #cecece;@active"><a href="@Url.RouteUrl("trophycategory", new { catid=cat.id })">> @cat.name</a></li>
+                                        <li style="border-bottom:1px solid #cecece;@active"><a href="/Trophy/category?catid=@cat.id">> @cat.name</a></li>
                                     </text>
                                 }
                             }
@@ -62,19 +62,15 @@
                         @foreach (var item in Model)
                         {
                             <div style="margin-left:12px;width:28%;position:relative;float:left;border:1px solid #bf0000;text-align:center;background-color:#fff;">
-                                <a href="@Url.RouteUrl("trophylist", new { id = item.id })"><img src="@{@GolfBooking.Config.domain@item.image}"></a>                                
-                                <p style="color:#000000;text-align:center;background-color:#edebe1;"><a href="@Url.RouteUrl("trophycategory", new { catid=item.id})">> @item.name</a></p>
+                                <a href="/Trophy/category?catid=@item.id"><img src="@{@GolfBooking.Config.domain@item.image}"></a>                                
+                                <p style="color:#000000;text-align:center;background-color:#edebe1;"><a href="/Trophy/category?catid=@item.id">> @item.name</a></p>
                             </div>
                         }
                         
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12">
-                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-                @Html.PagedListPager(Model, page => Url.Action("list", new { page, catid = ViewBag.catid}))
-            </div>
+            
         </div>
 
     </section>

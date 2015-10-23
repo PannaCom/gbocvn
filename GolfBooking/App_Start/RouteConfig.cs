@@ -22,20 +22,20 @@ namespace GolfBooking
 
             //Trophy/category
             // them route cho trophy category
-            routes.MapRoute(
-                "trophycategory",
-                "golftrophycat/{catid}/{page}",
-                new { controller = "Trophy", action = "category"}
-            );
+            //routes.MapRoute(
+            //    "trophycategory",
+            //    "golftrophycat/{catid}/{page}",
+            //    new { controller = "Trophy", action = "category"}
+            //);
 
 
-            //Trophy/list/?catid=4
-            // them route cho trophy list category
-            routes.MapRoute(
-                "trophylist",
-                "golftrophy/{catid}/{page}",
-                new { controller = "Trophy", action = "list", catid = UrlParameter.Optional, page = UrlParameter.Optional }
-            );
+            ////Trophy/list/?catid=4
+            //// them route cho trophy list category
+            //routes.MapRoute(
+            //    "trophylist",
+            //    "golftrophy/{catid}/{page}",
+            //    new { controller = "Trophy", action = "list", catid = UrlParameter.Optional, page = UrlParameter.Optional }
+            //);
 
 
             //Trophy/view/?id=4
