@@ -198,8 +198,12 @@
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\GolfController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PackageStayController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
+    <Compile Include="Controllers\SlideController.cs" />
+    <Compile Include="Controllers\TrophyCatController.cs" />
+    <Compile Include="Controllers\TrophyController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -226,6 +230,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GolfBooking.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GolfItemViewModel.cs" />
     <Compile Include="Models\golf_atributes.cs">
       <DependentUpon>GolfBooking.tt</DependentUpon>
     </Compile>
@@ -274,13 +279,18 @@
     <Compile Include="Models\golf_trophy_image.cs">
       <DependentUpon>GolfBooking.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelPacketStayItem.cs" />
     <Compile Include="Models\news.cs">
       <DependentUpon>GolfBooking.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\province.cs">
       <DependentUpon>GolfBooking.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\slide.cs">
+      <DependentUpon>GolfBooking.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap-theme.css" />
@@ -1316,7 +1326,101 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GolfBooking.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\Golf\046e2676-7c81-4a22-ba51-bd517ae0d1be.jpg" />
+    <Content Include="Images\Golf\0976b686-56ac-45f4-b132-80104e440a3c.jpg" />
+    <Content Include="Images\Golf\0c244688-bc86-4837-9a00-85b2cc32f27a.jpg" />
+    <Content Include="Images\Golf\0da35cd2-a9a5-4c17-9b2e-b317945d3954.jpg" />
+    <Content Include="Images\Golf\0f45e518-df0a-4203-ab1f-ff3a51d05fcd.jpg" />
+    <Content Include="Images\Golf\1f6f455e-becc-49af-aad2-4d5d27389e63.jpg" />
+    <Content Include="Images\Golf\1fe531f6-c4a4-4604-85b1-7e3d84c2b72d.jpg" />
+    <Content Include="Images\Golf\202d334e-f89e-47a6-ac62-d26da3e69c43.jpg" />
+    <Content Include="Images\Golf\21239fe8-81dc-4e56-b582-fdbf6951ecf2.jpg" />
+    <Content Include="Images\Golf\221ecccf-1ab5-4b05-8b25-7d22dce140b2.jpg" />
+    <Content Include="Images\Golf\237facfe-45a7-4bce-9e12-4353e4f1ee69.jpg" />
+    <Content Include="Images\Golf\26b71192-aa7d-4cc3-90e6-c804dceef1b9.jpg" />
+    <Content Include="Images\Golf\2ce1793e-9472-4155-9c10-b0a23c8886a2.jpg" />
+    <Content Include="Images\Golf\359fd61e-1d07-4e76-a1fc-88ec8d3a6115.jpg" />
+    <Content Include="Images\Golf\393b1cc2-15c0-460f-95d1-0ecbcc69407e.jpg" />
+    <Content Include="Images\Golf\3f8a2171-4ab1-49cd-90f0-ebccd3e1ed8e.jpg" />
+    <Content Include="Images\Golf\43284f2f-ec10-4fe9-a70d-a276f4587f76.jpg" />
+    <Content Include="Images\Golf\44506f63-961d-4814-9e30-d955cb039c02.jpg" />
+    <Content Include="Images\Golf\54ae1b93-575d-45ea-8d8a-4594fdd8cac2.jpg" />
+    <Content Include="Images\Golf\550ab48e-87e8-49e6-bd36-0dd8f541a22f.jpg" />
+    <Content Include="Images\Golf\557c730f-7a60-49b8-9437-bd430f698552.jpg" />
+    <Content Include="Images\Golf\59cdcf72-17b4-45af-bb33-32681ae21dd4.jpg" />
+    <Content Include="Images\Golf\6135d3b5-dcc1-423b-922e-788129125136.jpg" />
+    <Content Include="Images\Golf\61cbde1c-dc13-455c-b5f6-4e1913c0c819.jpg" />
+    <Content Include="Images\Golf\633af86d-eaaf-469c-86bf-bfd80ad1f302.jpg" />
+    <Content Include="Images\Golf\7407b245-87ec-4908-babb-744fcd342f4f.jpg" />
+    <Content Include="Images\Golf\77aa2f79-92d9-47d4-b118-64b8b118081f.jpg" />
+    <Content Include="Images\Golf\7812a19f-4529-43ed-a9ce-f34ecb8d280c.jpg" />
+    <Content Include="Images\Golf\79c7efb1-3d04-4559-998b-182ad13c584e.jpg" />
+    <Content Include="Images\Golf\7e711244-c879-4a0b-a52f-ce37df2b1206.jpg" />
+    <Content Include="Images\Golf\82e20a31-97ef-4ecd-9d37-345101d24c35.jpg" />
+    <Content Include="Images\Golf\8cb89b81-6827-4791-a15b-69a02c0779b1.jpg" />
+    <Content Include="Images\Golf\8d5108f9-e510-466a-97d1-cd00a47bb1d4.jpg" />
+    <Content Include="Images\Golf\8ec14310-8c60-436e-9dec-6856a1a623cd.jpg" />
+    <Content Include="Images\Golf\91641695-dc9e-4fa2-adc2-6822385f7852.jpg" />
+    <Content Include="Images\Golf\936e9352-2b46-4e86-a711-ea0c81f060cc.jpg" />
+    <Content Include="Images\Golf\94681388-9996-40da-832e-8e7829db70b8.jpg" />
+    <Content Include="Images\Golf\94cebf4f-51f2-416b-8dff-e0762ef59cf0.jpg" />
+    <Content Include="Images\Golf\9547b1f3-f1b0-43a0-95ca-632c2e7224f2.jpg" />
+    <Content Include="Images\Golf\9945d57d-d636-45dc-ad98-2e8de9da4f4a.jpg" />
+    <Content Include="Images\Golf\9ee2db89-4acf-4240-9be0-d7c2e946feba.jpg" />
+    <Content Include="Images\Golf\abc050ff-7e5f-4854-af09-98974fab05cb.jpg" />
+    <Content Include="Images\Golf\aeac45a3-c129-4350-897c-4cecae3edd58.jpg" />
+    <Content Include="Images\Golf\b674ab6e-501a-43fd-ad35-5aa9fbec3ace.jpg" />
+    <Content Include="Images\Golf\c11139ba-99b1-472b-8254-be59d0c2cd0b.jpg" />
+    <Content Include="Images\Golf\d008fb90-456b-425f-9d5f-dc0c2797971c.jpg" />
+    <Content Include="Images\Golf\dfd20dc4-8081-450d-88af-bcd9b0d0650e.jpg" />
+    <Content Include="Images\Golf\e69c048a-7f9d-4eb3-b013-91c6df8b37b9.jpg" />
+    <Content Include="Images\Golf\eaec71fa-2777-4443-ac45-cb37886af6dd.jpg" />
+    <Content Include="Images\Golf\f02c5500-e410-46df-9dbb-f06eef5db250.jpg" />
+    <Content Include="Images\Golf\f376387e-a546-4062-be1d-d506b384983a.jpg" />
+    <Content Include="Images\Golf\f65ce87a-3634-47f9-9f0d-e9626e466129.jpg" />
+    <Content Include="Images\Golf\f927bf6c-43d5-4524-b963-24c007d13840.jpg" />
+    <Content Include="Images\Golf\fa0c6adb-2437-4fe8-95f2-444c47b7064b.jpg" />
+    <Content Include="Images\Golf\fa994451-ed7b-45d7-b8c4-c13e9c2d062f.jpg" />
+    <Content Include="Images\Golf\fc69129f-2433-48b4-ab78-f98be0764129.jpg" />
+    <Content Include="Images\Golf\ffde777d-4595-4fc9-aa10-9e4eccf7e36f.jpg" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\News\ff0671e8-4ecc-49a5-a2ad-6e41bffea21b.jpg" />
+    <Content Include="Images\PackageGolf\0cec6866-a96f-435a-9a30-121b4384a695.jpg" />
+    <Content Include="Images\PackageGolf\13fddb4f-25b5-4e10-9a1d-45e21049a71d.jpg" />
+    <Content Include="Images\PackageGolf\2978567e-9b1a-48b5-9545-b19d723020cd.jpg" />
+    <Content Include="Images\PackageGolf\3d270207-313e-4734-bbd0-c6d6ead5fd77.jpg" />
+    <Content Include="Images\PackageGolf\44441cd9-ef3a-4807-8815-018b8b289096.jpg" />
+    <Content Include="Images\PackageGolf\48deb008-0359-4cc3-a833-82d391cb984a.jpg" />
+    <Content Include="Images\PackageGolf\48f591cb-2dff-4adf-8931-1dd13487b304.jpg" />
+    <Content Include="Images\PackageGolf\4be1a2be-1057-49f4-8cf6-d7219a6a5d13.jpg" />
+    <Content Include="Images\PackageGolf\5181d12a-71d2-49b5-a92b-df69729f5da4.jpg" />
+    <Content Include="Images\PackageGolf\5c104f0c-4da0-496e-b4a0-0193e86659df.jpg" />
+    <Content Include="Images\PackageGolf\6a60ebba-8b0c-43e3-b138-03b692e2afab.jpg" />
+    <Content Include="Images\PackageGolf\7209c613-918a-4229-977e-0030c6f65835.jpg" />
+    <Content Include="Images\PackageGolf\85350e18-b32a-4335-a66f-c04f7e72e45a.jpg" />
+    <Content Include="Images\PackageGolf\8770e013-902c-4633-8d6d-7dd98c4ce091.jpg" />
+    <Content Include="Images\PackageGolf\98787e12-f8b3-414c-8498-134765e74da0.jpg" />
+    <Content Include="Images\PackageGolf\9e909500-27d0-48f5-8099-cf8056adafac.jpg" />
+    <Content Include="Images\PackageGolf\a82e9e6a-48b8-4204-8b24-94c48b256288.jpg" />
+    <Content Include="Images\PackageGolf\a92c9004-ab00-4cd9-a64e-bc5c8a787110.jpg" />
+    <Content Include="Images\PackageGolf\b8ce4233-9e56-40ac-8af9-e2714cccf4f6.jpg" />
+    <Content Include="Images\PackageGolf\cf774b32-df61-4080-a1de-67b74607970c.jpg" />
+    <Content Include="Images\PackageGolf\d7c30878-7ecb-4b24-b044-333eaae69d7c.jpg" />
+    <Content Include="Images\PackageGolf\e28beb4d-ecce-4e99-84d3-53eaeef52fbe.jpg" />
+    <Content Include="Images\PackageGolf\e9bdc424-c321-4a0d-8019-9b14dd60a0d5.jpg" />
+    <Content Include="Images\PackageGolf\f2e7fb61-c3ad-44db-b398-874447d448cd.jpg" />
+    <Content Include="Images\PackageGolf\fe03f29f-d4e4-4d5c-b97a-1e3064e617c5.jpg" />
+    <Content Include="Images\PackageGolf\fedd0e6c-485e-4545-86fe-e267753010f3.jpg" />
+    <Content Include="Images\Trophy\156ff7df-3a77-4801-a831-5c52506e20d1.jpg" />
+    <Content Include="Images\Trophy\1b2934f0-9812-407c-8c82-a551f9f71fcf.jpg" />
+    <Content Include="Images\Trophy\28ea5812-ca73-46ca-a947-6ce481e9164f.jpg" />
+    <Content Include="Images\Trophy\5ceaef6e-a0e4-4f46-a5e6-a5e0e0231333.jpg" />
+    <Content Include="Images\Trophy\631dd928-936b-45cd-8c37-a33c4ead94b2.jpg" />
+    <Content Include="Images\Trophy\68d4850a-811a-4d5d-a1fe-d28c5237b561.jpg" />
+    <Content Include="Images\Trophy\6e38e23e-d34b-4c5b-9f5f-0182a17fe056.jpg" />
+    <Content Include="Images\Trophy\859f2e2d-c210-41ef-ab91-ebd1b66936bd.jpg" />
+    <Content Include="Images\Trophy\9b1f8a1e-79f8-420c-b376-a9af3c1f9aa9.jpg" />
+    <Content Include="Images\Trophy\a3265efa-c47f-4231-901e-cc1acdffd948.jpg" />
     <Content Include="Models\GolfBooking.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GolfBooking.edmx</DependentUpon>
@@ -1712,9 +1816,36 @@
     <Content Include="Views\PackageStay\Create.cshtml" />
     <Content Include="Views\PackageStay\Edit.cshtml" />
     <Content Include="Views\PackageStay\Delete.cshtml" />
+    <Content Include="Views\PackageStay\list.cshtml" />
+    <Content Include="Views\_vLeftMenu.cshtml" />
+    <Content Include="Views\TrophyCat\Index.cshtml" />
+    <Content Include="Views\TrophyCat\Details.cshtml" />
+    <Content Include="Views\TrophyCat\Create.cshtml" />
+    <Content Include="Views\TrophyCat\Edit.cshtml" />
+    <Content Include="Views\TrophyCat\Delete.cshtml" />
+    <Content Include="Views\Trophy\Index.cshtml" />
+    <Content Include="Views\Trophy\Details.cshtml" />
+    <Content Include="Views\Trophy\Create.cshtml" />
+    <Content Include="Views\Trophy\Edit.cshtml" />
+    <Content Include="Views\Trophy\Delete.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\PackageStay\View.cshtml" />
+    <Content Include="Views\Slide\Index.cshtml" />
+    <Content Include="Views\Slide\Details.cshtml" />
+    <Content Include="Views\Slide\Create.cshtml" />
+    <Content Include="Views\Slide\Edit.cshtml" />
+    <Content Include="Views\Slide\Delete.cshtml" />
+    <Content Include="Views\Trophy\category.cshtml" />
+    <Content Include="Views\Trophy\list.cshtml" />
+    <Content Include="Views\Trophy\view.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Slide\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
