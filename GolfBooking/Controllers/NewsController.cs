@@ -29,6 +29,18 @@ namespace GolfBooking.Controllers
             int pageNumber = (page ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));
         }
+        public ActionResult list(string name, int? page)
+        {
+            //return View(db.provinces.Where(o=>o.deleted==0).OrderBy(o=>o.country_id).ThenBy(o=>o.name).ToList());
+            if (name == null) name = "";
+            name = name.Replace("%20", " ");
+            name = name.Trim();
+            ViewBag.name = name;
+            var p = (from q in db.news where q.title.Contains(name) select q).OrderByDescending(o => o.id).Take(100);
+            int pageSize = 25;
+            int pageNumber = (page ?? 1);
+            return View(p.ToPagedList(pageNumber, pageSize));
+        }
 
         //
         // GET: /News/Details/5
@@ -160,6 +172,7 @@ namespace GolfBooking.Controllers
                     n.full_details = full_details;
                     n.image = image;
                     n.type = type;
+                    n.date_time = DateTime.Now;
                     db.news.Add(n);
                     db.SaveChanges();
                     return n.id.ToString();
@@ -171,6 +184,7 @@ namespace GolfBooking.Controllers
                     n.full_details = full_details;
                     n.image = image;
                     n.type = type;
+                    n.date_time = DateTime.Now;
                     db.Entry(n).State = EntityState.Modified;
                     db.SaveChanges();
                     return id.ToString();
