@@ -25,7 +25,7 @@
         <EntityTypeShape EntityType="golfbookingModel.golf_package_stay" Width="1.5" PointX="1.1840480385273917" PointY="2.4358168255704533" />
         <EntityTypeShape EntityType="golfbookingModel.golf_trophy" Width="1.5" PointX="7.677558088524993" PointY="27.630083514205218" />
         <EntityTypeShape EntityType="golfbookingModel.golf_trophy_category" Width="1.5" PointX="3.1051110676979232" PointY="23.528637405265421" />
-        <EntityTypeShape EntityType="golfbookingModel.slide" Width="1.5" PointX="0.87774668674811107" PointY="22.039727996121965" />
+        <EntityTypeShape EntityType="golfbookingModel.slide" Width="1.5" PointX="11.108506712647392" PointY="19.31291728621019" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

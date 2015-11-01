@@ -306,7 +306,7 @@
           <Property Name="slogan" Type="nvarchar" MaxLength="80" />
           <Property Name="link" Type="nvarchar" MaxLength="150" />
           <Property Name="linktext" Type="nvarchar" MaxLength="250" />
-          <Property Name="type" Type="nvarchar" MaxLength="50" />
+          <Property Name="type" Type="int" />
           <Property Name="deleted" Type="tinyint" />
         </EntityType>
       </Schema></edmx:StorageModels>
@@ -563,7 +563,7 @@
           <Property Type="String" Name="slogan" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="link" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="linktext" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="type" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="type" />
           <Property Type="Byte" Name="deleted" />
         </EntityType>
       </Schema>

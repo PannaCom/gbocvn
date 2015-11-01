@@ -167,9 +167,9 @@
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 if (xhr.responseText != "0") { 
-                    updateGI(xhr.responseText);
+                    //updateGI(xhr.responseText);
                     //updatePrice(xhr.responseText);
-                    //window.location.href = "/golf/index";
+                    window.location.href = "/slide/index";
                 } else {
                     document.getElementById("btnSA").disabled=false;
                     alert("Có lỗi trong quá trình cập nhật dữ liệu");

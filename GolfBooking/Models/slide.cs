@@ -21,7 +21,7 @@ namespace GolfBooking.Models
         public string slogan { get; set; }
         public string link { get; set; }
         public string linktext { get; set; }
-        public string type { get; set; }
+        public Nullable<int> type { get; set; }
         public Nullable<byte> deleted { get; set; }
     }
 }

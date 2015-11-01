@@ -38,8 +38,28 @@ namespace GolfBooking.Controllers
         //
         // GET: /Slide/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
+            if (id == null) id = 0;
+            ViewBag.id = id;
+            if (id != 0)
+            {
+                slide sl = db.slides.Find(id);
+                ViewBag.caption = sl.caption;
+                ViewBag.slogan = sl.slogan;
+                ViewBag.linktext = sl.linktext;
+                ViewBag.link = sl.link;
+                ViewBag.image = sl.image;
+                ViewBag.type = sl.type;
+            }else{
+                ViewBag.caption = "";
+                ViewBag.slogan = "";
+                ViewBag.linktext = "";
+                ViewBag.link = "";
+                ViewBag.image = "";
+                ViewBag.type = 1;
+            }
+
             return View();
         }
 
@@ -64,7 +84,7 @@ namespace GolfBooking.Controllers
         public string UploadImageProcess(HttpPostedFileBase file, string filename)
         {
             string physicalPath = HttpContext.Server.MapPath("../" + Config.SlideImagePath + "\\");
-            string nameFile = String.Format("{0}.jpg", filename);
+            string nameFile = String.Format("{0}.jpg", Guid.NewGuid().ToString());
             int countFile = Request.Files.Count;
             string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
             for (int i = 0; i < countFile; i++)
@@ -138,6 +158,42 @@ namespace GolfBooking.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+        [HttpPost]
+        public string Update(string caption, string slogan, string linktext, string link, string image, int? type,int id)
+        {
+            try
+            {
+                if (id == 0)
+                {
+                    slide sl = new slide();
+                    sl.caption = caption;
+                    sl.slogan = slogan;
+                    sl.linktext = linktext;
+                    sl.link = link;
+                    sl.image = image;
+                    sl.type = type;
+                    db.slides.Add(sl);
+                    db.SaveChanges();
+                    return sl.id.ToString();
+                }
+                else
+                {
+                    slide sl = db.slides.Find(id);
+                    sl.caption = caption;
+                    sl.slogan = slogan;
+                    sl.linktext = linktext;
+                    sl.link = link;
+                    sl.image = image;
+                    sl.type = type;
+                    db.Entry(sl).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return id.ToString();
+                }
+            }
+            catch (Exception ex) {
+                return "0";
+            }
         }
     }
 }
