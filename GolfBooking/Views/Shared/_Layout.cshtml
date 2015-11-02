@@ -145,7 +145,8 @@
 					<label class="toggle-nav-label" for="toggle-main-nav"><i class="fa fa-bars fa-lg"></i> Menu</label>
 					<label class="toggle-nav-label" for="toggle-secondary-nav"><i class="fa fa-info-circle fa-lg"></i> Services</label>
 				</div><!-- .header-row -->
-						
+				<div class="textlink" id=slogan1><span  style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;margin: 10 10 10 10;color:#fff;display: block;font-size:18px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;font-size:23px;">@ViewBag.slogan1</span></div>
+                <div class="smalltext" id=slogan2><span style="text-shadow: 0 0 25px #000, 0 0 27px #000;margin: 10px 0;color:#fff;display: block;font-size:23px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;">@ViewBag.caption1</span></div>		
 		  	</header><!-- #header -->
             <div>
                 @RenderBody()
@@ -247,53 +248,7 @@ $.src="//v2.zopim.com/?3DKPa68GNBWdbxOZIU4sK9aaX6RpVDFT";z.t=+new Date;$.
 type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 </script>-->
 <!--End of Zopim Live Chat Script-->
-<script>
-    var sl = 0;
-    var slu = ["ONLY 700 USD", "ONLY 200 USD"];
-    var sld = ["Phu Quoc, Da Lat<br>Stay and Play", "Da Lat<br>golf course 2 days"];
-    //alert($("#header").html());
-    function changeBG() {
-        //sl++;
-        //$('#header').slideDown(1000,changeBGDO());
-        if (sl % 2 == 0) {
-            //alert("1");
-            //$('#header').fadeIn(3000,changeBGDO());
-            $('#header').animate({ opacity: 0.7 }, 1000, changeBGDO).animate({ opacity: 1 }, 1000);
-        } else {
-            $('#header').animate({ opacity: 0.7 }, 1000, changeBGDO).animate({ opacity: 1 }, 1000);
-            //$('#header').fadeIn(3000,changeBGDO());
-        }
-    }
-    var spslu1 = "<span style=\"text-shadow: 0 0 25px #000, 0 0 27px #000;margin: 10 10 10 10;color:#fff;display: block;font-size:18px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;font-size:23px;\">";
-    var spslu2 = "<span style=\"text-shadow: 0 0 25px #000, 0 0 27px #000;margin: 10px 0;color:#fff;display: block;font-size:23px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;\">";
-    function changeBGDO() {
-        sl++;
 
-        if (sl % 2 == 0) {
-            $('#header').css("background-image", "url('images/sl1.jpg')");
-            //$('#header').css("background-repeat","no-repeat");
-            //$('#header').css("background-position","center");
-            //$('#header').css("background-size","contain");	//cover		
-            $('#header').fadeIn(2000);
-            $('#slogan1').html(spslu1 + slu[sl % 2] + "</span>");
-            $('#slogan1').fadeIn(2000);
-            $('#slogan2').html(spslu2 + sld[sl % 2] + "</span>");
-            $('#slogan2').fadeIn(2000);
-        } else {
-            $('#header').css("background-image", "url('images/sl2.jpg')");
-            //$('#header').css("background-repeat","no-repeat");
-            //$('#header').css("background-position","center");
-            //$('#header').css("background-size","contain");//cover
-            $('#header').fadeIn(2000);
-            $('#slogan1').html(spslu1 + slu[sl % 2] + "</span>");
-            $('#slogan1').fadeIn(2000);
-            $('#slogan2').html(spslu2 + sld[sl % 2] + "</span>");
-            $('#slogan2').fadeIn(2000);
-        }
-    }
-    //setInterval(changeBG, 3000);
-
-</script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 									<script>
 									    $(function () {

@@ -19,7 +19,7 @@ namespace GolfBooking.Controllers
 
         public ActionResult Index()
         {
-            return View(db.slides.ToList());
+            return View(db.slides.OrderBy(o=>o.type).ToList());
         }
 
         //
