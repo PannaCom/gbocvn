@@ -2,7 +2,9 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
+<article id="content" style="padding-top:12px;">
 
+</article>
 <script>
 	var sl=0;
 	var slu=[];
@@ -35,12 +37,12 @@
 	var spslu2="<span style=\"text-shadow: 0 0 25px #000, 0 0 27px #000;margin: 10px 0;color:#fff;display: block;font-size:23px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;\">";
 	function changeBGDO(){
 	    csl++;
-	           $('#header').css("background-image", "url('" + slbg[csl % sl] + "')");
-			 
+	          $('#header').css("background-image", "url('" + slbg[csl % sl] + "')");
+	         //$('#header').css("background-image", "url('/Images/sl2.jpg')");
 			 $('#slogan1').html(spslu1 + slu[csl % sl] + "</span>");
 			 
-			 $('#slogan2').html(spslu2+sld[sl%sl]+"</span>");
-			 
+			 $('#slogan2').html(spslu2 + sld[csl % sl] + "</span>");
+	    //alert(slbg[csl % sl]);
 		
 	}
 	setInterval(changeBG, 4000);
