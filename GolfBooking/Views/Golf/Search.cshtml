@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    long price = 0;
+    decimal price = 0;
 }
 <article id="content" style="padding-top:0px;background-color:#ffffff;">
                 
@@ -25,10 +25,10 @@
                                                                             <span class="price">
                                                                                 @if (ViewBag.isNormalDay)
                                                                                 {
-                                                                                    price = (long)((long)item.nprice) * int.Parse(ViewBag.players.ToString());
+                                                                                    price = item.nprice * ViewBag.players;
                                                                                 }
                                                                                 else {
-                                                                                    price = (long)((long)item.wprice) * int.Parse(ViewBag.players.ToString());
+                                                                                    price = item.wprice * ViewBag.players;
                                                                                 }
                                                                                 @String.Format("{0:#,##0}", price)
                                                                             </span>	
