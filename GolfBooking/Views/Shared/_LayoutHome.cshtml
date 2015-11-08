@@ -19,6 +19,7 @@
 		<script type="text/javascript" src="~/Content/js/jquery.gmap.min.js"></script>
 		<script src="~/Content/js/jquery-ui.js"></script>
 		<link rel="stylesheet" href="~/Content/css/jquery-ui.css"> 
+        <script src="~/Scripts/core.js"></script>
   	</head>
 	<body>
         <div id="site">
@@ -218,7 +219,7 @@ window.onerror = function(errorMsg) {
         dayOfWeekStart: 1,
         lang: 'en',
         disabledDates: ['1986/01/08', '1986/01/09', '1986/01/10'],
-        startDate: '2015/01/08'
+        startDate: '@DateTime.Now.Year/@DateTime.Now.Month/@DateTime.Now.Date'
     });
     var d = new Date();
     var s = d.toLocaleString();

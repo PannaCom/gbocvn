@@ -401,7 +401,8 @@ namespace GolfBooking.Controllers
             public decimal wprice { get; set; }
             public bool cart { get; set; }
         }
-        public ActionResult Search(string name,int? country,int? province,int date_id,string time) {
+        public ActionResult Search(string name, int? country, int? province, int date_id, string time, int players)
+        {
 
             if (country==null) country=0;
             if (province==null) province=0;
@@ -412,6 +413,8 @@ namespace GolfBooking.Controllers
             if (country != 0) query += " and country=" + country;
             if (province != 0) query += " and province=" + province;
             var p = db.Database.SqlQuery<searchTeeTime>(query);
+            if (Config.isNormalDay(date_id.ToString())) ViewBag.isNormalDay = true; else ViewBag.isNormalDay = false;
+            ViewBag.players = players;
             return View(p.ToList());
         }
     }

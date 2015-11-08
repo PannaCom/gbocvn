@@ -67,6 +67,7 @@ namespace GolfBooking
             d1 = DateTime.Now;
             return d1.Year.ToString() + d1.Month.ToString("00") + d1.Day.ToString("00");
         }
+
         //convert tieng viet thanh khong dau va them dau -
         public static string unicodeToNoMark(string input)
         {
@@ -91,6 +92,22 @@ namespace GolfBooking
         {
             input = input.Replace("-", "").Replace(":", "").Replace(",", "").Replace("_", "").Replace("'", "").Replace("\"", "").Replace(";", "").Replace("”", "").Replace(".", "").Replace("%", "").Replace("&", "");
             return input;
+        }
+        public static bool isNormalDay(string sDate)
+        {
+            if (sDate == null || sDate == "") return false;
+            sDate = sDate.Substring(0, 4) + "-" + sDate.Substring(4, 2) + "-" + sDate.Substring(6, 2);
+            try
+            {
+                DateTime d1 = DateTime.Parse(sDate);
+                if (d1.DayOfWeek == DayOfWeek.Saturday || d1.DayOfWeek == DayOfWeek.Sunday) 
+                    return false; 
+                else 
+                    return true;
+            }
+            catch (Exception ex) { 
+            }
+            return false;
         }
     }
 }

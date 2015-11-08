@@ -8,39 +8,38 @@
 								</div>	
 								<div class="col-md-2 col-sm-6  icon-arrow" style="width:140px;">
 									<label class="sr-only" for="departure-date">Region</label>
-									<select class="form-control" id="adults" style="width:100px;background-color:white;">
-										<option selected disabled>Region</option>
-										<option >Asian</option>
-										<option>Thai Lan</option>
-										<option>Singapore</option>
-										<option>Malaysia</option>
-										<option>VietNam</option>
-									</select>									
+                                    <select id="country_id" name="country_id" class="form-control" style="width:100px;background-color:white;">
+                                        <option value="0"></option>
+                                    </select>
+                                    <script>
+                                        getListCountry(1);
+                                        $("#country_id").change(function () {
+                                            getListProvin($("#country_id").val(), -1);
+                                        });
+                                        getListProvin(1, -1);
+                                        
+                                    </script>
+																		
 								</div>
 								<div class="col-md-2 col-sm-6  icon-arrow" style="width:140px;">
 									<label class="sr-only" for="departure-date">Province</label>
-									<select class="form-control" id="adults" style="width:100px;background-color:#ffffff;">
-										<option selected disabled>Province</option>
-										<option >Bangkok</option>
-										<option>Kuala Lumpur</option>
-										<option>Singapore</option>
-										<option>Jakata</option>
-										<option>Ha Noi</option>
-									</select>
+                                    <select id="province_id" name="province_id" class="form-control" style="width:100px;background-color:#ffffff;">
+                                         <option value="0"></option>
+                                    </select>
+									
 								</div>
 								<div class="col-md-3 col-sm-4" style="width:190px;">
 									<label class="sr-only" for="adults">Course</label>
-									<input type="text" class="form-control" id=course placeholder="Course" style="width:150px;background-color:white;">
+									<input type="text" class="form-control" id=name name="name" placeholder="Course" style="width:150px;background-color:white;">
 								</div>
 								<div class="col-md-2 col-sm-6  icon-arrow" style="width:140px;">
 									<label class="sr-only" for="departure-date">Players</label>
-									<select class="form-control" id="adults" style="width:100px;background-color:#ffffff;">
-										<option selected disabled>Players</option>
-										<option>1 golfer</option>
-										<option>2 golfers</option>
-										<option>3 golfers</option>
-										<option>4 golfers</option>
-										<option>5 golfers</option>
+									<select class="form-control" id="players" style="width:100px;background-color:#ffffff;">										
+										<option value="1">1 golfer</option>
+										<option value="2">2 golfers</option>
+										<option value="3">3 golfers</option>
+										<option value="4">4 golfers</option>
+										<option value="5">5 golfers</option>
 									</select>
 								</div>
 								<div class="col-md-2 col-sm-4">
@@ -48,10 +47,25 @@
 									<input type="text" class="form-control" id=datetimepicker placeholder="Time Arrival">
 								</div>							
 								<div class="col-md-2 col-sm-4">
-									<input type="submit" class="btn btn-primary btn-block" name="Search Now" value="Search Now" style="width:110px;">
+									<input type="button" class="btn btn-primary btn-block" onclick="SearchTeeTime();" name="Search Now" value="Search Now" style="width:110px;">
 								</div>
 							</form>
 							<div style="padding-bottom:2;margin-bottom:2px;width:100%;position:relative;display:block;float:left;"><h4 style="color:#ffffff;z-index=200;" class=leadingh5>------ BEST SERVICE ------ 36 Golf Course in Viet Nam, 500 Hotel & Resort -------------------------------</h4></div>	
 						</div><!-- .row -->
 					</div><!-- .container -->
 				</div><!-- .booking-row -->	
+<script>
+    function SearchTeeTime() {
+        var country = document.getElementById("country_id").value;
+        var province = document.getElementById("province_id").value;
+        var name = document.getElementById("name").value;
+        var players = document.getElementById("players").value;
+        var datetimepicker = document.getElementById("datetimepicker").value;
+        var date_id = datetimepicker.substr(0, 10).replace(/\//g, "");
+        var time = datetimepicker.substr(10,6)+":00";
+        //alert(date_id + "," + time);
+        //return;
+        var url = '/Golf/Search?name=' + name + '&country=' + country + '&province=' + province + '&date_id=' + date_id.trim() + '&time=' + time.trim() + '&players=' + players;
+        window.location.href = url;
+    }
+</script>
