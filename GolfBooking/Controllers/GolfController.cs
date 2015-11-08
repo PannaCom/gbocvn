@@ -391,5 +391,28 @@ namespace GolfBooking.Controllers
                 return "0";
             }
         }
+        public class searchTeeTime {
+            public int id { get; set; }
+            public string name { get; set; }
+            public string image { get; set; }
+            public int country { get; set; }
+            public int province { get; set; }
+            public decimal nprice { get; set; }
+            public decimal wprice { get; set; }
+            public bool cart { get; set; }
+        }
+        public ActionResult Search(string name,int? country,int? province,int date_id,string time) {
+
+            if (country==null) country=0;
+            if (province==null) province=0;
+            string query = "select id,name,image,country,province,nprice,wprice,cart from ";
+            query += "(select name,image,id,country_id as country,province_id as province from golf where name like N'%" + name + "%') as A inner join ";
+            query += "(select golf_id,normal_day_price as nprice,weekend_day_price as wprice,cart from golf_price where from_date_id<=" + date_id + " and to_date_id>=" + date_id + " and from_time<='"+time+"' and to_time>='"+time+"') as B ";
+            query += " on A.id=B.golf_id where 1=1 ";
+            if (country != 0) query += " and country=" + country;
+            if (province != 0) query += " and province=" + province;
+            var p = db.Database.SqlQuery<searchTeeTime>(query);
+            return View(p.ToList());
+        }
     }
 }
