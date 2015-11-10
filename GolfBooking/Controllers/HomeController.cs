@@ -11,6 +11,13 @@ namespace GolfBooking.Controllers
     public class HomeController : Controller
     {
         golfbookingEntities db = new golfbookingEntities();
+        public class myoffer
+        {
+            public int id { get; set; }
+            public string name { get; set; }
+            public string image { get; set; }
+            public decimal? minprice { get; set; }
+        }
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
@@ -20,6 +27,16 @@ namespace GolfBooking.Controllers
             //ViewBag.slogan = slogan;
             ViewBag.caption1 = caption[0].caption;
             ViewBag.slogan1 = caption[0].slogan;
+            var offer = (from q in db.golves
+                         where q.deleted == 0
+                         select new myoffer
+                         { 
+                             id=q.id,
+                             name=q.name,
+                             image=q.image,
+                             minprice = db.golf_price.Where(o => o.golf_id == q.id).Min(o => o.normal_day_price)
+                         }).OrderByDescending(o => o.id).Take(6).ToList();
+            ViewBag.offer = offer;
             return View();
         }
 

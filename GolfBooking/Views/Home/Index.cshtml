@@ -1,17 +1,455 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 <article id="content" style="padding-top:12px;">
+			  	<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="bs-example bs-example-tabs" style="width:94%;margin-left:2.8%;">
+									<ul id="myTab" class="nav nav-tabs">
+									  <li class="active"><a href="#tab1" data-toggle="tab">Special Offer</a></li>
+									  <li class=""><a href="#tab2" data-toggle="tab">Golf Package</a></li>
+									  <li class=""><a href="#tab21" data-toggle="tab">Customize Golf Package</a></li>
+									  <li class=""><a href="#tab3" data-toggle="tab">Stay and Play</a></li>
+									  <li class=""><a href="#tab4" data-toggle="tab">Golf Events</a></li>
+									</ul>
+									<div id="myTabContent" class="tab-content">
+									  <div class="tab-pane fade active in" id="tab1" style="height:600px;">
+									      <div class="list-carousel tab-item row active" style="float:left;width:100%;position: relative;display:block;"> 
+											<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 558px; margin: 12px 0px; overflow: hidden;">
+												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 558px; z-index: auto;">
+													    @{
 
-</article>
+                                                            foreach (var item in (IEnumerable<GolfBooking.Controllers.HomeController.myoffer>)ViewBag.offer)
+                                                               {
+                                                                <li style="margin-right:0px;width:310px;height:267px;float: left;">
+														            <a href="#" class="span8">
+															            <div class="image-container">
+																            <img src="@GolfBooking.Config.domain/@item.image" style="width:290px;height:160px;" alt="">
+															            </div>
+															            <div class="icon-carousel-details">
+																            <h3>@item.name</h3>
+																	            <div class="price-banner">
+																		            <span>From</span>
+																		            <span class="price">@item.minprice</span>																			    
+																	            </div>
+															            </div>
+														            </a>
+													            </li>
+                                                               }
+                                                        }
+												</ul>
+											 </div>	
+											 
+										  </div>
+									  </div>
+									  <div class="tab-pane fade" id="tab2" style="height:600px;">
+										<div class="list-carousel tab-item row active" style="float:left;width:100%;position: relative;display:block;"> 
+											<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 274px; margin: 12px 0px; overflow: hidden;">
+												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 274px; z-index: auto;">
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/cl1.jpg" width="290" height="195" alt="">
+															</div>															
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/cl2.jpg" width="290" height="195" alt="">
+															</div>															
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/cl3.jpg" width="290" height="195" alt="">
+															</div>															
+														</a>
+													</li>
+												</ul>
+											 </div>	
+											 <div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 274px; margin: 12px 0px; overflow: hidden;">
+												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 274px; z-index: auto;">
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/cl4.jpg" width="290" height="195" alt="">
+															</div>															
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/cl5.jpg" width="290" height="195" alt="">
+															</div>															
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/cl6.jpg" width="290" height="195" alt="">
+															</div>															
+														</a>
+													</li>
+												</ul>
+											 </div>
+										  </div>
+									  </div>
+									  <div class="tab-pane fade" id="tab21" style="height:600px;">
+										<div class="list-carousel tab-item row active" style="float:left;width:100%;position: relative;display:block;"> 
+											<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: 40px; z-index: auto; width: 100%;margin: 12px 0px; overflow: hidden;">
+												<div style="width:35%;display: block; text-align: start; float: left; position: relative;">
+													<h5>Customised Golf Package</h5>
+													<p>Customised golf packages are designed to give you the perfect golf vacation with hundreds of courses, top golf destinations, and discount pricing on where you want to play and stay !</p>
+													<p>Golfbooking.com.vn 's staffs  strive to create a golf package personalized to your request so you get the perfect vacation without any of the effort to put it together and suitable with your demand and budget. Our backend support will ensure your golf trip goes as smooth as possible. Each golf group will have their own personal golf screen dedicated to providing you with up to date itinerary information and features that will help your group on your trip.</p>
+													<p>Customised Golf Package Rate is based on accommodation with breakfast, Golf is inclusive with green  fee and caddie fee. Other fees will be charged under Hotel/ resort/ Golf course 's rules and regulations. If you have any special requested for this booking, kindly contact: (+84)915149666 or Email at: info@golfbooking.com.vn for details</p>
+													<p>Hours:  Monday - Sunday support 24 hours </p>
+												</div>
+												<div style="width:65%;display: block; text-align: start; float: left; position: relative;padding-left:10px;">
+													<h5 >Price/ Book online withour Golf Trip Builder</h5>
+													<ul style="display: block;width:100%;position:relative;">
+														<li style="display: block;width:100%;position:relative;">
+														<div class="col-md-2 col-sm-6  icon-arrow" style="width:140px;">
+															<label class="sr-only" for="departure-date">Region</label>
+															<select class="form-control" id="adults" >
+																<option selected disabled>Region</option>
+																<option>Thai Land</option>
+																<option>Singapore</option>
+																<option>Viet Nam</option>
+																<option>Malaysia</option>															
+															</select>
+														</div>
+														<div class="col-md-2 col-sm-6  icon-arrow" style="width:140px;">
+															<label class="sr-only" for="departure-date">Province</label>
+															<select class="form-control" id="adults" >
+																<option selected disabled>Province</option>
+																<option>Bangkok</option>
+																<option>Kuala</option>
+																<option>Ha Noi</option>
+																<option>Seoul</option>															
+															</select>
+														</div>
+														<div class="col-md-3 col-sm-6 icon-calendar">
+															<label class="sr-only" for="departure-date">Depart</label>
+															<input type="text" class="form-control" data-provide="datepicker" data-date-autoclose="true" data-date-format="mm/dd/yyyy" id="departure-date" placeholder="Depart">
+														</div>
+														<div class="col-md-3 col-sm-6 icon-calendar">
+															<label class="sr-only" for="departure-date">Return</label>
+															<input type="text" class="form-control" data-provide="datepicker" data-date-autoclose="true" data-date-format="mm/dd/yyyy" id="return-date" placeholder="Return">
+														</div>
+														</li>
+														<li style="padding-top:10px;width:100%;">
+														<div class="col-md-2 col-sm-6  icon-arrow" style="width:140px;">
+															<label class="sr-only" for="departure-date">Room Type</label>
+															<select class="form-control" id="adults" >
+																<option selected disabled>Room Type</option>
+																<option>Double/Single</option>
+																<option>Twin Share</option>																													
+															</select>
+														</div>
+														<div class="col-md-2 col-sm-6  icon-arrow" style="width:140px;">
+															<label class="sr-only" for="departure-date">Hotel Rate</label>
+															<select class="form-control" id="adults" >
+																<option selected disabled>Hotel Rate</option>
+																<option>3 stars</option>
+																<option>4 stars</option>
+																<option>5 stars</option>															
+															</select>
+														</div>
+														<div class="col-md-3 col-sm-6  icon-arrow" style="width:156px;">
+															<label class="sr-only" for="departure-date">Hotel or Resort</label>
+															<select class="form-control" id="adults" >
+																<option selected disabled>Hotels/Resort</option>
+																<option>Bangkok Hilton</option>
+																<option>Kuala Diamond</option>
+																<option>Horrision Hanoi</option>															
+															</select>
+														</div>
+														<div class="col-md-3 col-sm-6  icon-arrow" style="width:153px;">
+															<label class="sr-only" for="departure-date">NumbersOfRoom</label>
+															<select class="form-control" id="adults" >
+																<option selected >No of Rooms</option>
+																<option>1</option>
+																<option>2</option>
+																<option>3</option>	
+																<option>4</option>
+																<option>5</option>
+																<option>6</option>															
+															</select>
+														</div>
+														</li>
+													</ul>	
+													<ul style="width:100%;margin-top:10px;display:block;float:left;"><span style="display: block;margin-top:5px;">Golf Option</span></ul>
+													<ul id=golfoption style="width:100%;">
+														<li style="width:100%;">
+															<div class="col-md-4 col-sm-6  icon-arrow" style="width:190px;">
+																<label class="sr-only" for="departure-date">Golf Option 1</label>
+																<select class="form-control" id="adults" >
+																	<option selected disabled>Golf Option 1</option>
+																	<option>Bangkok golf</option>
+																	<option>Chieng Mai Golf</option>
+																	<option>Phuket Golf</option>															
+																</select>
+															</div>
+															<div class="col-md-4 col-sm-6  icon-arrow" style="width:180px;">
+																<label class="sr-only" for="adults">Date of Golf</label>
+																<input type="text" class="form-control" id="datetimepicker2" placeholder="Date of Golf">
+															</div>
+															<div class="col-md-4 col-sm-6  icon-arrow" style="width:143px;">
+																<label class="sr-only" for="departure-date">NoOfGolf</label>
+																<select class="form-control" >
+																	<option selected >No of Golfers</option>
+																	<option>1</option>
+																	<option>2</option>
+																	<option>3</option>	
+																	<option>4</option>
+																	<option>5</option>
+																	<option>6</option>														
+																</select>
+															</div>															
+														</li>
+														<li style="padding-top:10px;width:100%;">
+															<div class="col-md-4 col-sm-6  icon-arrow" style="width:190px;">
+																<label class="sr-only" for="departure-date">Golf Option 2</label>
+																<select class="form-control" >
+																	<option selected disabled>Golf Option 2</option>
+																	<option>Ha Noi golf</option>
+																	<option>Gia Lam Golf</option>
+																	<option>Soc Son Golf</option>							
+																</select>
+															</div>
+															<div class="col-md-4 col-sm-6  icon-arrow" style="width:180px;">
+																<label class="sr-only" for="adults">Date of Golf</label>
+																<input type="text" class="form-control" id=datetimepicker3 placeholder="Date of Golf">
+															</div>
+															<div class="col-md-4 col-sm-6  icon-arrow" style="width:143px;">
+																<label class="sr-only" for="departure-date">NoOfGolf</label>
+																<select class="form-control" >
+																	<option selected >No of Golfers</option>
+																	<option>1</option>
+																	<option>2</option>
+																	<option>3</option>	
+																	<option>4</option>
+																	<option>5</option>
+																	<option>6</option>															
+																</select>
+															</div>
+														</li>														
+													</ul>
+													<ul style="width:100%;margin-top:10px;float:left;"><span style="display: block;"><a href="#">+ Add Options</a></span></ul>
+												</div>
+											</div>																						 
+										  </div>
+									  </div>
+									  <div class="tab-pane fade" id="tab3" style="height:600px;">
+										<div class="list-carousel tab-item row active" style="float:left;width:100%;position: relative;display:block;"> 
+											<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 274px; margin: 12px 0px; overflow: hidden;">
+												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 274px; z-index: auto;">
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8" style="width:100%;">
+															<div class="image-container">
+																<img src="images/st1.jpg" width="290px" height="160px" >
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Vinpearl Nha Trang</h3>																	
+															</div>
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/st2.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Singapore Stay and Play</h3>																	
+															</div>
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/st3.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Malaysia Golf Stay</h3>																	
+															</div>
+														</a>
+													</li>
+												</ul>
+											 </div>	
+											 <div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 274px; margin: 12px 0px; overflow: hidden;">
+												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 274px; z-index: auto;">
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/st4.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Da Lat 3 days</h3>																	
+															</div>
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/st5.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Ha Noi Golf 2 day</h3>
+																	
+															</div>
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/st6.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Ho Chi Minh Golf 3 days</h3>																	
+															</div>
+														</a>
+													</li>
+												</ul>
+											 </div>
+										  </div>
+									  </div>
+									  <div class="tab-pane fade" id="tab4" style="height:600px;">
+										<div class="list-carousel tab-item row active" style="float:left;width:100%;position: relative;display:block;"> 
+											<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 274px; margin: 12px 0px; overflow: hidden;">
+												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 274px; z-index: auto;">
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/pr1.jpg" width="290px" height="160px" >
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Korean Viet Nam friendship tournament</h3>																	
+															</div>
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/pr2.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Soft Open Tournament 2015</h3>																	
+															</div>
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/pr3.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Award Presentation Events</h3>																	
+															</div>
+														</a>
+													</li>
+												</ul>
+											 </div>	
+											 <div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 274px; margin: 12px 0px; overflow: hidden;">
+												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 274px; z-index: auto;">
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/pr4.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Da Lat Open Tour 2015</h3>																	
+															</div>
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/pr5.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Ha Noi Golf Award</h3>
+																	
+															</div>
+														</a>
+													</li>
+													<li style="margin-right: 0px;width:310px;float: left;">
+														<a href="#" class="span8">
+															<div class="image-container">
+																<img src="images/pr6.jpg" width="290px" height="160px">
+															</div>
+															<div class="icon-carousel-details">
+																<h3>Golf Vũng Tàu Open 2015</h3>																	
+															</div>
+														</a>
+													</li>
+												</ul>
+											 </div>
+										  </div>
+									  </div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				<!-- Our Promise -->
+				<h1 style="text-align:center;">Company Mission</h1>
+				<div class="container">
+			  			<div class="col-sm-3 col-xs">
+			  				<div class="person-large">
+			  					<img src="/images/op1.png" alt="">
+			  					<strong>Customers</strong>
+			  					We work closely with top venues to secure the very best deals and offer a Price Promise that ensures our customers always get real value.
+			  				</div>
+			  			</div>
+			  			<div class="col-sm-3 col-xs">
+			  				<div class="person-large">
+			  					<img src="/images/op2.png" alt="">
+			  					<strong>Business</strong>
+			  					We offer 100 of the best venues in the Asian and beyond, helping arrange everything from overnight breaks to bespoke tours.
+			  				</div>
+			  			</div>
+			  			<div class="col-sm-3 col-xs">
+			  				<div class="person-large">
+			  					<img src="/images/op3.png" alt="">
+			  					<strong>Service</strong>
+			  					With 4 years’ experience and a team that knows every course and hotel on the books, golfers trust us to make the process hassle-free from start to finish.
+			  				</div>
+			  			</div>
+			  			<div class="col-sm-3 col-xs">
+			  				<div class="person-large">
+			  					<img src="/images/op4.png" alt="">
+			  					<strong>Staff</strong>
+			  					We appreciate our customers continuing to book with us and are the only golf travel company to reward golfers with loyalty Breakpoints.
+			  				</div>
+			  			</div>
+			  	</div>
+				<!-- Chat Live -->
+				<div class="container">
+					<div class="chat-live">
+						<hr>
+						<img src="/images/callcenter.png" width="186" height="145" alt="Chat live">
+						<h6>Just a phone call Golfbooking.com.vn will meet your all requirements <strong class="PhoneNumber8975" style="font-weight:bold;">84915 149 666</strong></h6>
+						<span>Mon - Fri: 8am - 9pm Sat: 9am - 6pm Sun: 9am - 3pm</span>
+							<a class="live-agent liveagent_button_online_573b00000004MdQ" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('573b00000004MdQ')" id="liveagent_button_online_573b00000004MdQ_0"><!-- Online Chat Content -->LIVE CHAT</a>
+							<span class="inline liveagent_button_online_573b00000004MdQ" style="display:none;" id="liveagent_button_online_573b00000004MdQ_1">OR</span>
+						<a href="#">CALL NOW<span></span></a>
+					</div>
+				</div>
+				
+</article><!-- #content -->
 <script>
 	var sl=0;
 	var slu=[];
 	var sld = [];
 	var slbg = [];
 	var csl = 0;
-    @foreach(var c in ViewBag.caption){
+    @foreach (var c in ViewBag.caption)
+    {
         <text>
             slu.push("@c.slogan");
             sld.push("@c.caption");
