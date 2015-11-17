@@ -13,7 +13,7 @@
 							<div class="col-sm-8">
                                 @foreach (var item in Model) { 
                                     <div class="entry sticky animated" style="height:330px;display:block;position:relative;">
-		  						        <h2><a href="article.html">@item.title</a> <small><i class="fa fa-calendar"></i>@item.date_time</small></h2>
+		  						        <h2><a href="/news/@GolfBooking.Config.unicodeToNoMark(@item.title)-@item.id">@item.title</a> <small><i class="fa fa-calendar"></i>@item.date_time</small></h2>
                                         <div style="display:block;position:relative;float:left;">                                        
 		  						                  <a href="/news/@GolfBooking.Config.unicodeToNoMark(@item.title)-@item.id" style="margin-top:0px;display:block;position:relative;float:left;"><img src="@item.image" alt="@item.title" class="wp-image" style="border:1px solid #808080;width:200px;height:127px;"></a>
                                             	    <div style="display:block;position:relative;float:right;width:67%;margin-top:22px;">					    

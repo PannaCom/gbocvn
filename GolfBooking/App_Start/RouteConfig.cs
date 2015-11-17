@@ -19,6 +19,11 @@ namespace GolfBooking
                 "viewpacket/{id}",
                 new { controller = "PackageStay", action = "View", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                "news details",
+                "news/{title}-{id}",
+                new { controller = "News", action = "Details", title = UrlParameter.Optional, id = UrlParameter.Optional }
+            );
 
             //Trophy/category
             // them route cho trophy category

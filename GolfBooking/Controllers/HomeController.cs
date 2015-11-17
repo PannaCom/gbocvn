@@ -37,6 +37,10 @@ namespace GolfBooking.Controllers
                              minprice = db.golf_price.Where(o => o.golf_id == q.id).Min(o => o.normal_day_price)
                          }).OrderByDescending(o => o.id).Take(6).ToList();
             ViewBag.offer = offer;
+            var package = (from q in db.golf_package_stay where q.deleted == 0 && q.type == 1 select q).OrderByDescending(o => o.id).Take(6).ToList();
+            ViewBag.package = package;
+            var stay = (from q in db.golf_package_stay where q.deleted == 0 && q.type == 2 select q).OrderByDescending(o => o.id).Take(6).ToList();
+            ViewBag.stay = stay;
             return View();
         }
 

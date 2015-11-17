@@ -2,57 +2,23 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
-
-<fieldset>
-    <legend>news</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.title)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.title)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.des)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.des)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.full_details)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.full_details)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.image)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.image)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.date_time)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.date_time)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.type)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.type)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<article id="content">
+				<section class="container content-padding-lg" style="padding-top:2px;">
+					<h6>Home » Golf News » Details</h6>
+					<div class="row animated">
+                            @Html.Partial("~/Views/_vLeftMenu.cshtml")
+							<div class="col-sm-8">                                
+                                    <div class="entry sticky animated" style="display:block;position:relative;float:left;">
+		  						        <h2><a href="#">@Model.title</a> <small><i class="fa fa-calendar"></i>@Model.date_time</small></h2>
+                                        <div style="display:block;position:relative;float:left;">                                        
+		  						                  @Html.Raw(@Model.full_details)                                         
+                                        </div>
+								    </div>
+                                
+                            </div>
+                    </div>
+                    
+                </section>
+</article>

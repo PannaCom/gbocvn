@@ -22,12 +22,12 @@
 												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 558px; z-index: auto;">
 													    @{
 
-                                                            foreach (var item in (IEnumerable<GolfBooking.Controllers.HomeController.myoffer>)ViewBag.offer)
+                                                            foreach (var item in ViewBag.offer)
                                                                {
                                                                 <li style="margin-right:0px;width:310px;height:267px;float: left;">
-														            <a href="#" class="span8">
+														            <a href="/golf/view/@item.id" class="span8">
 															            <div class="image-container">
-																            <img src="@GolfBooking.Config.domain/@item.image" style="width:290px;height:160px;" alt="">
+																            <img src="@GolfBooking.Config.domain/@item.image" style="width:290px;height:160px;border:1px solid #0026ff;" alt="@item.name">
 															            </div>
 															            <div class="icon-carousel-details">
 																            <h3>@item.name</h3>
@@ -47,56 +47,25 @@
 									  </div>
 									  <div class="tab-pane fade" id="tab2" style="height:600px;">
 										<div class="list-carousel tab-item row active" style="float:left;width:100%;position: relative;display:block;"> 
-											<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 274px; margin: 12px 0px; overflow: hidden;">
+											<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 558px; margin: 12px 0px; overflow: hidden;">
 												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 274px; z-index: auto;">
-													<li style="margin-right: 0px;width:310px;float: left;">
-														<a href="#" class="span8">
-															<div class="image-container">
-																<img src="images/cl1.jpg" width="290" height="195" alt="">
-															</div>															
-														</a>
-													</li>
-													<li style="margin-right: 0px;width:310px;float: left;">
-														<a href="#" class="span8">
-															<div class="image-container">
-																<img src="images/cl2.jpg" width="290" height="195" alt="">
-															</div>															
-														</a>
-													</li>
-													<li style="margin-right: 0px;width:310px;float: left;">
-														<a href="#" class="span8">
-															<div class="image-container">
-																<img src="images/cl3.jpg" width="290" height="195" alt="">
-															</div>															
-														</a>
-													</li>
+                                                    @{
+
+                                                            foreach (var item in ViewBag.package)
+                                                               {
+													            <li style="margin-right: 0px;width:310px;height:267px;float: left;">
+														            <a href="/viewpacket/@item.id" class="span8">
+															            <div class="image-container">
+																            <img src="@GolfBooking.Config.domain/@item.image" style="width:290px;height:195px;border:1px solid #0026ff;" alt="@item.name">
+															            </div>															
+														            </a>
+													            </li>
+                                                               }
+                                                    }
+													
 												</ul>
 											 </div>	
-											 <div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: auto; z-index: auto; width: 100%; height: 274px; margin: 12px 0px; overflow: hidden;">
-												<ul style="text-align: left; float: left; position: absolute; top: 0px; right: auto; bottom: auto; left: 25px; margin: 0px; height: 274px; z-index: auto;">
-													<li style="margin-right: 0px;width:310px;float: left;">
-														<a href="#" class="span8">
-															<div class="image-container">
-																<img src="images/cl4.jpg" width="290" height="195" alt="">
-															</div>															
-														</a>
-													</li>
-													<li style="margin-right: 0px;width:310px;float: left;">
-														<a href="#" class="span8">
-															<div class="image-container">
-																<img src="images/cl5.jpg" width="290" height="195" alt="">
-															</div>															
-														</a>
-													</li>
-													<li style="margin-right: 0px;width:310px;float: left;">
-														<a href="#" class="span8">
-															<div class="image-container">
-																<img src="images/cl6.jpg" width="290" height="195" alt="">
-															</div>															
-														</a>
-													</li>
-												</ul>
-											 </div>
+											 
 										  </div>
 									  </div>
 									  <div class="tab-pane fade" id="tab21" style="height:600px;">
