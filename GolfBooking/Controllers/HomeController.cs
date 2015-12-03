@@ -41,6 +41,8 @@ namespace GolfBooking.Controllers
             ViewBag.package = package;
             var stay = (from q in db.golf_package_stay where q.deleted == 0 && q.type == 2 select q).OrderByDescending(o => o.id).Take(6).ToList();
             ViewBag.stay = stay;
+            var news = (from q in db.news where q.type == 2 select q).OrderByDescending(o => o.id).Take(6).ToList();
+            ViewBag.news = news;
             return View();
         }
 
