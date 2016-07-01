@@ -23,7 +23,7 @@
   	</head>
 	<body>
         <div id="site">
-		  	<header id="header" role="banner" >
+		  	<header id="header" role="banner" style="position:relative;">
 		  		<div class="header-row clearfix" style="height:3px;background-color:#9FCC47;">
 					<div class="container">
 						<div class="row">
@@ -43,10 +43,10 @@
 									<div class="sign-in-out-btns">
 											<a class="sign-in-out-btn" href="/">CONTACT US</a>
 									</div>
-									<ul id="menu-main-menu" class="menu" style="margin-left:350px;margin-top:10px;">
-										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
+									<ul id="menu-main-menu" class="menu" style="margin-left:350px;margin-top:10px;position:relative;display:block;max-height:50px;">
+										@*<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children">
 											<a href="ourservice.html">Our Service</a>										
-										</li>
+										</li>*@
 										<li class="menu-item menu-item-type-custom menu-item-object-custom">
 											<a href="/golf/list">Golf Course</a>
 											<ul class="sub-menu">
@@ -104,48 +104,49 @@
             <div>
                 @RenderBody()
             </div>
-        <footer id="footer" role="contentinfo">			
-		  		<div class="container">
-		  			<div class="row" id="main-footer">
-		  				<div class=livechat id=livechat1>LIVE CHAT</div>
-						<!--<div class=livechat2 id=livechat2>
-							<div style="display:block;float:left;position:relative;width:100%;background-color:#9FCC47;">Suport 24/7</div>
-							<div style="display:block;float:left;position:relative;width:100%;background-color:#ffffff;">
-								<label class="sr-only" for="adults">Name or Email</label>
-								<input type="text" class="form-control" id=cname placeholder="enter name or email">
-							</div>
-						</div>-->
-		  			</div><!-- end .row -->
-		  			<div class="row" id="absolute-footer">
-		  				<div class="col-sm-12">
-		  					<aside class="widget" style="float:left;display:block;position:relative;width:35%;padding-top:2px;">
-		  						<p>CÔNG TY CỔ PHẦN ĐẦU TƯ THƯƠNG MẠI VÀ TRUYỀN THÔNG QUỐC TẾ <br>
-								   Office: R1209, 13th floor, 137 Nguyen Ngoc Vu Building, Cau Giay District, Hanoi, Vietnam<br>
-								   Tel: (+84)466819156 – Hotline: (+84)915149666 <br> Fanpage: www.facebook.com/intergolfvn <br> Email: info@intergolf.vn. All Rights Reserved. <br>
-		  						<!--<span class="pull-right hidden-xs">
-		  							<a href="#" class="fa fa-boxed fa-rss" data-toggle="tooltip" data-placement="left" title="Leisure RSS"></a>
-		  							<a href="http://www.pinterest.com/raducretu/curly-themes/" class="fa fa-boxed fa-pinterest" data-toggle="tooltip" data-placement="left" title="Leisure Pintrest Board"></a>
-		  							<a href="https://www.facebook.com/cthemes" class="fa fa-boxed fa-facebook" data-toggle="tooltip" data-placement="left" title="Leisure on Facebook"></a>
-		  							<a href="https://twitter.com/CurlyThemes" class="fa fa-boxed fa-twitter" data-toggle="tooltip" data-placement="left" title="Leisure on Twitter"></a>
-		  						</span>-->								
-		  						</p>								
-		  					</aside><!-- .widget -->
-							<aside class="widget" style="float:left;display:block;position:relative;width:35%;padding-top:2px;">
-								<img src="~/Content/images/logof1.jpg" width=190 height=300><img src="~/Content/images/logof2.png" width=190 height=300 style="padding-left:5px;">
-							</aside>
-							<span class="pull-right hidden-xs">									
-									<div id="map-canvas" style="height: 200px; width: 330px;float:right;padding-top:2px;display:block;position:relative;"></div>								
-							</span>
-		  				</div><!-- .col-sm-12 -->
-		  			</div><!-- #absolute-footer -->
-		  		</div><!-- .container -->
-		  	</footer><!-- #footer -->		
+            <footer id="footer" role="contentinfo">
+                <div class="container">
+                    <div class="row" id="main-footer">
+                        <div class=livechat id=livechat1>LIVE CHAT</div>
+                        <!--<div class=livechat2 id=livechat2>
+                    <div style="display:block;float:left;position:relative;width:100%;background-color:#9FCC47;">Suport 24/7</div>
+                    <div style="display:block;float:left;position:relative;width:100%;background-color:#ffffff;">
+                        <label class="sr-only" for="adults">Name or Email</label>
+                        <input type="text" class="form-control" id=cname placeholder="enter name or email">
+                    </div>
+                </div>-->
+                    </div><!-- end .row -->
+                    <div class="row" id="absolute-footer">
+                        <div class="col-sm-12">
+                            @*<aside class="widget" style="float:left;display:block;position:relative;width:38%;padding-top:2px;color:yellow;">*@
+                                <div style="color:yellow;float:left;display:block;position:relative;width:38%;padding-top:2px;color:yellow;">
+                                    <p style="margin:0 0 0 0">CÔNG TY CỔ PHẦN ĐẦU TƯ THƯƠNG MẠI VÀ TRUYỀN THÔNG QUỐC TẾ </p>
+                                    <p style="margin:0 0 0 0">Office: R1706, 17th floor, 137 Nguyen Ngoc Vu Building, Cau Giay District, Hanoi, Vietnam</p>
+                                    <p style="margin:0 0 0 0">Tel: (+84)466819156 – Hotline: (+84)915149666 <br> Fanpage: www.facebook.com/intergolfvn <br> Email: info@intergolf.vn. All Rights Reserved. </p>
+                                        <!--<span class="pull-right hidden-xs">
+            <a href="#" class="fa fa-boxed fa-rss" data-toggle="tooltip" data-placement="left" title="Leisure RSS"></a>
+            <a href="http://www.pinterest.com/raducretu/curly-themes/" class="fa fa-boxed fa-pinterest" data-toggle="tooltip" data-placement="left" title="Leisure Pintrest Board"></a>
+            <a href="https://www.facebook.com/cthemes" class="fa fa-boxed fa-facebook" data-toggle="tooltip" data-placement="left" title="Leisure on Facebook"></a>
+            <a href="https://twitter.com/CurlyThemes" class="fa fa-boxed fa-twitter" data-toggle="tooltip" data-placement="left" title="Leisure on Twitter"></a>
+        </span>-->
+</div>
+                            @*</aside>*@<!-- .widget -->
+                            @*<aside class="widget" style="float:left;display:block;position:relative;width:32%;padding-top:2px;">*@
+                            <div style="text-align:center;float:left;display:block;position:relative;width:32%;padding-top:2px;" ><p style="margin:0 0 0 0"><img src="~/Content/images/logof1.jpg" width=190 height=300></p><p style="text-align:center;"><img src="~/Content/images/logof2.png" width=190 height=300 style="padding-left:5px;"></p></div>
+                            @*</aside>*@
+                            <span class="pull-right hidden-xs">
+                                <div id="map-canvas" style="height: 200px; width: 280px;float:right;padding-top:2px;display:block;position:relative;"></div>
+                            </span>
+                        </div><!-- .col-sm-12 -->
+                    </div><!-- #absolute-footer -->
+                </div><!-- .container -->
+            </footer><!-- #footer -->		
 		</div><!-- #site -->
 		
 		<!-- All Pages JS -->
 		<script src="~/Content/js/jquery-1.11.1.min.js"></script>
 		<script src="~/Content/js/bootstrap.min.js"></script>		
-		<script src="~/Content/js/dropdown-menu.min.js"></script>
+		@*<script src="~/Content/js/dropdown-menu.min.js"></script>*@
 		<script src="~/Content/js/waypoints.min.js"></script>
 		<script src="~/Content/js/waypoints-sticky.min.js"></script>
 		<script src="~/Content/js/jquery.velocity.min.js"></script>
@@ -189,6 +190,13 @@ window.onerror = function(errorMsg) {
             $("#scroller").simplyScroll();
         });
     })(jQuery);
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            //$("#SSTIMES").css("position","relative");
+        } else {
+          
+        }
+    });
 </script>
 
 <!--Start of Zopim Live Chat Script-->
