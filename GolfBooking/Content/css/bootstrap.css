@@ -1,3 +1,7 @@
+@font-face {
+    font-family:myFirstFont;
+    src: url(HelveticaWorld-Regular.ttf);
+}
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -5,12 +9,13 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family: myFirstFont;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
 body {
   margin: 0;
+  font-family: myFirstFont;
 }
 article,
 aside,
@@ -1082,7 +1087,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: myFirstFont;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;

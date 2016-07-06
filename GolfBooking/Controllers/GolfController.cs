@@ -89,38 +89,48 @@ namespace GolfBooking.Controllers
             return View(p.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult View(int id) {
-            golf golf = db.golves.Find(id);
-            if (golf == null)
-            {
-                return HttpNotFound();
+            try { 
+                golf golf = db.golves.Find(id);
+                if (golf == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.sdes = Config.smoothDes(golf.des);
+                ViewBag.des = golf.des;
+                ViewBag.name = golf.name;
+                ViewBag.id = id;
+                string gallery = "";
+                var p = (from q in db.golf_image where q.golf_id == id select q).Take(3).ToList();
+                for (int i = 0; i < p.Count; i++) { 
+                    gallery+="<li><a href=\""+Config.domain+p[i].image+"\" rel=\"lightbox\" class=\"link-image\"><img class=\"wp-image\" src=\""+Config.domain+p[i].image+"\" alt=\""+golf.name+"\" style=\"width:70px;height:70px;\"/></a></li>";
+                }
+                ViewBag.gallery = gallery;
+                string golf_course_list = "";
+                var p2 = (from q in db.golves where q.region_id == golf.region_id && q.deleted==0 select q).Take(6).ToList();
+                for (int j = 0; j < p2.Count; j++) { 
+                    golf_course_list+="<div class=\"panel panel-default\">";
+				    golf_course_list+=" <div class=\"panel-heading\">";
+				    golf_course_list+="<h6 class=\"panel-title\" style=\"font-size:12px;\">";
+				    golf_course_list+="<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\">"+p2[j].name+"</a>";
+				    golf_course_list+=" </h6>";
+				    golf_course_list+="	</div>";
+				    golf_course_list+=" <div id=\"collapseOne\" class=\"panel-collapse collapse in\">";
+				    golf_course_list+="		<div class=\"panel-body\" style=\"font-size:12px;\">";
+                    golf_course_list += Config.smoothDesSmall(p2[j].des) + "..<a href=\"/golf/view/" + p2[j].id + "\">đọc tiếp</a>";
+				    golf_course_list+="			    	</div>";
+				    golf_course_list+="			    </div>";
+                    golf_course_list += "		</div>";
+                }
+                ViewBag.golf_course_list = golf_course_list;
+
+                ViewBag.header_course_list = Config.getRegionById((int)golf.region_id) + " Golf";
+                ViewBag.golf_package_list = (from q2 in db.golf_package_stay select q2).OrderByDescending(o => o.id).Take(3).ToList();
+                return View(golf);
+
             }
-            ViewBag.sdes = Config.smoothDes(golf.des);
-            ViewBag.des = golf.des;
-            string gallery = "";
-            var p = (from q in db.golf_image where q.golf_id == id select q).Take(3).ToList();
-            for (int i = 0; i < p.Count; i++) { 
-                gallery+="<li><a href=\""+Config.domain+p[i].image+"\" rel=\"lightbox\" class=\"link-image\"><img class=\"wp-image\" src=\""+Config.domain+p[i].image+"\" alt=\""+golf.name+"\" style=\"width:70px;height:70px;\"/></a></li>";
+            catch (Exception ex) {
+                return View();
             }
-            ViewBag.gallery = gallery;
-            string golf_course_list = "";
-            var p2 = (from q in db.golves where q.region_id == golf.region_id && q.deleted==0 select q).Take(6).ToList();
-            for (int j = 0; j < p2.Count; j++) { 
-                golf_course_list+="<div class=\"panel panel-default\">";
-				golf_course_list+=" <div class=\"panel-heading\">";
-				golf_course_list+="<h6 class=\"panel-title\" style=\"font-size:12px;\">";
-				golf_course_list+="<a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\">"+p2[j].name+"</a>";
-				golf_course_list+=" </h6>";
-				golf_course_list+="	</div>";
-				golf_course_list+=" <div id=\"collapseOne\" class=\"panel-collapse collapse in\">";
-				golf_course_list+="		<div class=\"panel-body\" style=\"font-size:12px;\">";
-                golf_course_list += Config.smoothDesSmall(p2[j].des) + "..<a href=\"/golf/view/" + p2[j].id + "\">đọc tiếp</a>";
-				golf_course_list+="			    	</div>";
-				golf_course_list+="			    </div>";
-                golf_course_list += "		</div>";
-            }
-            ViewBag.golf_course_list = golf_course_list;
-            ViewBag.header_course_list = Config.getRegionById((int)golf.region_id) + " Golf";
-            return View(golf);
         }
         public ActionResult Create(int? id) {
             ViewBag.id = id;
@@ -173,6 +183,29 @@ namespace GolfBooking.Controllers
             ViewBag.fromDate = String.Format("{0:yyyy-MM-dd}", fromDate);
             ViewBag.toDate = String.Format("{0:yyyy-MM-dd}", toDate);  
             return View();
+        }
+        public string book(int id,string name,DateTime datetimepicker,int players,int holes,string email,string phone) {
+            try
+            {
+                golf_order_course goc = new golf_order_course();
+                goc.golf_id = id;
+                goc.date_time = datetimepicker;
+                goc.holes = holes;
+                goc.players = players;
+                db.golf_order_course.Add(goc);
+                db.SaveChanges();
+                golf_order go = new golf_order();
+                go.email = email;
+                go.golf_order_id = goc.id;
+                go.phone = phone;
+                go.type = 0;
+                db.golf_order.Add(go);
+                db.SaveChanges();
+                return "1";
+            }
+            catch (Exception ex) {
+                return "0";
+            }
         }
         public ActionResult Test() {
 

@@ -3,17 +3,23 @@
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */ /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
-
+@font-face {
+    font-family:myFirstFont;
+    src: url(HelveticaWorld-Regular.ttf);
+}
 html {
-    font-family: Roboto,Tahoma,Verdana,sans-serif;
+    font-family: myFirstFont;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
 
 body {
     margin: 0;
+    font-family: myFirstFont;
 }
-
+p {
+    font-family: myFirstFont;
+}
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
     display: block;
 }
@@ -105,7 +111,7 @@ pre {
 }
 
 code, kbd, pre, samp {
-    font-family:Roboto,Tahoma,Verdana;/*monospace,monospace;*/
+    font-family:myFirstFont;/*monospace,monospace;*/
     font-size: 1em;
 }
 
@@ -1107,7 +1113,7 @@ html {
 }
 
 body {
-    font-family: Roboto,Tahoma,Verdana,Arial,sans-serif;
+    font-family: myFirstFont;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
@@ -1115,7 +1121,7 @@ body {
 }
 
 input, button, select, textarea {
-    font-family: inherit;
+    font-family: myFirstFont;
     font-size: inherit;
     line-height: inherit;
 }

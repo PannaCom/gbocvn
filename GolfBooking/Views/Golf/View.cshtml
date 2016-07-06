@@ -35,12 +35,12 @@
 											<div class="booking-block col-sm-6 col-sm-offset-3">
 												<form id="booking-form" role="form">
 													<div class="form-group icon-calendar">
-														<label class="sr-only" for="arrival-date">Tee Times</label>
+														<label class="sr-only" for="arrival-date">Tee Times *</label>
 														<input type="text" class="form-control" id=datetimepicker placeholder="Time Arrival">
 													</div>
 													<div class="form-group icon-arrow">
 														<label class="sr-only" for="adults">Players</label>
-														<select class="form-control" id="adults">
+														<select class="form-control" id="players">
 															<option>Players</option>
 															<option>1</option>
 															<option selected>2</option>
@@ -50,7 +50,7 @@
 													</div>
 													<div class="form-group icon-arrow">
 														<label class="sr-only" for="room">Holes</label>
-														<select class="form-control" id="room">
+														<select class="form-control" id="holes">
 															<option selected disabled>Holes</option>
 															<option>18 holes</option>
 															<option>36 holes</option>
@@ -58,15 +58,15 @@
 														</select>
 													</div>
                                                     <div class="form-group icon-calendar">
-														<label class="sr-only" for="arrival-date">Email</label>
+														<label class="sr-only" for="arrival-date">Email *</label>
 														<input type="text" class="form-control" id="email" placeholder="Email">
 													</div>
                                                     <div class="form-group icon-calendar">
-														<label class="sr-only" for="arrival-date">Phone</label>
-														<input type="text" class="form-control" id="phone" placeholder="Email">
+														<label class="sr-only" for="arrival-date">Phone *</label>
+                                                        <input type="text" class="form-control" id="phone" placeholder="Phone">
 													</div>
 													<div class="form-group">
-														<input type="button" class="btn btn-primary btn-block" name="Make Reservations" value="Make Reservations">
+                                                        <input type="button" class="btn btn-primary btn-block" name="Make Reservations" value="Make Reservations" onclick="booksource();">
 														<input type="button" class="btn btn-primary btn-block" name="Make Close" value="Close" onclick="showBookSource();">
 													</div>
 												</form>
@@ -95,90 +95,33 @@
 										<div class="list-carousel tab-item row active" style="float:left;width:100%;position: relative;display:block;left: 0px;"> 
 											<h6 style="margin-top:2px;padding-left:15px;width:100%;position: relative;display:block;">@ViewBag.header_course_list Package</h6>
 											<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: 0px; z-index: auto; width: 100%; height: 600px; margin: 12px 0px; overflow: hidden;">													
-												<div class="col-sm-12" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
-													<div style="width:100%;position:relative;display:block;float:left;padding-left:15px;">
-															<div class="col-sm-4" style="padding-left:1px;">
-																<img src="/images/gv4.jpg" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
-															</div>
-															<div class="col-sm-6">
-																<h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">7 Days 6 Nights Shocking Banyan Tree Villa  + 5 rounds of Golf</h6>
-																<p style="font-size:10px;">Offers from 15th September 2014 to 14th September 2015
-																	7 Nights in Twin Room based on 2 sharing on B & B Basis
-																	Water and Fruit on arrival
-																	5 x 18 holes as follows - either
-																	3 round Golf Montado + 2 round at Ribagolfe
-																	5 rounds at Golf Montado
-																	3 round at Montado + 2 round Golf at Troia </p>
-															</div>
-															<div class="col-sm-2">
-																<div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:65px;width:65px;position:position: absolute;">
-																	<span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:10px;padding-left:20px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from 231$</span>
-																</div>
-															</div>										
-													</div>
-													<div style="width:100%;position:relative;display:block;float:left;padding-left:15px;padding-right:0px;">
-														<div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
-															&nbsp;
-														</div>
-														<div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
-															<a href="#" style="color:#ffffff;">Details</a>
-														</div>
-													</div>	
-												</div>
-												<div class="col-sm-12" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
-													<div style="width:100%;position:relative;display:block;float:left;padding-left:15px;">
-															<div class="col-sm-4" style="padding-left:1px;">
-																<img src="/images/gv1.jpg" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
-															</div>
-															<div class="col-sm-6">
-																<h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">3 Days 2 Nights Shocking Angsana Langco Hotel   with unlimited Golf for 2 days</h6>
-																<p style="font-size:10px;">3 round Golf Montado + 2 round at Ribagolfe
-																	5 rounds at Golf Montado
-																	3 round at Montado + 2 round Golf at Troia </p>
-															</div>
-															<div class="col-sm-2">
-																<div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:65px;width:65px;position:position: absolute;">
-																	<span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:10px;padding-left:20px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from 331$</span>
-																</div>
-															</div>										
-													</div>
-													<div style="width:100%;position:relative;display:block;float:left;padding-left:15px;padding-right:0px;">
-														<div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
-															&nbsp;
-														</div>
-														<div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
-															<a href="#" style="color:#ffffff;">Details</a>
-														</div>
-													</div>	
-												</div>
-												<div class="col-sm-12" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
-													<div style="width:100%;position:relative;display:block;float:left;padding-left:15px;">
-															<div class="col-sm-4" style="padding-left:1px;">
-																<img src="/images/gv2.jpg" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
-															</div>
-															<div class="col-sm-6">
-															<h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">1 Days 2 Nights Shocking Da Lat Villa  + 4 rounds of Golf</h6>
-																<p style="font-size:10px;">
-																	5 x 18 holes as follows - either
-																	3 round Golf Montado + 2 round at Ribagolfe
-																	5 rounds at Golf Montado
-																	3 round at Montado + 2 round Golf at Troia </p>
-															</div>
-															<div class="col-sm-2">
-																<div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:65px;width:65px;position:position: absolute;">
-																	<span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:10px;padding-left:20px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from 431$</span>
-																</div>
-															</div>										
-													</div>
-													<div style="width:100%;position:relative;display:block;float:left;padding-left:15px;padding-right:0px;">
-														<div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
-															&nbsp;
-														</div>
-														<div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
-															<a href="#" style="color:#ffffff;">Details</a>
-														</div>
-													</div>	
-												</div>
+												@foreach (var item in ViewBag.golf_package_list){
+                                                    <div class="col-sm-12" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
+													    <div style="width:100%;position:relative;display:block;float:left;padding-left:15px;">
+															    <div class="col-sm-4" style="padding-left:1px;">
+																    <img src="@GolfBooking.Config.domain/@item.image" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
+															    </div>
+															    <div class="col-sm-6">
+																    <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@item.name</h6>
+																    <p style="font-size:10px;">@Html.Raw(@item.des)</p>
+															    </div>
+															    <div class="col-sm-2">
+																    <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:65px;width:65px;position:position: absolute;">
+																	    <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:10px;padding-left:20px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from @item.min_price</span>
+																    </div>
+															    </div>										
+													    </div>
+													    <div style="width:100%;position:relative;display:block;float:left;padding-left:15px;padding-right:0px;">
+														    <div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
+															    &nbsp;
+														    </div>
+														    <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
+                                                                <a href="/viewpacket/@item.id" style="color:#ffffff;">Details</a>
+														    </div>
+													    </div>	
+												    </div>
+                                                }
+												
 											 </div>	
 										  </div>
 									</div>
@@ -193,6 +136,54 @@
         $("#fDes").show();
         $("#sDes").hide();
     }
+    function hideFDes() {
+        $("#fDes").hide();
+        $("#sDes").show();
+    }
+    function booksource(){
+            if (idDocument==-1 && document.getElementById("datetimepicker").value == "") {
+                alert("Chọn ngày chơi");
+                document.getElementById("datetimepicker").focus();
+                return;
+            }
+            if (document.getElementById("email").value == "") {
+                alert("Nhập email");
+                document.getElementById("name").focus();
+                return;
+            }
+            if (document.getElementById("phone").value == -2) {
+                alert("Nhập điện thoại");
+                document.getElementById("phone").focus();
+                return;
+            }
+            document.getElementById("btnAddNew").value="Booking...";
+            document.getElementById("btnAddNew").disabled=true;
+            var formdata = new FormData(); //FormData object
+
+            formdata.append("id", "@ViewBag.id");
+            formdata.append("name", "@ViewBag.name");
+            formdata.append("datetimepicker", document.getElementById("datetimepicker").value);
+            formdata.append("players", document.getElementById("players").value);
+            formdata.append("holes", document.getElementById("holes").value);
+            formdata.append("email", document.getElementById("email").value);
+            formdata.append("phone", document.getElementById("phone").value);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Golf/book');
+            xhr.send(formdata);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.responseText!="0"){
+                        alert("Đặt sân thành công! Chúng tôi sẽ liên hệ với bạn sớm!");
+                    }else{
+                        alert("Có lỗi trên web. Xin quay lại sau!");
+                    }
+                    document.getElementById("btnAddNew").disabled=false;
+                    document.getElementById("btnAddNew").value="Make Reservations";
+                }
+            }
+        }
+   
 </script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 									<script>
@@ -249,7 +240,7 @@
 									        }
 
 									    });
-									    function showBookSource2() {
+									    function showBookSource() {
 									        $('html,body').scrollTop(0);
 									        if (document.getElementById("booksource").style.display == "none") {
 									            document.getElementById("booksource").style.display = "block";
