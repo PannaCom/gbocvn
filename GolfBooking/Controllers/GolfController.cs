@@ -132,6 +132,7 @@ namespace GolfBooking.Controllers
                 return View();
             }
         }
+      
         public ActionResult Create(int? id) {
             ViewBag.id = id;
             if (id == null)
@@ -183,6 +184,7 @@ namespace GolfBooking.Controllers
             ViewBag.fromDate = String.Format("{0:yyyy-MM-dd}", fromDate);
             ViewBag.toDate = String.Format("{0:yyyy-MM-dd}", toDate);  
             return View();
+            
         }
         public string book(int id,string name,DateTime datetimepicker,int players,int holes,string email,string phone) {
             try
@@ -202,6 +204,8 @@ namespace GolfBooking.Controllers
                 db.golf_order.Add(go);
                 db.SaveChanges();
                 return "1";
+
+
             }
             catch (Exception ex) {
                 return "0";

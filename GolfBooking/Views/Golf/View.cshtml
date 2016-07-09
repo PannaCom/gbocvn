@@ -5,132 +5,133 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <article id="content">
-				<section class="container content-padding-lg" style="padding-top:2px;">
-					<h6>Home » @ViewBag.header_course_list Course</h6>
-					<div class="row animated">
-							  @Html.Partial("~/Views/_vLeftMenu.cshtml")  
-							<div class="col-sm-9" style="background-color:#edebe1;">
-								<h2>@Model.name</h2>
-								<div id="sDes"><p >@Html.Raw(@ViewBag.sdes)...<a onclick="showFDes();" style="cursor:pointer;">đọc tiếp</a></p></div>
-                                <div id="fDes" style="display:none;"><p>@Html.Raw(@ViewBag.des)</p></div>
-								<div class="row animated">
-									<div class="col-sm-4">
-										<img src="@GolfBooking.Config.domain/@Model.image" class="wp-image" alt="" style="width:300px;height:200px;float:left;"/>
-										<ul class="block-grid-3">
-											@Html.Raw(@ViewBag.gallery)
-										</ul>
-									</div>
-									<div class="col-sm-8">
-										@Html.Raw(@Model.tech_des)
-										<div style="width:100%;text-align:center;float:right;">
-												<input type="submit" class="btn btn-primary btn-block" style="margin-top:25px;padding-top:15px;background-color:#00b04f;color:#fff;width:211px;float:right;" name="Make Reservations" value="Make Reservations" onclick="showBookSource();">
-										</div>
-									</div>
-								</div>
-								<div id="booksource" style="width:60%;display:none;top:10px;left:20%;position:fixed;background-color:#00b04f;z-index:1001;">									
-									<div class="col-sm-8" style="width:100%;">
-										<h6 class="text-center text-uppercase" style="margin-top:10px;border:1px solid #9FCC47;"><small style="color:#ffffff;">Come and Visit Us</small>Book this course</h6>
-										<p class="text-center" style="color:#ffffff;">Price change follow tee time and holes</p><br />
-										<div class="row">
-											<div class="booking-block col-sm-6 col-sm-offset-3">
-												<form id="booking-form" role="form">
-													<div class="form-group icon-calendar">
-														<label class="sr-only" for="arrival-date">Tee Times *</label>
-														<input type="text" class="form-control" id=datetimepicker placeholder="Time Arrival">
-													</div>
-													<div class="form-group icon-arrow">
-														<label class="sr-only" for="adults">Players</label>
-														<select class="form-control" id="players">
-															<option>Players</option>
-															<option>1</option>
-															<option selected>2</option>
-															<option>3</option>
-															<option>4</option>
-														</select>
-													</div>
-													<div class="form-group icon-arrow">
-														<label class="sr-only" for="room">Holes</label>
-														<select class="form-control" id="holes">
-															<option selected disabled>Holes</option>
-															<option>18 holes</option>
-															<option>36 holes</option>
-															<option>64 holes</option>			  									
-														</select>
-													</div>
-                                                    <div class="form-group icon-calendar">
-														<label class="sr-only" for="arrival-date">Email *</label>
-														<input type="text" class="form-control" id="email" placeholder="Email">
-													</div>
-                                                    <div class="form-group icon-calendar">
-														<label class="sr-only" for="arrival-date">Phone *</label>
-                                                        <input type="text" class="form-control" id="phone" placeholder="Phone">
-													</div>
-													<div class="form-group">
-                                                        <input type="button" class="btn btn-primary btn-block" name="Make Reservations" value="Make Reservations" onclick="booksource();">
-														<input type="button" class="btn btn-primary btn-block" name="Make Close" value="Close" onclick="showBookSource();">
-													</div>
-												</form>
-											</div><!-- .booking-block -->
-										</div>
-									</div>
-								</div>
-								<div class="row animated" style="padding-top:10px;">
-									<div class="col-sm-4">
-										<h6 style="margin-top:2px;">Map</h6>
-										<div id="map-canvas2" style="height: 200px; width: 100%;float:left;padding-top:2px;display:block;position:relative;"></div>
-									</div>
-									<div class="col-sm-8">
-										<h6 style="margin-top:2px;">Score Board</h6>										
-                                        <a href="@GolfBooking.Config.domain/@Model.score_board_image" rel="lightbox" class="link-image"><img class="wp-image" src="@GolfBooking.Config.domain/@Model.score_board_image" alt="score board @Model.name" style="width:100%;height:200px;float:left;"/></a>
-									</div>
-								</div>
-								<div class="row animated" style="padding-top:10px;">									
-									<div class="col-sm-4">
-										<h6 style="margin-top:2px;">@ViewBag.header_course_list Courses</h6>
-										<div class="panel-group" id="accordion">
-											 @Html.Raw(ViewBag.golf_course_list)
-										</div>
-									</div>
-									<div class="col-sm-8">
-										<div class="list-carousel tab-item row active" style="float:left;width:100%;position: relative;display:block;left: 0px;"> 
-											<h6 style="margin-top:2px;padding-left:15px;width:100%;position: relative;display:block;">@ViewBag.header_course_list Package</h6>
-											<div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: 0px; z-index: auto; width: 100%; height: 600px; margin: 12px 0px; overflow: hidden;">													
-												@foreach (var item in ViewBag.golf_package_list){
-                                                    <div class="col-sm-12" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
-													    <div style="width:100%;position:relative;display:block;float:left;padding-left:15px;">
-															    <div class="col-sm-4" style="padding-left:1px;">
-																    <img src="@GolfBooking.Config.domain/@item.image" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
-															    </div>
-															    <div class="col-sm-6">
-																    <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@item.name</h6>
-																    <p style="font-size:10px;">@Html.Raw(@item.des)</p>
-															    </div>
-															    <div class="col-sm-2">
-																    <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:65px;width:65px;position:position: absolute;">
-																	    <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:10px;padding-left:20px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from @item.min_price</span>
-																    </div>
-															    </div>										
-													    </div>
-													    <div style="width:100%;position:relative;display:block;float:left;padding-left:15px;padding-right:0px;">
-														    <div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
-															    &nbsp;
-														    </div>
-														    <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
-                                                                <a href="/viewpacket/@item.id" style="color:#ffffff;">Details</a>
-														    </div>
-													    </div>	
-												    </div>
-                                                }
-												
-											 </div>	
-										  </div>
-									</div>
-								</div>
-							</div>
-					</div>		
-					
-				</section>
-		  	</article><!-- #content -->
+    <section class="container content-padding-lg" style="padding-top:2px;">
+        <h6>Home » @ViewBag.header_course_list Course</h6>
+        <div class="row animated">
+            @Html.Partial("~/Views/_vLeftMenu.cshtml")
+            <div class="col-sm-9" style="background-color:#edebe1;">
+                <h2>@Model.name</h2>
+                <div id="sDes"><p>@Html.Raw(@ViewBag.sdes)...<a onclick="showFDes();" style="cursor:pointer;">đọc tiếp</a></p></div>
+                <div id="fDes" style="display:none;"><p>@Html.Raw(@ViewBag.des)</p></div>
+                <div class="row animated">
+                    <div class="col-sm-4">
+                        <img src="@GolfBooking.Config.domain/@Model.image" class="wp-image" alt="" style="width:300px;height:200px;float:left;" />
+                        <ul class="block-grid-3">
+                            @Html.Raw(@ViewBag.gallery)
+                        </ul>
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.Raw(@Model.tech_des)
+                        <div style="width:100%;text-align:center;float:right;">
+                            <input type="submit" class="btn btn-primary btn-block" style="margin-top:25px;padding-top:15px;background-color:#00b04f;color:#fff;width:211px;float:right;" name="Make Reservations" value="Make Reservations" onclick="showBookSource();">
+                        </div>
+                    </div>
+                </div>
+                <div id="booksource" style="width:60%;display:none;top:10px;left:20%;position:fixed;background-color:#00b04f;z-index:1001;">
+                    <div class="col-sm-8" style="width:100%;">
+                        <h6 class="text-center text-uppercase" style="margin-top:10px;border:1px solid #9FCC47;"><small style="color:#ffffff;">Come and Visit Us</small>Book this course</h6>
+                        <p class="text-center" style="color:#ffffff;">Price change follow tee time and holes</p><br />
+                        <div class="row">
+                            <div class="booking-block col-sm-6 col-sm-offset-3">
+                                <form id="booking-form" role="form" >
+                                    <div class="form-group icon-calendar">
+                                        <label class="sr-only" for="arrival-date">Tee Times *</label>
+                                        <input type="text" class="form-control" id=datetimepicker placeholder="Time Arrival">
+                                    </div>
+                                    <div class="form-group icon-arrow">
+                                        <label class="sr-only" for="adults">Players</label>
+                                        <select class="form-control" id="players">
+                                            <option>Players</option>
+                                            <option>1</option>
+                                            <option selected>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group icon-arrow">
+                                        <label class="sr-only" for="room">Holes</label>
+                                        <select class="form-control" id="holes">
+                                            <option selected disabled>Holes</option>
+                                            <option>18 holes</option>
+                                            <option>36 holes</option>
+                                            <option>64 holes</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group icon-calendar">
+                                        <label class="sr-only" for="arrival-date">Email *</label>
+                                        <input type="text" class="form-control" id="email" placeholder="Email">
+                                    </div>
+                                    <div class="form-group icon-calendar">
+                                        <label class="sr-only" for="arrival-date">Phone *</label>
+                                        <input type="text" class="form-control" id="phone" placeholder="Phone">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary btn-block" name="Make Reservations" value="Make Reservations" onclick="booksource()">
+                                        <input type="submit" class="btn btn-primary btn-block" name="Make Close" value="Close" onclick="showBookSource()">
+                                    </div>
+                                </form>
+                            </div><!-- .booking-block -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row animated" style="padding-top:10px;">
+                    <div class="col-sm-4">
+                        <h6 style="margin-top:2px;">Map</h6>
+                        <div id="map-canvas2" style="height: 200px; width: 100%;float:left;padding-top:2px;display:block;position:relative;"></div>
+                    </div>
+                    <div class="col-sm-8">
+                        <h6 style="margin-top:2px;">Score Board</h6>
+                        <a href="@GolfBooking.Config.domain/@Model.score_board_image" rel="lightbox" class="link-image"><img class="wp-image" src="@GolfBooking.Config.domain/@Model.score_board_image" alt="score board @Model.name" style="width:100%;height:200px;float:left;" /></a>
+                    </div>
+                </div>
+                <div class="row animated" style="padding-top:10px;">
+                    <div class="col-sm-4">
+                        <h6 style="margin-top:2px;">@ViewBag.header_course_list Courses</h6>
+                        <div class="panel-group" id="accordion">
+                            @Html.Raw(ViewBag.golf_course_list)
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="list-carousel tab-item row active" style="float:left;width:100%;position: relative;display:block;left: 0px;">
+                            <h6 style="margin-top:2px;padding-left:15px;width:100%;position: relative;display:block;">@ViewBag.header_course_list Package</h6>
+                            <div class="caroufredsel_wrapper" style="display: block; text-align: start; float: left; position: relative; top: auto; right: auto; bottom: auto; left: 0px; z-index: auto; width: 100%; height: 600px; margin: 12px 0px; overflow: hidden;">
+                                @foreach (var item in ViewBag.golf_package_list)
+                                {
+                                    <div class="col-sm-12" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
+                                        <div style="width:100%;position:relative;display:block;float:left;padding-left:15px;">
+                                            <div class="col-sm-4" style="padding-left:1px;">
+                                                <img src="@GolfBooking.Config.domain/@item.image" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@item.name</h6>
+                                                <p style="font-size:10px;">@Html.Raw(@item.des)</p>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:65px;width:65px;position:position: absolute;">
+                                                    <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:10px;padding-left:20px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from @item.min_price</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="width:100%;position:relative;display:block;float:left;padding-left:15px;padding-right:0px;">
+                                            <div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
+                                                &nbsp;
+                                            </div>
+                                            <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
+                                                <a href="/viewpacket/@item.id" style="color:#ffffff;">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</article><!-- #content -->
 <script>
     function showFDes() {
         $("#fDes").show();
@@ -141,111 +142,117 @@
         $("#sDes").show();
     }
     function booksource(){
-            if (idDocument==-1 && document.getElementById("datetimepicker").value == "") {
-                alert("Chọn ngày chơi");
-                document.getElementById("datetimepicker").focus();
-                return;
-            }
-            if (document.getElementById("email").value == "") {
-                alert("Nhập email");
-                document.getElementById("name").focus();
-                return;
-            }
-            if (document.getElementById("phone").value == -2) {
-                alert("Nhập điện thoại");
-                document.getElementById("phone").focus();
-                return;
-            }
-            document.getElementById("btnAddNew").value="Booking...";
-            document.getElementById("btnAddNew").disabled=true;
-            var formdata = new FormData(); //FormData object
+        //if (idDocument==-1 && document.getElementById("datetimepicker").value == "") {
+        //    alert("Chọn ngày chơi");
+        //    document.getElementById("datetimepicker").focus();
+        //    return;
+        //}
+        if (document.getElementById("datetimepicker").value == "") {
+            alert("Chọn ngày chơi");
+            document.getElementById("datetimepicker").focus();
+            return;
+        }
+        if (document.getElementById("email").value == "") {
+            alert("Nhập email");
+            document.getElementById("name").focus();
+            return;
+        }
+        if (document.getElementById("phone").value == -2) {
+            alert("Nhập điện thoại");
+            document.getElementById("phone").focus();
+            return;
+        }
+        document.getElementById("btnAddNew").value="Booking...";
+        document.getElementById("btnAddNew").disabled=true;
+        var formdata = new FormData(); //FormData object
 
-            formdata.append("id", "@ViewBag.id");
-            formdata.append("name", "@ViewBag.name");
-            formdata.append("datetimepicker", document.getElementById("datetimepicker").value);
-            formdata.append("players", document.getElementById("players").value);
-            formdata.append("holes", document.getElementById("holes").value);
-            formdata.append("email", document.getElementById("email").value);
-            formdata.append("phone", document.getElementById("phone").value);
+        formdata.append("id", "@ViewBag.id");
+        formdata.append("name", "@ViewBag.name");
+        formdata.append("datetimepicker", document.getElementById("datetimepicker").value);
+        formdata.append("players", document.getElementById("players").value);
+        formdata.append("holes", document.getElementById("holes").value);
+        formdata.append("email", document.getElementById("email").value);
+        formdata.append("phone", document.getElementById("phone").value);
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/Golf/book');
-            xhr.send(formdata);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    if (xhr.responseText!="0"){
-                        alert("Đặt sân thành công! Chúng tôi sẽ liên hệ với bạn sớm!");
-                    }else{
-                        alert("Có lỗi trên web. Xin quay lại sau!");
-                    }
-                    document.getElementById("btnAddNew").disabled=false;
-                    document.getElementById("btnAddNew").value="Make Reservations";
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Golf/book');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText!="0"){
+                    alert("Đặt sân thành công! Chúng tôi sẽ liên hệ với bạn sớm!");
+                }else{
+                    alert("Có lỗi trên web. Xin quay lại sau!");
                 }
+                document.getElementById("btnAddNew").disabled=false;
+                document.getElementById("btnAddNew").value="Make Reservations";
             }
         }
-   
+    }
+
 </script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-									<script>
-									    $(function () {
+<script>
+    $(function () {
 
-									        $(window).load(function () {
-									            initialize2();
-									        });
-									        
-									        var map2;									        
-									        var overlay2;
+        $(window).load(function () {
+            initialize2();
+        });
 
-									        function initialize2() {
-									            
-									            var mapDiv2 = document.getElementById('map-canvas2');
-									            
-									            map2 = new google.maps.Map(mapDiv2, {
-									                center: new google.maps.LatLng(@Model.lat, @Model.lon),
-									                zoom: 16,
-									                zoomControl: true,
-									                zoomControlOptions: {
-									                    style: google.maps.ZoomControlStyle.SMALL
-									                },
-									                //minZoom: 15, maxZoom: 19,
-									                mapTypeId: google.maps.MapTypeId.ROADMAP,
-									                scaleControl: true,
-									                scaleControlOptions: {
-									                    position: google.maps.ControlPosition.BOTTOM_LEFT
-									                }
-									            });
-									            google.maps.event.addListenerOnce(map2, 'tilesloaded', addMarkers2);
+        var map2;
+        var overlay2;
 
-									            overlay2 = new google.maps.OverlayView();
-									            overlay2.draw = function () { };
-									            overlay2.setMap(map2);
+        function initialize2() {
 
-									            //BienDongInit(map, "map-canvas");
+            var mapDiv2 = document.getElementById('map-canvas2');
 
-									        }
+            map2 = new google.maps.Map(mapDiv2, {
+                center: new google.maps.LatLng(@Model.lat, @Model.lon),
+                zoom: 16,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.SMALL
+                },
+                //minZoom: 15, maxZoom: 19,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scaleControl: true,
+                scaleControlOptions: {
+                    position: google.maps.ControlPosition.BOTTOM_LEFT
+                }
+            });
+            google.maps.event.addListenerOnce(map2, 'tilesloaded', addMarkers2);
 
-									        //var imageRed = new google.maps.MarkerImage('/img/icons/marker-house-red.gif',new google.maps.Size(16, 16),new google.maps.Point(0,0),new google.maps.Point(8, 16));
-									        var imageGreen = new google.maps.MarkerImage('/img/icons/marker-house-green.gif', new google.maps.Size(16, 16), new google.maps.Point(0, 0), new google.maps.Point(8, 16));
+            overlay2 = new google.maps.OverlayView();
+            overlay2.draw = function () { };
+            overlay2.setMap(map2);
 
-									        function addMarkers2() {
-									            // current hotel pointer
-									            var latLng = new google.maps.LatLng(21.2954138, 105.8431038);
-									            var marker = new google.maps.Marker({ position: latLng, map: map });
-									            var content = '<div style="width:100px;float:left;margin-right:10px;"><img src="http://elitehotel.com.vn//Images/Hotels/premier-village-danang-resort-quan-ngu-hanh-son-i8c4b.jpg" width="100" height="100"/></div><div style="font-size:10pt;width:290px;float:left;"><div style="margin-bottom:5px;font-weight:bold;font-size:1.2em;">Premier Village Danang Resort</div><span style="color:#444;font-size:9pt;">V&#245; Nguyễn Gi&#225;p, quận Ngũ H&#224;nh Sơn, Đ&#224; Nẵng, Việt Nam</span></div></div><div class="clear"></div>';
-									            marker['content'] = content;
+            //BienDongInit(map, "map-canvas");
 
-									            //google.maps.event.addListener(marker, 'mouseover', function() { ShowContentPopup(this); });
-									            google.maps.event.addListener(marker, 'mouseout', function () { $("#divMapInfoWindow").hide(); });
+        }
 
-									        }
+        //var imageRed = new google.maps.MarkerImage('/img/icons/marker-house-red.gif',new google.maps.Size(16, 16),new google.maps.Point(0,0),new google.maps.Point(8, 16));
+        //var imageGreen = new google.maps.MarkerImage('/img/icons/marker-house-green.gif', new google.maps.Size(16, 16), new google.maps.Point(0, 0), new google.maps.Point(8, 16));
 
-									    });
-									    function showBookSource() {
-									        $('html,body').scrollTop(0);
-									        if (document.getElementById("booksource").style.display == "none") {
-									            document.getElementById("booksource").style.display = "block";
-									        } else {
-									            document.getElementById("booksource").style.display = "none";
-									        }
-									    }
-									</script>
+        function addMarkers2() {
+            // current hotel pointer
+            var latLng = new google.maps.LatLng(21.2954138, 105.8431038);
+            var marker = new google.maps.Marker({ position: latLng, map: map });
+            var content = '<div style="width:100px;float:left;margin-right:10px;"><img src="http://elitehotel.com.vn//Images/Hotels/premier-village-danang-resort-quan-ngu-hanh-son-i8c4b.jpg" width="100" height="100"/></div><div style="font-size:10pt;width:290px;float:left;"><div style="margin-bottom:5px;font-weight:bold;font-size:1.2em;">Premier Village Danang Resort</div><span style="color:#444;font-size:9pt;">V&#245; Nguyễn Gi&#225;p, quận Ngũ H&#224;nh Sơn, Đ&#224; Nẵng, Việt Nam</span></div></div><div class="clear"></div>';
+            marker['content'] = content;
+
+            //google.maps.event.addListener(marker, 'mouseover', function() { ShowContentPopup(this); });
+            google.maps.event.addListener(marker, 'mouseout', function () { $("#divMapInfoWindow").hide(); });
+
+        }
+
+    });
+    function showBookSource() {
+        $('html,body').scrollTop(0);
+        if (document.getElementById("booksource").style.display == "none") {
+            document.getElementById("booksource").style.display = "block";
+        } else {
+            document.getElementById("booksource").style.display = "none";
+        }
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDCnHiJWMm8EETv1PT776B1u7K5yWESqA" async defer></script>
