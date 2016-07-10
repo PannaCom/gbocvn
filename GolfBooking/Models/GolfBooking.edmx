@@ -4,74 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="golfbookingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="golfbookingModelStoreContainer">
-          <EntitySet Name="country" EntityType="golfbookingModel.Store.country" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf" EntityType="golfbookingModel.Store.golf" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_atribute_value" EntityType="golfbookingModel.Store.golf_atribute_value" store:Type="Tables" store:Schema="dbo" store:Name="golf_atribute_value">
-            <DefiningQuery>SELECT 
-      [golf_atribute_value].[id] AS [id], 
-      [golf_atribute_value].[golf_id] AS [golf_id], 
-      [golf_atribute_value].[atribute_id] AS [atribute_id], 
-      [golf_atribute_value].[value] AS [value]
-      FROM [dbo].[golf_atribute_value] AS [golf_atribute_value]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="golf_atributes" EntityType="golfbookingModel.Store.golf_atributes" store:Type="Tables" store:Schema="dbo" store:Name="golf_atributes">
-            <DefiningQuery>SELECT 
-      [golf_atributes].[id] AS [id], 
-      [golf_atributes].[name] AS [name], 
-      [golf_atributes].[parent_id] AS [parent_id], 
-      [golf_atributes].[order_no] AS [order_no], 
-      [golf_atributes].[deleted] AS [deleted]
-      FROM [dbo].[golf_atributes] AS [golf_atributes]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="golf_customize_package" EntityType="golfbookingModel.Store.golf_customize_package" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_image" EntityType="golfbookingModel.Store.golf_image" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_order" EntityType="golfbookingModel.Store.golf_order" store:Type="Tables" store:Schema="dbo" store:Name="golf_order">
-            <DefiningQuery>SELECT 
-      [golf_order].[id] AS [id], 
-      [golf_order].[type] AS [type], 
-      [golf_order].[golf_order_id] AS [golf_order_id], 
-      [golf_order].[full_name] AS [full_name], 
-      [golf_order].[email] AS [email], 
-      [golf_order].[phone] AS [phone], 
-      [golf_order].[des] AS [des], 
-      [golf_order].[from_date] AS [from_date], 
-      [golf_order].[from_date_id] AS [from_date_id], 
-      [golf_order].[to_date] AS [to_date], 
-      [golf_order].[to_date_id] AS [to_date_id], 
-      [golf_order].[from_time] AS [from_time], 
-      [golf_order].[to_time] AS [to_time]
-      FROM [dbo].[golf_order] AS [golf_order]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="golf_order_course" EntityType="golfbookingModel.Store.golf_order_course" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_order_customize_package" EntityType="golfbookingModel.Store.golf_order_customize_package" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_order_package_stay" EntityType="golfbookingModel.Store.golf_order_package_stay" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_order_trophy" EntityType="golfbookingModel.Store.golf_order_trophy" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_package_stay" EntityType="golfbookingModel.Store.golf_package_stay" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_package_stay_image" EntityType="golfbookingModel.Store.golf_package_stay_image" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_price" EntityType="golfbookingModel.Store.golf_price" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_review" EntityType="golfbookingModel.Store.golf_review" store:Type="Tables" store:Schema="dbo" store:Name="golf_review">
-            <DefiningQuery>SELECT 
-      [golf_review].[id] AS [id], 
-      [golf_review].[user_name] AS [user_name], 
-      [golf_review].[review] AS [review], 
-      [golf_review].[point] AS [point], 
-      [golf_review].[address] AS [address]
-      FROM [dbo].[golf_review] AS [golf_review]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="golf_trophy" EntityType="golfbookingModel.Store.golf_trophy" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_trophy_category" EntityType="golfbookingModel.Store.golf_trophy_category" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="golf_trophy_image" EntityType="golfbookingModel.Store.golf_trophy_image" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="news" EntityType="golfbookingModel.Store.news" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="province" EntityType="golfbookingModel.Store.province" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="slide" EntityType="golfbookingModel.Store.slide" store:Type="Tables" Schema="dbo" />
-        </EntityContainer>
+    <Schema Namespace="golfbookingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="country">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="deleted" Type="tinyint" />
         </EntityType>
@@ -79,7 +17,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="150" />
           <Property Name="des" Type="ntext" />
           <Property Name="tech_des" Type="ntext" />
@@ -95,8 +33,7 @@
           <Property Name="deleted" Type="tinyint" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'golfbooking.dbo.golf_atribute_value' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
+warning 6002: The table/view 'golfbooking.dbo.golf_atribute_value' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="golf_atribute_value">
           <Key>
             <PropertyRef Name="id" />
@@ -107,8 +44,7 @@
           <Property Name="value" Type="nvarchar" MaxLength="505" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'golfbooking.dbo.golf_atributes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
+warning 6002: The table/view 'golfbooking.dbo.golf_atributes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="golf_atributes">
           <Key>
             <PropertyRef Name="id" />
@@ -123,25 +59,22 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="des" Type="ntext" />
         </EntityType>
         <EntityType Name="golf_image">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="golf_id" Type="int" />
           <Property Name="image" Type="nvarchar" MaxLength="151" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'golfbooking.dbo.golf_order' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="golf_order">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="type" Type="tinyint" />
           <Property Name="golf_order_id" Type="int" />
           <Property Name="full_name" Type="nvarchar" MaxLength="151" />
@@ -152,14 +85,14 @@
           <Property Name="from_date_id" Type="int" />
           <Property Name="to_date" Type="date" />
           <Property Name="to_date_id" Type="int" />
-          <Property Name="from_time" Type="time" />
-          <Property Name="to_time" Type="time" />
+          <Property Name="from_time" Type="time" Precision="7" />
+          <Property Name="to_time" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="golf_order_course">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="golf_id" Type="int" />
           <Property Name="time" Type="datetime" />
           <Property Name="players" Type="int" />
@@ -170,7 +103,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="full_details" Type="ntext" />
@@ -180,7 +113,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="golf_package_stay_id" Type="int" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
@@ -191,7 +124,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="golf_trophy_id" Type="int" />
           <Property Name="email" Type="nvarchar" MaxLength="150" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
@@ -202,13 +135,13 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="golf_id" Type="nvarchar" MaxLength="50" />
           <Property Name="name" Type="nvarchar" MaxLength="551" />
           <Property Name="des" Type="nvarchar" MaxLength="2500" />
           <Property Name="full_detail" Type="ntext" />
           <Property Name="image" Type="nvarchar" MaxLength="150" />
-          <Property Name="min_price" Type="decimal" Precision="12" />
+          <Property Name="min_price" Type="decimal" Precision="12" Scale="0" />
           <Property Name="deleted" Type="tinyint" />
           <Property Name="type" Type="tinyint" />
         </EntityType>
@@ -216,7 +149,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="golf_package_id" Type="int" />
           <Property Name="image" Type="nvarchar" MaxLength="151" />
         </EntityType>
@@ -224,19 +157,18 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="golf_id" Type="int" />
-          <Property Name="normal_day_price" Type="decimal" Precision="12" />
-          <Property Name="weekend_day_price" Type="decimal" Precision="12" />
+          <Property Name="normal_day_price" Type="decimal" Precision="12" Scale="0" />
+          <Property Name="weekend_day_price" Type="decimal" Precision="12" Scale="0" />
           <Property Name="from_date_id" Type="int" />
           <Property Name="to_date_id" Type="int" />
-          <Property Name="from_time" Type="time" />
-          <Property Name="to_time" Type="time" />
+          <Property Name="from_time" Type="time" Precision="7" />
+          <Property Name="to_time" Type="time" Precision="7" />
           <Property Name="cart" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'golfbooking.dbo.golf_review' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
+warning 6002: The table/view 'golfbooking.dbo.golf_review' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="golf_review">
           <Key>
             <PropertyRef Name="id" />
@@ -251,10 +183,10 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="150" />
           <Property Name="des" Type="ntext" />
-          <Property Name="price" Type="decimal" Precision="12" />
+          <Property Name="price" Type="decimal" Precision="12" Scale="0" />
           <Property Name="image" Type="nvarchar" MaxLength="150" />
           <Property Name="banner" Type="nvarchar" MaxLength="150" />
           <Property Name="golf_trophy_cat_id" Type="int" />
@@ -263,7 +195,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="150" />
           <Property Name="image" Type="nvarchar" MaxLength="150" />
         </EntityType>
@@ -271,14 +203,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="image" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="news">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="nvarchar" MaxLength="150" />
           <Property Name="des" Type="nvarchar" MaxLength="550" />
           <Property Name="full_details" Type="ntext" />
@@ -290,17 +222,29 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="country_id" Type="int" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="deleted" Type="tinyint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'golfbooking.dbo.region' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="region">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="251" />
+          <Property Name="parent_id" Type="int" />
+          <Property Name="order_no" Type="int" />
           <Property Name="deleted" Type="tinyint" />
         </EntityType>
         <EntityType Name="slide">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="image" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="image" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="caption" Type="nvarchar" MaxLength="50" />
           <Property Name="imagelink" Type="nvarchar" MaxLength="150" />
           <Property Name="slogan" Type="nvarchar" MaxLength="80" />
@@ -309,6 +253,61 @@
           <Property Name="type" Type="int" />
           <Property Name="deleted" Type="tinyint" />
         </EntityType>
+        <EntityContainer Name="golfbookingModelStoreContainer">
+          <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf" EntityType="Self.golf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_customize_package" EntityType="Self.golf_customize_package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_image" EntityType="Self.golf_image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_order" EntityType="Self.golf_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_order_course" EntityType="Self.golf_order_course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_order_customize_package" EntityType="Self.golf_order_customize_package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_order_package_stay" EntityType="Self.golf_order_package_stay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_order_trophy" EntityType="Self.golf_order_trophy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_package_stay" EntityType="Self.golf_package_stay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_package_stay_image" EntityType="Self.golf_package_stay_image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_price" EntityType="Self.golf_price" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_trophy" EntityType="Self.golf_trophy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_trophy_category" EntityType="Self.golf_trophy_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_trophy_image" EntityType="Self.golf_trophy_image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="province" EntityType="Self.province" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="slide" EntityType="Self.slide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="golf_atribute_value" EntityType="Self.golf_atribute_value" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[golf_atribute_value].[id] AS [id], 
+[golf_atribute_value].[golf_id] AS [golf_id], 
+[golf_atribute_value].[atribute_id] AS [atribute_id], 
+[golf_atribute_value].[value] AS [value]
+FROM [dbo].[golf_atribute_value] AS [golf_atribute_value]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="golf_atributes" EntityType="Self.golf_atributes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[golf_atributes].[id] AS [id], 
+[golf_atributes].[name] AS [name], 
+[golf_atributes].[parent_id] AS [parent_id], 
+[golf_atributes].[order_no] AS [order_no], 
+[golf_atributes].[deleted] AS [deleted]
+FROM [dbo].[golf_atributes] AS [golf_atributes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="golf_review" EntityType="Self.golf_review" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[golf_review].[id] AS [id], 
+[golf_review].[user_name] AS [user_name], 
+[golf_review].[review] AS [review], 
+[golf_review].[point] AS [point], 
+[golf_review].[address] AS [address]
+FROM [dbo].[golf_review] AS [golf_review]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="region" EntityType="Self.region" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[region].[id] AS [id], 
+[region].[name] AS [name], 
+[region].[parent_id] AS [parent_id], 
+[region].[order_no] AS [order_no], 
+[region].[deleted] AS [deleted]
+FROM [dbo].[region] AS [region]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -317,7 +316,6 @@
           <EntitySet Name="golf_atribute_value" EntityType="golfbookingModel.golf_atribute_value" />
           <EntitySet Name="golf_atributes" EntityType="golfbookingModel.golf_atributes" />
           <EntitySet Name="golf_customize_package" EntityType="golfbookingModel.golf_customize_package" />
-          <EntitySet Name="golf_order" EntityType="golfbookingModel.golf_order" />
           <EntitySet Name="golf_order_course" EntityType="golfbookingModel.golf_order_course" />
           <EntitySet Name="golf_order_customize_package" EntityType="golfbookingModel.golf_order_customize_package" />
           <EntitySet Name="golf_order_package_stay" EntityType="golfbookingModel.golf_order_package_stay" />
@@ -335,6 +333,8 @@
           <EntitySet Name="golf_trophy" EntityType="golfbookingModel.golf_trophy" />
           <EntitySet Name="golf_trophy_category" EntityType="golfbookingModel.golf_trophy_category" />
           <EntitySet Name="slides" EntityType="golfbookingModel.slide" />
+          <EntitySet Name="golf_order" EntityType="golfbookingModel.golf_order" />
+          <EntitySet Name="regions" EntityType="golfbookingModel.region" />
         </EntityContainer>
         <EntityType Name="golf_atribute_value">
           <Key>
@@ -361,24 +361,6 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="des" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="golf_order">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="type" Type="Byte" />
-          <Property Name="golf_order_id" Type="Int32" />
-          <Property Name="full_name" Type="String" MaxLength="151" Unicode="true" FixedLength="false" />
-          <Property Name="email" Type="String" MaxLength="51" Unicode="true" FixedLength="false" />
-          <Property Name="phone" Type="String" MaxLength="51" Unicode="true" FixedLength="false" />
-          <Property Name="des" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="from_date" Type="DateTime" Precision="0" />
-          <Property Name="from_date_id" Type="Int32" />
-          <Property Name="to_date" Type="DateTime" Precision="0" />
-          <Property Name="to_date_id" Type="Int32" />
-          <Property Name="from_time" Type="Time" Precision="7" />
-          <Property Name="to_time" Type="Time" Precision="7" />
         </EntityType>
         <EntityType Name="golf_order_course">
           <Key>
@@ -566,6 +548,34 @@
           <Property Type="Int32" Name="type" />
           <Property Type="Byte" Name="deleted" />
         </EntityType>
+        <EntityType Name="golf_order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="Byte" />
+          <Property Name="golf_order_id" Type="Int32" />
+          <Property Name="full_name" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="51" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="51" FixedLength="false" Unicode="true" />
+          <Property Name="des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="from_date" Type="DateTime" Precision="0" />
+          <Property Name="from_date_id" Type="Int32" />
+          <Property Name="to_date" Type="DateTime" Precision="0" />
+          <Property Name="to_date_id" Type="Int32" />
+          <Property Name="from_time" Type="Time" Precision="7" />
+          <Property Name="to_time" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="region">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="251" FixedLength="false" Unicode="true" />
+          <Property Name="parent_id" Type="Int32" />
+          <Property Name="order_no" Type="Int32" />
+          <Property Name="deleted" Type="Byte" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -598,25 +608,6 @@
               <MappingFragment StoreEntitySet="golf_customize_package">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="des" ColumnName="des" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="golf_order">
-            <EntityTypeMapping TypeName="golfbookingModel.golf_order">
-              <MappingFragment StoreEntitySet="golf_order">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="golf_order_id" ColumnName="golf_order_id" />
-                <ScalarProperty Name="full_name" ColumnName="full_name" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="des" ColumnName="des" />
-                <ScalarProperty Name="from_date" ColumnName="from_date" />
-                <ScalarProperty Name="from_date_id" ColumnName="from_date_id" />
-                <ScalarProperty Name="to_date" ColumnName="to_date" />
-                <ScalarProperty Name="to_date_id" ColumnName="to_date_id" />
-                <ScalarProperty Name="from_time" ColumnName="from_time" />
-                <ScalarProperty Name="to_time" ColumnName="to_time" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -823,6 +814,36 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="golf_order">
+            <EntityTypeMapping TypeName="golfbookingModel.golf_order">
+              <MappingFragment StoreEntitySet="golf_order">
+                <ScalarProperty Name="to_time" ColumnName="to_time" />
+                <ScalarProperty Name="from_time" ColumnName="from_time" />
+                <ScalarProperty Name="to_date_id" ColumnName="to_date_id" />
+                <ScalarProperty Name="to_date" ColumnName="to_date" />
+                <ScalarProperty Name="from_date_id" ColumnName="from_date_id" />
+                <ScalarProperty Name="from_date" ColumnName="from_date" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="golf_order_id" ColumnName="golf_order_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regions">
+            <EntityTypeMapping TypeName="golfbookingModel.region">
+              <MappingFragment StoreEntitySet="region">
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="order_no" ColumnName="order_no" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -840,6 +861,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

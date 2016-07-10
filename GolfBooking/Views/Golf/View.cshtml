@@ -42,19 +42,19 @@
                                         <label class="sr-only" for="adults">Players</label>
                                         <select class="form-control" id="players">
                                             <option>Players</option>
-                                            <option>1</option>
-                                            <option selected>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
+                                            <option value="1">1</option>
+                                            <option selected value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
                                         </select>
                                     </div>
                                     <div class="form-group icon-arrow">
                                         <label class="sr-only" for="room">Holes</label>
                                         <select class="form-control" id="holes">
                                             <option selected disabled>Holes</option>
-                                            <option>18 holes</option>
-                                            <option>36 holes</option>
-                                            <option>64 holes</option>
+                                            <option value="18">18 holes</option>
+                                            <option value="36">36 holes</option>
+                                            <option value="64">64 holes</option>
                                         </select>
                                     </div>
                                     <div class="form-group icon-calendar">
@@ -66,8 +66,8 @@
                                         <input type="text" class="form-control" id="phone" placeholder="Phone">
                                     </div>
                                     <div class="form-group">
-                                        <input type="submit" class="btn btn-primary btn-block" name="Make Reservations" value="Make Reservations" onclick="booksource()">
-                                        <input type="submit" class="btn btn-primary btn-block" name="Make Close" value="Close" onclick="showBookSource()">
+                                        <input type="button" class="btn btn-primary btn-block" id="btnAddNew" value="Make Reservations" onclick="booksource()">
+                                        <input type="button" class="btn btn-primary btn-block" name="Make Close" value="Close" onclick="showBookSource()">
                                     </div>
                                 </form>
                             </div><!-- .booking-block -->
@@ -147,6 +147,7 @@
         //    document.getElementById("datetimepicker").focus();
         //    return;
         //}
+        alert(document.getElementById("datetimepicker").value);
         if (document.getElementById("datetimepicker").value == "") {
             alert("Chọn ngày chơi");
             document.getElementById("datetimepicker").focus();

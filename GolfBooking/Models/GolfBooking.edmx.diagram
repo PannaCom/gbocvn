@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="golfbookingModel.golf_atribute_value" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_atributes" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_customize_package" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="golfbookingModel.golf_order" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_order_course" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_order_customize_package" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="golfbookingModel.golf_order_package_stay" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
@@ -26,6 +25,8 @@
         <EntityTypeShape EntityType="golfbookingModel.golf_trophy" Width="1.5" PointX="7.677558088524993" PointY="27.630083514205218" />
         <EntityTypeShape EntityType="golfbookingModel.golf_trophy_category" Width="1.5" PointX="3.1051110676979232" PointY="23.528637405265421" />
         <EntityTypeShape EntityType="golfbookingModel.slide" Width="1.5" PointX="11.108506712647392" PointY="19.31291728621019" />
+        <EntityTypeShape EntityType="golfbookingModel.golf_order" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="golfbookingModel.region" Width="1.5" PointX="2.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
