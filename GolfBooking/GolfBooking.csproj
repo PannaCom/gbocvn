@@ -286,6 +286,9 @@
     <Compile Include="Models\province.cs">
       <DependentUpon>GolfBooking.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\region.cs">
+      <DependentUpon>GolfBooking.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\slide.cs">
       <DependentUpon>GolfBooking.tt</DependentUpon>
     </Compile>
@@ -1777,7 +1780,7 @@
     <Content Include="Views\News\Create.cshtml" />
     <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\News\Delete.cshtml" />
-    <Content Include="Views\PackageStay\View.cshtml" />
+    <Content Include="Views\PackageStay\Views.cshtml" />
     <Content Include="Views\Slide\Index.cshtml" />
     <Content Include="Views\Slide\Details.cshtml" />
     <Content Include="Views\Slide\Create.cshtml" />

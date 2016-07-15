@@ -47,7 +47,7 @@ namespace GolfBooking.Controllers
         
 
         //  Tuyenvv - View a packet
-        public ActionResult View(int id = 0)
+        public ActionResult Views(int id = 0)
         {
 
             var q = (from pack in db.golf_package_stay
@@ -67,39 +67,43 @@ namespace GolfBooking.Controllers
                      }).FirstOrDefault();
 
             var q2 = (from pack in db.golf_package_stay
-                     where pack.id > q.id
-                     select new ModelPacketStayItem
-                     {
-                         id = pack.id,
-                         golf_id = pack.golf_id,
-                         name = pack.name,
-                         des = pack.des,
-                         full_detail = pack.full_detail,
-                         image = pack.image,
-                         min_price = pack.min_price,
-                         deleted = pack.deleted,
-                         type = pack.type,
-                         listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
-                     }).FirstOrDefault();
+                      where pack.id > q.id
+                      select new ModelPacketStayItem
+                      {
+                          id = pack.id,
+                          golf_id = pack.golf_id,
+                          name = pack.name,
+                          des = pack.des,
+                          full_detail = pack.full_detail,
+                          image = pack.image,
+                          min_price = pack.min_price,
+                          deleted = pack.deleted,
+                          type = pack.type,
+                          listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
+                      }).FirstOrDefault();
 
             var q3 = (from pack in db.golf_package_stay
-                     where pack.id > q2.id
-                     select new ModelPacketStayItem
-                     {
-                         id = pack.id,
-                         golf_id = pack.golf_id,
-                         name = pack.name,
-                         des = pack.des,
-                         full_detail = pack.full_detail,
-                         image = pack.image,
-                         min_price = pack.min_price,
-                         deleted = pack.deleted,
-                         type = pack.type,
-                         listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
-                     }).FirstOrDefault();
+                      where pack.id > q2.id
+                      select new ModelPacketStayItem
+                      {
+                          id = pack.id,
+                          golf_id = pack.golf_id,
+                          name = pack.name,
+                          des = pack.des,
+                          full_detail = pack.full_detail,
+                          image = pack.image,
+                          min_price = pack.min_price,
+                          deleted = pack.deleted,
+                          type = pack.type,
+                          listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
+                      }).FirstOrDefault();
 
             ViewBag.nextItem1 = q2;
+            ViewBag.hasItem1 = 1;
+            if (ViewBag.nextItem1 == null) ViewBag.hasItem1 = 0;
             ViewBag.nextItem2 = q3;
+            ViewBag.hasItem2 = 1;
+            if (ViewBag.nextItem2 == null) ViewBag.hasItem2 = 0;
 
             return View(q);
         }

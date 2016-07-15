@@ -26,16 +26,18 @@
                     </div>
                 </div>
             </div>
+            @if (ViewBag.hasItem1 != 0)
+            { 
             <div style="padding-top:15px;padding-bottom:15px;background-color:#ffffff;color:#bf0000;font-weight:bold;"><i>More Discounted Packages</i></div>
             <div class="col-sm-9" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
                 <div style="width:100%;position:relative;display:block;float:left;padding-left:5px;">
                     <div class="col-sm-4" style="padding-left:1px;">
-                        <a href="@Url.RouteUrl("viewpacket", new { id = ViewBag.nextItem2.id })">
+                        <a href="/PackageStay/Views/@ViewBag.nextItem1.id">
                             <img src="@{@GolfBooking.Config.domain@ViewBag.nextItem1.image}" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
                         </a>
                     </div>
                     <div class="col-sm-6">
-                        <a href="@Url.RouteUrl("viewpacket", new { id = ViewBag.nextItem2.id })">
+                        <a href="/PackageStay/Views/@ViewBag.nextItem1.id">
                             <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@ViewBag.nextItem1.name</h6>
                         </a>
                         <p>
@@ -44,7 +46,7 @@
                     </div>
                     <div class="col-sm-2">
                         <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:125px;width:125px;position:position: absolute;">
-                            <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:40px;padding-left:46px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from 231$</span>
+                            <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:40px;padding-left:46px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from @ViewBag.nextItem1.min_price</span>
                         </div>
                     </div>
                 </div>
@@ -53,41 +55,43 @@
                         &nbsp;
                     </div>
                     <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
-                        <a href="@Url.RouteUrl("viewpacket", new { id = ViewBag.nextItem1.id })" style="color:#ffffff;">Details</a>
+                        <a href="/PackageStay/Views/@ViewBag.nextItem1.id" style="color:#ffffff;">Details</a>
                     </div>
                 </div>
-
             </div>
-            <div class="col-sm-9" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-top:15px;">
-                <div style="width:100%;position:relative;display:block;float:left;padding-left:5px;">
-                    <div class="col-sm-4" style="padding-left:1px;">
-                        <a href="@Url.RouteUrl("viewpacket", new { id = ViewBag.nextItem2.id })">
-                            <img src="@{@GolfBooking.Config.domain@ViewBag.nextItem2.image}" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
-                        </a>
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="@Url.RouteUrl("viewpacket", new { id = ViewBag.nextItem2.id })">
-                            <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@ViewBag.nextItem2.name</h6>
-                        </a>
+            }
+            @if (ViewBag.hasItem2 != 0)
+            {
+                <div class="col-sm-9" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-top:15px;">
+                    <div style="width:100%;position:relative;display:block;float:left;padding-left:5px;">
+                        <div class="col-sm-4" style="padding-left:1px;">
+                            <a href="/PackageStay/Views/@ViewBag.nextItem2.id">
+                                <img src="@{@GolfBooking.Config.domain@ViewBag.nextItem2.image}" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="/PackageStay/Views/@ViewBag.nextItem2.id">
+                                <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@ViewBag.nextItem2.name</h6>
+                            </a>
 
-                            @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(ViewBag.nextItem2.des))
+                                @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(ViewBag.nextItem2.des))
+                        </div>
+                        <div class="col-sm-2">
+                            <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:125px;width:125px;position:position: absolute;">
+                                <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:40px;padding-left:46px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from @ViewBag.nextItem2.min_price</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-2">
-                        <div style="background-color:#bf0000;border-radius: 100%;color:#ffffff;height:125px;width:125px;position:position: absolute;">
-                            <span style="text-shadow: 0 0 5px #0026ff, 0 0 7px #0026ff;padding-top:40px;padding-left:46px;color:#fff;display: block;font-size:12px;line-height: 1;-webkit-margin-before: 0.67em;-webkit-margin-after: 0.67em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;font-weight: bold;width:10px;">Only from 241$</span>
+                    <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;padding-right:0px;">
+                        <div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
+                            &nbsp;
+                        </div>
+                        <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
+                            <a href="/PackageStay/Views/@ViewBag.nextItem2.id" style="color:#ffffff;">Details</a>
                         </div>
                     </div>
                 </div>
-                <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;padding-right:0px;">
-                    <div style="padding-left:0px;background-color:#a3a3a3;width:83%;position:relative;display:block;float:left;">
-                        &nbsp;
-                    </div>
-                    <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
-                        <a href="@Url.RouteUrl("viewpacket", new { id = ViewBag.nextItem2.id })" style="color:#ffffff;">Details</a>
-                    </div>
-                </div>
-
-            </div>
+            }
         </div>
 
     </section>

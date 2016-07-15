@@ -25,23 +25,23 @@
                                 if (sliderId < 4)
                                 {
                                     <text>
-                                    <div class="col-sm-9 golf-slider-custom" style="background-color:#edebe1;cursor:pointer;padding-left:0px;padding-right:0px;@display" id="slide@{@sliderId}" onclick="location.href = '@Url.RouteUrl("viewpacket", new { id = item.id })'">
-                                        <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;">
-                                            <div class="col-sm-12" id=slide1bg style="border:1px solid #bf0000;padding-left:1px;background-image:url('@{@GolfBooking.Config.domain@item.image}');background-position:center;background-size:100% 100%;height:300px;">
-                                                <div style="display:block;color:#bf0000;position:absolute;float:left;top:60%;left:40%;background-color:#ffffff;width:57%;height:100px;padding-top:30px;padding-left:10px;padding-right:10px;">
-                                                    <div style="display:block;color:#ffffff;text-align:center;font-weight:bold;position:absolute;float:left;top:-15px;left:40%;background-color:#bf0000;width:57%;height:35px;">
-                                                        @item.name
-                                                    </div>
-                                                    <div style="border:4px solid #b06e5b;display:block;color:#000000;text-align:center;font-weight:bold;position:absolute;float:left;top:-35px;left:-70px;border-radius:48%;padding-top:20px;background-color:#ffffff;width:90px;height:80px;">
-                                            
-                                                        <a href="@Url.RouteUrl("viewpacket", new { id = item.id })">Book Now</a>
-                                                    </div>
-                                                    @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(item.des)) 
-                                        
-                                                </div>
-                                            </div>
+                        <div class="col-sm-9 golf-slider-custom" style="background-color:#edebe1;cursor:pointer;padding-left:0px;padding-right:0px;@display" id="slide@{@sliderId}" onclick="location.href = '/PackageStay/Views/@item.id'">
+                            <div style="width:100%;position:relative;display:block;float:left;padding-left:0px;">
+                                <div class="col-sm-12" id=slide1bg style="border:1px solid #bf0000;padding-left:1px;background-image:url('@{@GolfBooking.Config.domain@item.image}');background-position:center;background-size:100% 100%;height:300px;">
+                                    <div style="display:block;color:#bf0000;position:absolute;float:left;top:60%;left:40%;background-color:#ffffff;width:57%;height:100px;padding-top:30px;padding-left:10px;padding-right:10px;">
+                                        <div style="display:block;color:#ffffff;text-align:center;font-weight:bold;position:absolute;float:left;top:-15px;left:40%;background-color:#bf0000;width:57%;height:35px;">
+                                            @item.name
                                         </div>
+                                        <div style="border:4px solid #b06e5b;display:block;color:#000000;text-align:center;font-weight:bold;position:absolute;float:left;top:-35px;left:-70px;border-radius:48%;padding-top:20px;background-color:#ffffff;width:90px;height:80px;">
+
+                                            <a href="/PackageStay/Views/@item.id">Book Now</a>
+                                        </div>
+                                        @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(item.des))
+
                                     </div>
+                                </div>
+                            </div>
+                        </div>
                                 </text>
                                 }
                                 else
@@ -55,14 +55,14 @@
                                         <div class="col-sm-9" style="background-color:#edebe1;padding-left:0px;padding-right:0px;margin-bottom:15px;">
                                             <div style="width:100%;position:relative;display:block;float:left;padding-left:5px;">
                                                 <div class="col-sm-4" style="padding-left:1px;">
-                                                    <a href="@Url.RouteUrl("viewpacket", new { id = item.id })">
+                                                    <a href="/PackageStay/Views/@item.id">
                                                         <img src="@{@GolfBooking.Config.domain@item.image}" style="width:100%;height:160px;padding-top:10px;padding-bottom:10px;">
                                                     </a>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <a href="@Url.RouteUrl("viewpacket", new { id = item.id })">
+                                                    <a href="/PackageStay/Views/@item.id">
                                                         <h6 style="margin-top:2px;color:#bf0000;font-weight:bold;">@item.name</h6>
-                                                  </a>
+                                                    </a>
 
                                                     <p>
                                                         @Html.Raw(GolfBooking.Utility.Utility.stripTagHtml(item.des))
@@ -79,7 +79,7 @@
                                                     &nbsp;
                                                 </div>
                                                 <div style="background-color:#00b04f;text-align:center;color:#ffffff;width:17%;position:relative;display:block;float:left;">
-                                                    <a href="@Url.RouteUrl("viewpacket", new { id = item.id })" style="color:#ffffff;">Details</a>
+                                                    <a href="/PackageStay/Views/@item.id" style="color:#ffffff;">Details</a>
                                                 </div>
                                             </div>
 
