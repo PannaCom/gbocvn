@@ -14,11 +14,11 @@ namespace GolfBooking
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             
             //define 1 cai route o day
-            routes.MapRoute(
-                "viewpacket",
-                "viewpacket/{id}",
-                new { controller = "PackageStay", action = "View", id = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    "viewpacket",
+            //    "viewpacket/{id}",
+            //    new { controller = "PackageStay", action = "View", id = UrlParameter.Optional }
+            //);
             routes.MapRoute(
                 "news details",
                 "news/{title}-{id}",
