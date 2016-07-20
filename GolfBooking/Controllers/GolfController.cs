@@ -206,7 +206,7 @@ namespace GolfBooking.Controllers
                 db.SaveChanges();
                 string rs = "<tr><td>" + email + "</td><td>" + phone + "</td><td>" + holes + "</td><td>" + players + "</td><td>" + datetimepicker + "</td><tr>";
                 rs = "<h2>Thông báo có khách đặt sân golf \"" + name + "\"</h2><table border=1 style=\"width:100%\"><tr><th>Email</th><th>Phone</th><th>Holes</th><th>Players</th><th>Date Time</th></tr>" + rs + "</table>";
-                bool sendmail = Config.mail(Config.fromEmail, Config.fromEmail, phone + ", khách đặt sân golf " + name, Config.passEmail, rs);
+                bool sendmail = Config.mail(Config.fromEmail, Config.fromEmail, "Khách đặt sân golf " + name + ": " + phone, Config.passEmail, rs);
                 return "1";
 
 

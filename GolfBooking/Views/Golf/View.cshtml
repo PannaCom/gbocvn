@@ -147,7 +147,7 @@
         //    document.getElementById("datetimepicker").focus();
         //    return;
         //}
-        alert(document.getElementById("datetimepicker").value);
+        //alert(document.getElementById("datetimepicker").value);
         if (document.getElementById("datetimepicker").value == "") {
             alert("Chọn ngày chơi");
             document.getElementById("datetimepicker").focus();
@@ -181,9 +181,10 @@
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 if (xhr.responseText!="0"){
-                    alert("Đặt sân thành công! Chúng tôi sẽ liên hệ với bạn sớm!");
+                    alert("book golf course success! We will contact you soon!");
+                    document.getElementById("booksource").style.display = "none";
                 }else{
-                    alert("Có lỗi trên web. Xin quay lại sau!");
+                    alert("Error! Be back later!");
                 }
                 document.getElementById("btnAddNew").disabled=false;
                 document.getElementById("btnAddNew").value="Make Reservations";
@@ -193,7 +194,7 @@
 
 </script>
 <script>
-    $(function () {
+    @*$(function () {
 
         $(window).load(function () {
             initialize2();
@@ -245,7 +246,7 @@
 
         }
 
-    });
+    });*@
     function showBookSource() {
         $('html,body').scrollTop(0);
         if (document.getElementById("booksource").style.display == "none") {
@@ -256,4 +257,4 @@
     }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDCnHiJWMm8EETv1PT776B1u7K5yWESqA" async defer></script>
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDCnHiJWMm8EETv1PT776B1u7K5yWESqA" async defer></script>*@

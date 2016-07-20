@@ -49,7 +49,8 @@ namespace GolfBooking.Controllers
         //  Tuyenvv - View a packet
         public ActionResult Views(int id = 0)
         {
-
+            ViewBag.id = id;
+            
             var q = (from pack in db.golf_package_stay
                      where pack.id == id
                      select new ModelPacketStayItem
@@ -65,7 +66,7 @@ namespace GolfBooking.Controllers
                          type = pack.type,
                          listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
                      }).FirstOrDefault();
-
+            ViewBag.name = q.name;
             var q2 = (from pack in db.golf_package_stay
                       where pack.id > q.id
                       select new ModelPacketStayItem
@@ -81,33 +82,58 @@ namespace GolfBooking.Controllers
                           type = pack.type,
                           listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
                       }).FirstOrDefault();
-
-            var q3 = (from pack in db.golf_package_stay
-                      where pack.id > q2.id
-                      select new ModelPacketStayItem
-                      {
-                          id = pack.id,
-                          golf_id = pack.golf_id,
-                          name = pack.name,
-                          des = pack.des,
-                          full_detail = pack.full_detail,
-                          image = pack.image,
-                          min_price = pack.min_price,
-                          deleted = pack.deleted,
-                          type = pack.type,
-                          listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
-                      }).FirstOrDefault();
-
+            if (q2 != null) { 
+                var q3 = (from pack in db.golf_package_stay
+                          where pack.id > q2.id
+                          select new ModelPacketStayItem
+                          {
+                              id = pack.id,
+                              golf_id = pack.golf_id,
+                              name = pack.name,
+                              des = pack.des,
+                              full_detail = pack.full_detail,
+                              image = pack.image,
+                              min_price = pack.min_price,
+                              deleted = pack.deleted,
+                              type = pack.type,
+                              listImages = db.golf_package_stay_image.Where(o => o.golf_package_id == pack.id).Select(x => x.image).Take(3)
+                          }).FirstOrDefault();
+                ViewBag.nextItem2 = q3;
+            }
             ViewBag.nextItem1 = q2;
             ViewBag.hasItem1 = 1;
             if (ViewBag.nextItem1 == null) ViewBag.hasItem1 = 0;
-            ViewBag.nextItem2 = q3;
             ViewBag.hasItem2 = 1;
             if (ViewBag.nextItem2 == null) ViewBag.hasItem2 = 0;
 
             return View(q);
         }
+        public string book(int id,string name, DateTime datetimepicker, string full_details, string email, string phone)
+        {
+            try
+            {
 
+                golf_order_package_stay gops = new golf_order_package_stay();
+                gops.golf_package_stay_id = id;
+                gops.name = name;
+                gops.date_time = datetimepicker;
+                gops.full_details = full_details;
+                gops.email = email;
+                gops.phone = phone;
+                db.golf_order_package_stay.Add(gops);
+                db.SaveChanges();
+                string rs = "<tr><td>" + email + "</td><td>" + phone + "</td><td>" + full_details + "</td><td>" + datetimepicker + "</td><tr>";
+                rs = "<h2>Thông báo có khách đặt gói golf \"" + name + "\"</h2><table border=1 style=\"width:100%\"><tr><th>Email</th><th>Phone</th><th>Description</th><th>Date Time</th></tr>" + rs + "</table>";
+                bool sendmail = Config.mail(Config.fromEmail, Config.fromEmail, "Khách đặt gói golf " + name+": "+phone, Config.passEmail, rs);
+                return "1";
+
+
+            }
+            catch (Exception ex)
+            {
+                return "0";
+            }
+        }
         //
         // GET: /PackageStay/Details/5
         public ActionResult Details(int id = 0)
