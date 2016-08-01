@@ -186,7 +186,7 @@ namespace GolfBooking.Controllers
             return View();
             
         }
-        public string book(int id,string name,DateTime datetimepicker,int players,int holes,string email,string phone) {
+        public string book(int id,string name,DateTime datetimepicker,int players,int? holes,string email,string phone) {
             try
             {
 
