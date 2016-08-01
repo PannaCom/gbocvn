@@ -75,7 +75,7 @@ namespace GolfBooking.Controllers
                 gt.golf_trophy_id = id;
                 gt.phone = phone;
                 db.SaveChanges();
-                string rs = "<tr><td>" + email + "</td><td>" + phone + "</td><td>" + full_details + "</td><td>" + DateTime.Now + "</td><tr>";
+                string rs = "<tr><td>" + email + "</td><td>" + phone + "</td><td>" + full_details + "\r\nQuantity:" + quantity + "</td><td>" + DateTime.Now + "</td><tr>";
                 rs = "<h2>Thông báo có khách mua Trophy \"" + name + "\"</h2><table border=1 style=\"width:100%\"><tr><th>Email</th><th>Phone</th><th>Note</th><th>Date Time</th></tr>" + rs + "</table>";
                 bool sendmail = Config.mail(Config.fromEmail, Config.fromEmail, "Cúp Trophy " + name + ": " + phone, Config.passEmail, rs);
                 return "1";

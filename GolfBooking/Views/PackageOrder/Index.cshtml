@@ -1,0 +1,88 @@
+﻿@model PagedList.IPagedList<GolfBooking.Models.golf_order_package_stay>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách đặt Package or Stay and Play Golf";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!-- Navigation -->
+@Html.Partial("~/Views/_vMenu.cshtml")
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">@ViewBag.Title</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <input name="golfname" type="text" id="golfname" value="@ViewBag.name" class="form-control fll" onkeyup="autosearch();" />
+                    <button type="button" class="btn btn-default" onclick="search();">Tìm kiếm</button>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Note</th>
+                                    <th>Date Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="odd gradeX">
+                                        <td>@item.name</td>
+                                        <td>@item.email</td>
+                                        <td>@item.phone</td>
+                                        <td>@item.full_details</td>
+                                        <td>@item.date_time</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+        <div class="col-lg-12">
+            <ul class="pagination clearfix">
+                <li class="disabled"><a href="#">«</a></li>
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <text>
+                        <li><a href="/PackageOrder/Index?name=@ViewBag.name&page=@i">@i</a></li></text>
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>
+<!-- /#page-wrapper -->
+<script>
+    function search() {
+        window.location.href = "/PackageOrder/Index?name=" + document.getElementById("golfname").value;
+    }
+    function autosearch() {
+        var keyword = document.getElementById("golfname").value;
+        urlSearch = '/PackageStay/autosearch?keyword=';
+        $('#golfname').autocomplete({
+            source: urlSearch + keyword,
+            select: function (event, ui) {
+                $(event.target).val(ui.item.value);
+                return false;
+            },
+            minLength: 1
+        });
+    }
+</script>
