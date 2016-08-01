@@ -41,14 +41,116 @@
                         </div>
                         <div style="width:57%;position:relative;float:left;border:1px solid #cfd5e3;text-align:center;background-color:#fff;height:300px;">
                             @Html.Raw(Model.des)
-                            <input type="button" class="btn btn-primary btn-block" style="float:right;right:0;bottom:0;background-color:#bf0000;color:#ffffff;width:112px;font-size:11px;position:absolute;" name="Make Reservations" value="Order Now">
+                            <input type="button" class="btn btn-primary btn-block" style="float:right;right:0;bottom:0;background-color:#bf0000;color:#ffffff;width:112px;font-size:11px;position:absolute;" name="Make Reservations" value="Order Now" onclick="showBookSource();">
                             <input type="button" class="btn btn-primary btn-block" style="float:left;left:0;bottom:0;background-color:#bf0000;color:#ffffff;width:112px;font-size:11px;position:absolute;" name="Make Reservations" value="@Model.price VNĐ">
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
+        <div id="booksource" style="width:60%;display:none;top:10px;left:20%;position:fixed;background-color:#00b04f;z-index:1001;">
+            <div class="col-sm-8" style="width:100%;">
+                <h6 class="text-center text-uppercase" style="margin-top:10px;border:1px solid #9FCC47;"><small style="color:#ffffff;">Come and Visit Us</small>Book this Trophy</h6>
+                
+                <div class="row">
+                    <div class="booking-block col-sm-6 col-sm-offset-3">
+                        <form id="booking-form" role="form">
+                            <div class="form-group">
+                                <label class="sr-only" >Email *</label>
+                                <input type="text" class="form-control" id="email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" >Phone *</label>
+                                <input type="text" class="form-control" id="phone" placeholder="Phone">
+                            </div>
+                            <div class="form-group icon-arrow">
+                                <label class="sr-only" for="room">Quantity</label>
+                                <select class="form-control" id="quantity">
+                                    <option value="-1" selected>Quantity</option>
+                                    <option value="1" >1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value=">7">>7</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only">Description *</label>
+                                <textarea id="full_details" placeholder="Description" class="form-control" rows="8"></textarea>
+                            </div>                            
+                            <div class="form-group">
+                                <input type="button" class="btn btn-primary btn-block" id="btnAddNew" value="Make Reservations" onclick="booksource()">
+                                <img id="imgloading" src="~/Images/loading.gif" style="display:none;" />
+                                <input type="button" class="btn btn-primary btn-block" name="Make Close" value="Close" onclick="showBookSource()">
+                            </div>
+                        </form>
+                    </div><!-- .booking-block -->
+                </div>
+            </div>
+        </div>
     </section>
 </article><!-- #content -->  
+<script>
+    function booksource() {
+        //if (idDocument==-1 && document.getElementById("datetimepicker").value == "") {
+        //    alert("Chọn ngày chơi");
+        //    document.getElementById("datetimepicker").focus();
+        //    return;
+        //}
+        //alert(document.getElementById("datetimepicker").value);
+        if (document.getElementById("email").value == "") {
+            alert("Email?");
+            document.getElementById("email").focus();
+            return;
+        }
+        if (document.getElementById("phone").value == "") {
+            alert("Phone?");
+            document.getElementById("phone").focus();
+            return;
+        }
+        if (document.getElementById("quantity").value == -1) {
+            alert("Quantity?");
+            document.getElementById("quantity").focus();
+            return;
+        }
+        $("#btnAddNew").hide();
+        $("#imgloading").show();
+       
+        var formdata = new FormData(); //FormData object
+
+        formdata.append("id", "@ViewBag.id");
+        formdata.append("name", "@ViewBag.name");
+        formdata.append("quantity", document.getElementById("quantity").value);
+        formdata.append("full_details", document.getElementById("full_details").value);
+        formdata.append("phone", document.getElementById("phone").value);
+        formdata.append("email", document.getElementById("email").value);
+        
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Trophy/book');
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0") {
+                    alert("book golf course success! We will contact you soon!");
+                    document.getElementById("booksource").style.display = "none";
+                    $("#btnAddNew").show();
+                    $("#imgloading").hide();
+                } else {
+                    alert("Error! Be back later!");
+                }
+                $("#btnAddNew").show();
+            }
+        }
+    }
+    function showBookSource() {
+        $('html,body').scrollTop(0);
+        if (document.getElementById("booksource").style.display == "none") {
+            document.getElementById("booksource").style.display = "block";
+        } else {
+            document.getElementById("booksource").style.display = "none";
+        }
+    }
+</script>

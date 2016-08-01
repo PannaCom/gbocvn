@@ -124,7 +124,7 @@ namespace GolfBooking.Controllers
                 db.SaveChanges();
                 string rs = "<tr><td>" + email + "</td><td>" + phone + "</td><td>" + full_details + "</td><td>" + datetimepicker + "</td><tr>";
                 rs = "<h2>Thông báo có khách đặt gói golf \"" + name + "\"</h2><table border=1 style=\"width:100%\"><tr><th>Email</th><th>Phone</th><th>Description</th><th>Date Time</th></tr>" + rs + "</table>";
-                bool sendmail = Config.mail(Config.fromEmail, Config.fromEmail, "Khách đặt gói golf " + name+": "+phone, Config.passEmail, rs);
+                bool sendmail = Config.mail(Config.fromEmail, Config.fromEmail, "Gói golf " + name+": "+phone, Config.passEmail, rs);
                 return "1";
 
 

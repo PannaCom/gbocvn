@@ -34,11 +34,11 @@
                         <div class="booking-block col-sm-6 col-sm-offset-3">
                             <form id="booking-form" role="form">
                                 <div class="form-group">
-                                    <label class="sr-only" for="arrival-date">Email *</label>
+                                    <label class="sr-only">Email *</label>
                                     <input type="text" class="form-control" id="email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="arrival-date">Phone *</label>
+                                    <label class="sr-only">Phone *</label>
                                     <input type="text" class="form-control" id="phone" placeholder="Phone">
                                 </div>
                                 <div class="form-group">
@@ -51,6 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="button" class="btn btn-primary btn-block" id="btnAddNew" value="Make Reservations" onclick="booksource()">
+                                    <img id="imgloading" src="~/Images/loading.gif" style="display:none;" />
                                     <input type="button" class="btn btn-primary btn-block" name="Make Close" value="Close" onclick="showBookSource()">
                                 </div>
                             </form>
@@ -137,23 +138,25 @@
         //}
         //alert(document.getElementById("datetimepicker").value);
         if (document.getElementById("datetimepicker").value == "") {
-            alert("Chọn ngày chơi");
+            alert("Date Time?");
             document.getElementById("datetimepicker").focus();
             return;
         }
         if (document.getElementById("email").value == "") {
-            alert("Nhập email");
-            document.getElementById("name").focus();
+            alert("Email?");
+            document.getElementById("email").focus();
             return;
         }
-        if (document.getElementById("phone").value == -2) {
-            alert("Nhập điện thoại");
+        if (document.getElementById("phone").value == "") {
+            alert("Phone?");
             document.getElementById("phone").focus();
             return;
         }
 
-        document.getElementById("btnAddNew").value = "Booking...";
-        document.getElementById("btnAddNew").disabled = true;
+        //document.getElementById("btnAddNew").value = "Booking...";
+        //document.getElementById("btnAddNew").disabled = true;
+        $("#btnAddNew").hide();
+        $("#imgloading").show();
         var formdata = new FormData(); //FormData object
 
         formdata.append("id", "@ViewBag.id");   
@@ -171,11 +174,14 @@
                 if (xhr.responseText != "0") {
                     alert("book golf package success! We will contact you soon!");
                     document.getElementById("booksource").style.display = "none";
+                    $("#btnAddNew").show();
+                    $("#imgloading").hide();
                 } else {
                     alert("Error! Be back later!");
                 }
-                document.getElementById("btnAddNew").disabled = false;
-                document.getElementById("btnAddNew").value = "Make Reservations";
+                //document.getElementById("btnAddNew").disabled = false;
+                //document.getElementById("btnAddNew").value = "Make Reservations";
+                $("#btnAddNew").show();
             }
         }
     }

@@ -64,7 +64,29 @@ namespace GolfBooking.Controllers
             int pageNumber = (page ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));
         }
+        public string book(int id, string name, string quantity, string full_details, string phone, string email)
+        {
+            try
+            {
 
+                golf_order_trophy gt = new golf_order_trophy();
+                gt.email = email;
+                gt.full_details = full_details + "\r\nQuantity:" + quantity;
+                gt.golf_trophy_id = id;
+                gt.phone = phone;
+                db.SaveChanges();
+                string rs = "<tr><td>" + email + "</td><td>" + phone + "</td><td>" + full_details + "</td><td>" + DateTime.Now + "</td><tr>";
+                rs = "<h2>Thông báo có khách mua Trophy \"" + name + "\"</h2><table border=1 style=\"width:100%\"><tr><th>Email</th><th>Phone</th><th>Note</th><th>Date Time</th></tr>" + rs + "</table>";
+                bool sendmail = Config.mail(Config.fromEmail, Config.fromEmail, "Cúp Trophy " + name + ": " + phone, Config.passEmail, rs);
+                return "1";
+
+
+            }
+            catch (Exception ex)
+            {
+                return "0";
+            }
+        }
         public ActionResult view(int id)
         {
             golf_trophy golf_trophy = db.golf_trophy.Find(id);
@@ -72,7 +94,8 @@ namespace GolfBooking.Controllers
             ViewBag.categories = cat;
             ViewBag.catid = golf_trophy.golf_trophy_cat_id;
             ViewBag.catname = cat.Where(o => o.id == golf_trophy.golf_trophy_cat_id).FirstOrDefault().name;
-
+            ViewBag.name = golf_trophy.name;
+            ViewBag.id = id;
             if (golf_trophy == null)
             {
                 return HttpNotFound();
