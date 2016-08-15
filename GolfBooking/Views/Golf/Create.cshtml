@@ -2,7 +2,7 @@
     ViewBag.Title = "Thêm mới sân Golf";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>        
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD9JT7GBH6eZnT7wgzEVpsqdkKixxgeE1w&libraries=places"></script>
 <script src="/Scripts/jquery.geocomplete.js"></script> 
 <div class="map_canvas" style="display:none;"></div>
 <script src="/Scripts/ckeditor/ckeditor.js"></script>
@@ -105,7 +105,7 @@
                                                             </div>   
                                                             <div class="form-group">
                                                                 <label>Địa chỉ *: (Google Map)</label>
-                                                                <input name="address" type="text" id="address" value="@ViewBag.address" class="form-control"/> 
+                                                                <input name="address" autocomplete="on" type="text" id="address" value="@ViewBag.address" class="form-control" /> 
                                                                 <input name="lon" type="hidden" id="lon" value="@ViewBag.lon" class="form-control"/>
                                                                 <input name="lat" type="hidden" id="lat" value="@ViewBag.lat" class="form-control"/>
                                                             </div>                                                        
@@ -168,8 +168,8 @@
                                                                 <tr class="odd gradeX" id=rowsPrice1 style="display:block;">
                                                                     <td><input type="date" id="from_date_id_1" name="from_date_id_1" value="@ViewBag.fromDate" placeholder="từ ngày" style="height:25px;"></td>
                                                                     <td><input type="date" id="to_date_id_1" name="to_date_id_1" value="@ViewBag.toDate" placeholder="đến ngày" style="height:25px;"></td>
-                                                                    <td><input type="text" id="normal_day_price_1" name="normal_day_price_1" placeholder="giá trong tuần" style="height:25px;width:120px;"></td>
-                                                                    <td><input type="text" id="weekend_day_price_1" name="weekend_day_price_1" placeholder="giá cuối tuần" style="height:25px;width:120px;"></td>
+                                                                    <td><input type="text" id="normal_day_price_1" name="normal_day_price_1" placeholder="giá trong tuần" style="height:25px;width:120px;" onblur="checkPrice(this);"></td>
+                                                                    <td><input type="text" id="weekend_day_price_1" name="weekend_day_price_1" placeholder="giá cuối tuần" style="height:25px;width:120px;" onblur="checkPrice(this);"></td>
                                                                     <td><input type="time" id="from_time_1" name="from_time_1" value="07:00:00" placeholder="từ thời gian" style="height:25px;"></td>
                                                                     <td><input type="time" id="to_time_1" name="to_time_1" value="11:00:00" placeholder="đến thời gian" style="height:25px;"></td>
                                                                     <td><input type="checkbox" id="cart_1" name="cart_1" style="height:25px;">Cart</td>                                                                                                                                                          
@@ -217,8 +217,8 @@
         }
         row+='<td><input type="date" id="from_date_id_'+rowsPrice+'" name="from_date_id_'+rowsPrice+'" value="'+from_date_price+'" placeholder="từ ngày" style="height:25px;"></td>';
         row+='<td><input type="date" id="to_date_id_'+rowsPrice+'" name="to_date_id_'+rowsPrice+'" value="'+to_date_price+'" placeholder="đến ngày" style="height:25px;"></td>';
-        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" placeholder="giá trong tuần" style="height:25px;width:120px;"></td>';
-        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" placeholder="giá cuối tuần" style="height:25px;width:120px;"></td>';
+        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" placeholder="giá trong tuần" style="height:25px;width:120px;" onblur="checkPrice(this);"></td>';
+        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" placeholder="giá cuối tuần" style="height:25px;width:120px;" onblur="checkPrice(this);"></td>';
         row+='<td><input type="time" id="from_time_'+rowsPrice+'" name="from_time_'+rowsPrice+'" value="07:00:00" placeholder="từ thời gian" style="height:25px;"></td>';
         row+='<td><input type="time" id="to_time_'+rowsPrice+'" name="to_time_'+rowsPrice+'" value="11:00:00" placeholder="đến thời gian" style="height:25px;"></td>';
         row+='<td><input type="checkbox" id="cart_'+rowsPrice+'" name="cart_'+rowsPrice+'" >Cart</td>';
@@ -476,8 +476,8 @@
                         row+='<tr class="odd gradeX" id=rowsPrice'+rowsPrice+' style="display:block;">';                        
                         row+='<td><input type="date" id="from_date_id_'+rowsPrice+'" name="from_date_id_'+rowsPrice+'" value="'+convertFromDateIdToDateString(v.from_date_id+"")+'" placeholder="từ ngày" style="height:25px;"></td>';
                         row+='<td><input type="date" id="to_date_id_'+rowsPrice+'" name="to_date_id_'+rowsPrice+'" value="'+convertFromDateIdToDateString(v.to_date_id+"")+'" placeholder="đến ngày" style="height:25px;"></td>';
-                        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" value="'+v.normal_day_price+'" placeholder="giá trong tuần" style="height:25px;width:120px;"></td>';
-                        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" value="'+v.weekend_day_price+'" placeholder="giá cuối tuần" style="height:25px;width:120px;"></td>';
+                        row+='<td><input type="text" id="normal_day_price_'+rowsPrice+'" name="normal_day_price_'+rowsPrice+'" value="'+numberWithCommas(v.normal_day_price)+'" placeholder="giá trong tuần" style="height:25px;width:120px;" onblur="checkPrice(this);"></td>';
+                        row+='<td><input type="text" id="weekend_day_price_'+rowsPrice+'" name="weekend_day_price_'+rowsPrice+'" value="'+numberWithCommas(v.weekend_day_price)+'" placeholder="giá cuối tuần" style="height:25px;width:120px;" onblur="checkPrice(this);"></td>';
                         row+='<td><input type="time" id="from_time_'+rowsPrice+'" name="from_time_'+rowsPrice+'" value="'+v.from_time+'" placeholder="từ thời gian" style="height:25px;"></td>';
                         row+='<td><input type="time" id="to_time_'+rowsPrice+'" name="to_time_'+rowsPrice+'" value="'+v.to_time+'" placeholder="đến thời gian" style="height:25px;"></td>';
                         row+='<td><input type="checkbox" id="cart_'+rowsPrice+'" name="cart_'+rowsPrice+'" '+check+'>Cart</td>';
@@ -535,8 +535,8 @@
             if (document.getElementById("rowsPrice"+j).style.display=='none') continue;
             formdata.append("from_date_id_"+j, document.getElementById("from_date_id_"+j).value);
             formdata.append("to_date_id_"+j, document.getElementById("to_date_id_"+j).value);
-            formdata.append("normal_day_price_"+j, document.getElementById("normal_day_price_"+j).value);
-            formdata.append("weekend_day_price_"+j, document.getElementById("weekend_day_price_"+j).value);
+            formdata.append("normal_day_price_"+j, removeSpecialCharater(document.getElementById("normal_day_price_"+j).value));
+            formdata.append("weekend_day_price_"+j, removeSpecialCharater(document.getElementById("weekend_day_price_"+j).value));
             formdata.append("from_time_"+j, document.getElementById("from_time_"+j).value);
             formdata.append("to_time_"+j, document.getElementById("to_time_"+j).value);
             formdata.append("cart_"+j, document.getElementById("cart_"+j).checked);
@@ -582,5 +582,12 @@
               $.log("Multiple: " + results.length + " results found");
           });
     });
-
+    function checkPrice(obj) {
+        if (obj.value=="") return 0;
+        obj.value = parseInt(removeSpecialCharater(obj.value));
+        obj.value=numberWithCommas(obj.value);
+    }
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 </script>

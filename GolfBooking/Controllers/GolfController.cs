@@ -264,6 +264,29 @@ namespace GolfBooking.Controllers
             }
             return JsonConvert.SerializeObject(list);
         }
+        public ActionResult Delete(int id = 0)
+        {
+            //if (Config.getCookie("userid") == "") return RedirectToAction("Login", "members");
+            golf g = db.golves.Find(id);
+            if (g == null)
+            {
+                return HttpNotFound();
+            }
+            return View(g);
+        }
+
+        //
+        // POST: /Cat1/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            golf g = db.golves.Find(id);
+            db.golves.Remove(g);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         [ValidateInput(false)]
         public string Update_Golf(string name, string des,int country_id,int province_id,int region_id, string image, string address, double? lon, double? lat, string tech_des, string score_board_image,int id)

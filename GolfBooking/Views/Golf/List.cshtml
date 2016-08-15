@@ -24,7 +24,13 @@
 																    <h3>@item.name</h3>
 																	    <div class="price-banner">
 																		    <span>from</span>
-                                                                            <span class="price">@if(item.priceInfo != null){ @item.priceInfo.minPrice }</span>	
+                                                                            <span class="price">@if (item.priceInfo != null)
+                                                                                                {
+                                                                                                    @item.priceInfo.minPrice;
+                                                                                                    //decimal price = item.priceInfo.minPrice;
+                                                                                                    //string.Format("{0:0,0}", price);
+                                                                                                }
+                                                                            </span>	
                                                                             <br />																		
                                                                             @if (item.priceInfo != null && item.priceInfo.cart){
                                                                                 <text>

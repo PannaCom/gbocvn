@@ -46,3 +46,33 @@ function convertFromDateIdToDateString(sDate) {
     sDate = sDate.substring(0, 4) + "-" + sDate.substring(4, 6) + "-" + sDate.substring(6, 8);
     return sDate;
 }
+function removeSpecialCharater(input) {
+    if (input == null) return "";
+    input = input.trim();
+    input = input.replace(/\./g, "");
+    input = input.replace(/\&/g, "");
+    input = input.replace(/\'/g, "");
+    input = input.replace(/\"/g, "");
+    input = input.replace(/\“/g, "");
+    input = input.replace(/\”/g, "");
+    input = input.replace(/\;/g, "");
+    input = input.replace(/\?/g, "");
+    input = input.replace(/\!/g, "");
+    input = input.replace(/\~/g, "");
+    input = input.replace(/\*/g, "");
+    input = input.replace(/\:/g, "");
+    input = input.replace(/\"/g, "");
+    input = input.replace("/", "");
+    input = input.replace("%", "");
+    input = input.replace("‘", "");
+    input = input.replace("’", "");
+    input = input.replace(/\"/g, "");
+    input = input.replace("+", "");
+    input = input.replace("“", "");
+    input = input.replace("-", "_");
+    input = input.replace("”", "");
+    input = input.replace(/\,/g, "");
+
+    return input;
+  
+}

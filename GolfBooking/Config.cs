@@ -19,7 +19,7 @@ namespace GolfBooking
         public static string fromEmail = "golfbookingvietnam@gmail.com";
         public static string passEmail = "ducta123";
 
-        public static string domain = "http://golf.binhyen.net/";
+        public static string domain = "http://golfbooking.com.vn/";
         //convert longitude latitude to geography
         public static DbGeography CreatePoint(double? latitude, double? longitude)
         {
